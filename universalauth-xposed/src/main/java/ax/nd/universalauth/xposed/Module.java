@@ -13,7 +13,10 @@ import android.util.Log;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -22,6 +25,8 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class Module implements IXposedHookLoadPackage {
     private static final String TAG = "XposedUniversalAuth";
+    private static final String STATUS_BAR_CLASS = "com.android.systemui.statusbar.phone.StatusBar";
+    private static final String SYSTEM_UI_CLASS = "com.android.systemui.SystemUI";
 
     /**
      * This method is called when an app is loaded. It's called very early, even before
@@ -37,7 +42,7 @@ public class Module implements IXposedHookLoadPackage {
         if (Objects.equals(lpparam.packageName, "com.android.systemui")) {
             // Hook com.android.systemui.statusbar.phone.StatusBar.start
             XposedHelpers.findAndHookMethod(
-                    "com.android.systemui.statusbar.phone.StatusBar",
+                    STATUS_BAR_CLASS,
                     lpparam.classLoader,
                     "start",
                     new XC_MethodHook() {
@@ -55,7 +60,7 @@ public class Module implements IXposedHookLoadPackage {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 //                            XposedBridge.log("FaceUnlock hook pre-install!");
-                            hookStatusBar(param);
+                            hookStatusBar(lpparam.classLoader, param);
 //                            XposedBridge.log("FaceUnlock hook installed!");
                         }
                     }
@@ -68,10 +73,19 @@ public class Module implements IXposedHookLoadPackage {
         return a;
     }
 
-    private void hookStatusBar(XC_MethodHook.MethodHookParam param) throws Throwable {
+    private String dumpArray(Object[] obj) {
+        return dumpStream(Arrays.stream(obj));
+    }
+
+    private String dumpStream(Stream<Object> stream) {
+        return stream.map(Object::toString).collect(Collectors.joining(",\n"));
+    }
+
+    private void hookStatusBar(ClassLoader classLoader, XC_MethodHook.MethodHookParam param) throws Throwable {
         Object statusBar = param.thisObject;
-        Class<?> statusBarClass = statusBar.getClass();
-        Context context = (Context) asAccessible(statusBarClass.getField("mContext")).get(statusBar);
+        Class<?> systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
+        Class<?> statusBarClass = classLoader.loadClass(STATUS_BAR_CLASS);
+        Context context = (Context) asAccessible(systemUiClass.getDeclaredField("mContext")).get(statusBar);
 
         UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
 
