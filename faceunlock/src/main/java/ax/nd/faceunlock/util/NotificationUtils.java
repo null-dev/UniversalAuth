@@ -75,7 +75,7 @@ public class NotificationUtils {
                 .setContentText(context.getString(R.string.facelock_setup_notification_text))
                 .setAutoCancel(true)
                 .setChannelId(CHANNEL_ID)
-                .setContentIntent(PendingIntent.getActivity(context, 0, intent, 268435456)).build());
+                .setContentIntent(PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE)).build());
     }
 
     private static void setNotiCount() {

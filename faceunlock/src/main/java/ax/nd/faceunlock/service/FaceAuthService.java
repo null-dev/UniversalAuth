@@ -268,8 +268,8 @@ public class FaceAuthService extends Service {
         mFaceAuth = preloadedInstance.getImpl();
         mUserId = Util.getUserId(this);
         mAlarmManager = getSystemService(AlarmManager.class);
-        mIdleTimeoutIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(ALARM_TIMEOUT_FREEZED), 0);
-        mLockoutTimeoutIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(ALARM_FAIL_TIMEOUT_LOCKOUT), 0);
+        mIdleTimeoutIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(ALARM_TIMEOUT_FREEZED), PendingIntent.FLAG_IMMUTABLE);
+        mLockoutTimeoutIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, new Intent(ALARM_FAIL_TIMEOUT_LOCKOUT), PendingIntent.FLAG_IMMUTABLE);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ALARM_TIMEOUT_FREEZED);
         intentFilter.addAction(ALARM_FAIL_TIMEOUT_LOCKOUT);
