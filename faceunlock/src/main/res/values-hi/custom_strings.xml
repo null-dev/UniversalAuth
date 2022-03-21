@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">चेहरे से अनलॉक</string>
+    <string name="attr_light_dark">चेहरे पर और प्रकाश की ज़रूरत है</string>
+    <string name="attr_light_high">चेहरे पर प्रकाश काफ़ी ज़्यादा है</string>
+    <string name="attr_light_shadow">चेहरे पर कई परछाइयां हैं</string>
+    <string name="btn_done">हो गया</string>
+    <string name="btn_try">पुनः प्रयास करें</string>
+    <string name="face_intro_conten_first_point">चेहरा मिलाने की सुविधा प्रतिमान, पिन या पासवर्ड से कम सुरक्षित होती है</string>
+    <string name="face_intro_content_second_point">आपके समान दिखने वाला कोई व्यक्ति आपका फ़ोन अनलॉक कर सकता है</string>
+    <string name="face_intro_content_third_point">आपके चेहरे की पहचान करने के लिए उपयोग किया जाने वाला डेटा आपके फ़ोन पर निजी रखा जाता है</string>
+    <string name="face_intro_next">अगला</string>
+    <string name="face_intro_remember">याद रखें:</string>
+    <string name="face_intro_summary">अपने फ़ोन को देख कर उसे अनलॉक करें.</string>
+    <string name="face_intro_title">चेहरे से अनलॉक के बारे में</string>
+    <string name="facelock_setup_notification_text">चेहरे से अनलॉक सेट करें</string>
+    <string name="facelock_setup_notification_title">पलक झपकते ही अनलॉक करें</string>
+    <string name="policy_disabled_alert_msg">चेहरे से अनलॉक को आपके व्यवस्थापक द्वारा अक्षम कर दिया गया है.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">चेहरा मेल खाने के बाद पावर की दबाने पर होम स्क्रीन खुलती है या अंतिम उपयोग किया गया ऐप खुलता है</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">लॉक स्क्रीन की उपेक्षा करना</string>
+    <string name="title_activity_face_intro">चेहरे से अनलॉक का परिचय</string>
+    <string name="unlock_failed_face_blur">चेहरा बहुत धुंधला है</string>
+    <string name="unlock_failed_face_large">चेहरा बहुत पास है</string>
+    <string name="unlock_failed_face_multi">कई चेहरों का पता चला</string>
+    <string name="unlock_failed_face_not_complete">केवल चेहरे के कुछ भाग का पता चला</string>
+    <string name="unlock_failed_face_small">चेहरा बहुत दूर है</string>
+    <string name="upgrade_finish_summary">"अब आप अपने उपकरण को चेहरे से अनलॉक करने की सुविधा के साथ अनलॉक करने के लिए तैयार हैं"</string>
+    <string name="upgrade_finish_title">ठीक है!</string>
+</resources>

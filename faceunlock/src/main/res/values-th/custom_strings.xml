@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">การปลดล็อกด้วยใบหน้า</string>
+    <string name="attr_light_dark">ใบหน้าต้องการแสงเพิ่มเติม</string>
+    <string name="attr_light_high">ใบหน้ามีแสงมากเกินไป</string>
+    <string name="attr_light_shadow">ใบหน้ามีเงามากเกินไป</string>
+    <string name="btn_done">เสร็จสิ้น</string>
+    <string name="btn_try">ลองทำอีกครั้ง</string>
+    <string name="face_intro_conten_first_point">การจับคู่ใบหน้าปลอดภัยน้อยกว่าการวาดรูปแบบ PIN หรือรหัสผ่าน</string>
+    <string name="face_intro_content_second_point">บางคนที่ดูคล้ายกับคุณอาจปลดล็อกโทรศัพท์ของคุณได้</string>
+    <string name="face_intro_content_third_point">ข้อมูลที่ใช้เพื่อจดจำใบหน้าของคุณจะเก็บไว้เป็นส่วนตัวในโทรศัพท์ของคุณ</string>
+    <string name="face_intro_next">ถัดไป</string>
+    <string name="face_intro_remember">โปรดจำไว้ว่า:</string>
+    <string name="face_intro_summary">ปลดล็อกโทรศัพท์ของคุณโดยการมองที่เครื่อง</string>
+    <string name="face_intro_title">เกี่ยวกับการปลดล็อกด้วยใบหน้า</string>
+    <string name="facelock_setup_notification_text">ตั้งค่าการปลดล็อกด้วยใบหน้า</string>
+    <string name="facelock_setup_notification_title">ปลดล็อกด้วยการมอง</string>
+    <string name="policy_disabled_alert_msg">การปลดล็อกด้วยใบหน้าถูกปิดใช้งานโดยผู้ดูแลระบบ</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">การกดแป้นเปิด/ปิดจะเปิดหน้าจอหลักหรือแอปที่ใช้ล่าสุดเมื่อจับคู่ใบหน้าแล้ว</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">ข้ามหน้าจอล็อก</string>
+    <string name="title_activity_face_intro">การแนะนำการปลดล็อกด้วยใบหน้า</string>
+    <string name="unlock_failed_face_blur">ใบหน้าเบลอเกินไป</string>
+    <string name="unlock_failed_face_large">ใบหน้าอยู่ใกล้เกินไป</string>
+    <string name="unlock_failed_face_multi">ตรวจพบใบหน้ามากเกินไป</string>
+    <string name="unlock_failed_face_not_complete">ตรวจพบใบหน้าบางส่วนเท่านั้น</string>
+    <string name="unlock_failed_face_small">ใบหน้าอยู่ไกลเกินไป</string>
+    <string name="upgrade_finish_summary">"ตอนนี้คุณพร้อมสำหรับการปลดล็อกอุปกรณ์ของคุณด้วยใบหน้าแล้ว"</string>
+    <string name="upgrade_finish_title">ใช่เลย!</string>
+</resources>

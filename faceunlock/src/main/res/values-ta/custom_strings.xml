@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">முகம் அறிதல்</string>
+    <string name="attr_light_dark">முகத்திற்கு அதிக வெளிச்சம் தேவை</string>
+    <string name="attr_light_high">முகத்தில் அதிக வெளிச்சம் உள்ளது</string>
+    <string name="attr_light_shadow">முகத்தில் பல நிழல்கள் உள்ளன</string>
+    <string name="btn_done">முடிந்தது</string>
+    <string name="btn_try">மீண்டும் முயற்சிக்கவும்</string>
+    <string name="face_intro_conten_first_point">முகப் பொருத்தமானது வடிவம், PIN அல்லது கடவுச்சொல்லை விட பாதுகாப்புக் குறைவானது</string>
+    <string name="face_intro_content_second_point">உங்களைப் போன்ற தோற்றம் கொண்ட எவரேனும் உங்கள் ஃபோனைத் தடை நீக்கலாம்</string>
+    <string name="face_intro_content_third_point">உங்கள் முகத்தை அடையாளம் காண்பதற்காக பயன்படுத்தப்படும் தரவு, உங்கள் ஃபோனில் தனியாக வைக்கப்படும்</string>
+    <string name="face_intro_next">அடுத்து</string>
+    <string name="face_intro_remember">நினைவில் கொள்க:</string>
+    <string name="face_intro_summary">உங்கள் ஃபோனைப் பார்ப்பதன் மூலம் அதைத் தடை நீக்கலாம்.</string>
+    <string name="face_intro_title">முகம் அறிதல் பற்றி</string>
+    <string name="facelock_setup_notification_text">முகத் தடைநீக்கத்தை அமைக்கவும்</string>
+    <string name="facelock_setup_notification_title">பார்வையின் மூலம் தடைநீக்கு</string>
+    <string name="policy_disabled_alert_msg">நிர்வாகியால் முகம் அறிதல் முடக்கப்பட்டுள்ளது.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">முகம் பொருந்தியவுடன், பவர் விசையை அழுத்துவது முகப்புத் திரை அல்லது கடைசியாகப் பயன்படுத்தப்பட்ட பயன்பாட்டைத் திறக்கும்</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">பைபாஸ் பூட்டுத் திரை</string>
+    <string name="title_activity_face_intro">முகம் அறிதல் அறிமுகம்</string>
+    <string name="unlock_failed_face_blur">முகம் மிகவும் மங்கலாக உள்ளது</string>
+    <string name="unlock_failed_face_large">முகம் மிகவும் அருகில் உள்ளது</string>
+    <string name="unlock_failed_face_multi">பல முகங்கள் கண்டறியப்பட்டுள்ளன</string>
+    <string name="unlock_failed_face_not_complete">பகுதி முகம் மட்டுமே கண்டறியப்பட்டுள்ளது</string>
+    <string name="unlock_failed_face_small">முகம் மிகவும் தொலைவில் உள்ளது</string>
+    <string name="upgrade_finish_summary">"இப்போது நீங்கள் முகத் தடைநீக்கம் மூலம், சாதனத்தைத் தடைநீக்கத் தயார்."</string>
+    <string name="upgrade_finish_title">முடிந்தது!</string>
+</resources>

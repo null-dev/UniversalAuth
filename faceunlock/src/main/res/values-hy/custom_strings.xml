@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_done">Պատրաստ է</string>
+    <string name="btn_try">Փորձեք կրկին</string>
+    <string name="face_intro_next">Հաջորդ</string>
+    <string name="face_intro_remember">Հիշել․</string>
+</resources>

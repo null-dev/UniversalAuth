@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Veido atpažinimo užraktas</string>
+    <string name="attr_light_dark">Veidui reikia daugiau šviesos</string>
+    <string name="attr_light_high">Per daug šviesos veidui</string>
+    <string name="attr_light_shadow">Per daug šešėlio krenta ant veido</string>
+    <string name="btn_done">Atlikta</string>
+    <string name="btn_try">Bandyti dar kartą</string>
+    <string name="face_intro_conten_first_point">Veido atitikimas yra mažiau saugus nei ,grafinis raktas PIN kodas ar slaptažodis</string>
+    <string name="face_intro_content_second_point">Kažkas panašus į jus gali atrakinti telefoną</string>
+    <string name="face_intro_content_third_point">Duomenys, naudojami jūsų veidui atpažinti, jūsų telefone laikomi privačiais</string>
+    <string name="face_intro_next">Sekantis</string>
+    <string name="face_intro_remember">Prisiminti:</string>
+    <string name="face_intro_summary">Atrakinkite telefoną, žiūrėdami į jį.</string>
+    <string name="face_intro_title">Apie veido atrakinimą</string>
+    <string name="facelock_setup_notification_text">Nustatykite veido atrakinimą</string>
+    <string name="facelock_setup_notification_title">Atrakinkite žvilgsniu</string>
+    <string name="policy_disabled_alert_msg">Administratorius išjungė veido atpažinimo užraktą.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Paspaudus įjungimo mygtuką, atidaromas pagrindinis ekranas arba paskutinį kartą naudojama programa, kai veidas suderinamas</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Apeikite užrakto ekraną</string>
+    <string name="title_activity_face_intro">Įvadas į veido atpažinimo užraktą</string>
+    <string name="unlock_failed_face_blur">Veidas labai neryškus</string>
+    <string name="unlock_failed_face_large">Veidas per arti</string>
+    <string name="unlock_failed_face_multi">Aptikta per daug veidų</string>
+    <string name="unlock_failed_face_not_complete">Aptikta tik dalis veido</string>
+    <string name="unlock_failed_face_small">Veidas per toli</string>
+    <string name="upgrade_finish_summary">"Dabar esate pasiruošę atrakinti savo įrenginį naudodami veido atpažinimą"</string>
+    <string name="upgrade_finish_title">Viskas gerai!</string>
+</resources>

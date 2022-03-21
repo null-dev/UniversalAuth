@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Otključavanje licem</string>
+    <string name="attr_light_dark">Lice treba bolje osvjetljenje</string>
+    <string name="attr_light_high">Lice je previše osvijetljeno</string>
+    <string name="attr_light_shadow">Na licu je previše sjena</string>
+    <string name="btn_done">Gotovo</string>
+    <string name="btn_try">Pokušaj ponovo</string>
+    <string name="face_intro_conten_first_point">Prepoznavanje lica manje je sigurno od uzorka, PIN-a ili lozinke</string>
+    <string name="face_intro_content_second_point">Netko tko izgleda poput vas mogao bi otključati vaš telefon</string>
+    <string name="face_intro_content_third_point">Podaci koji se upotrebljavaju za prepoznavanje lica sigurno su pohranjeni na telefonu</string>
+    <string name="face_intro_next">Dalje</string>
+    <string name="face_intro_remember">Ne zaboravite:</string>
+    <string name="face_intro_summary">Otključajte telefon gledanjem u njega.</string>
+    <string name="face_intro_title">O otključavanju s pomoću lica</string>
+    <string name="facelock_setup_notification_text">Postavi otključavanje putem lica</string>
+    <string name="facelock_setup_notification_title">Otključavanje pogledom</string>
+    <string name="policy_disabled_alert_msg">Administrator je onemogućio otključavanje prepoznavanjem lica.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Pritiskom tipke za uključivanje/isključivanje otvara se početni zaslon ili posljednja upotrijebljena aplikacija kada se lice prepozna</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Zaobiđi zaslon za zaključavanje</string>
+    <string name="title_activity_face_intro">Uvod u otključavanje prepoznavanjem lica</string>
+    <string name="unlock_failed_face_blur">Lice je previše zamućeno</string>
+    <string name="unlock_failed_face_large">Lice je preblizu</string>
+    <string name="unlock_failed_face_multi">Prepoznato je previše lica</string>
+    <string name="unlock_failed_face_not_complete">Prepoznat je samo dio lica</string>
+    <string name="unlock_failed_face_small">Lice je previše udaljeno</string>
+    <string name="upgrade_finish_summary">"Sada ste spremni za otključavanje uređaja prepoznavanjem lica"</string>
+    <string name="upgrade_finish_title">Odlično!</string>
+</resources>

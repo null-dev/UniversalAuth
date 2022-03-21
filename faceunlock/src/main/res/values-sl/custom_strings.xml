@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Odklepanje z obrazom</string>
+    <string name="attr_light_dark">Obraz mora biti bolj osvetljen</string>
+    <string name="attr_light_high">Obraz je preveč osvetljen</string>
+    <string name="attr_light_shadow">Na obrazu je preveč senc</string>
+    <string name="btn_done">Končano</string>
+    <string name="btn_try">POSKUSI ZNOVA</string>
+    <string name="face_intro_conten_first_point">Prepoznavanje obraza je manj varno kot vzorec, PIN ali geslo</string>
+    <string name="face_intro_content_second_point">Telefon bi lahko odklenil kdo, ki vam je podoben</string>
+    <string name="face_intro_content_third_point">Podatki, uporabljeni za prepoznavanje obraza, se zadržijo v telefonu</string>
+    <string name="face_intro_next">NAPREJ</string>
+    <string name="face_intro_remember">Pomnite:</string>
+    <string name="face_intro_summary">Telefon odklenite tako, da ga pogledate.</string>
+    <string name="face_intro_title">O odklepanju z obrazom</string>
+    <string name="facelock_setup_notification_text">Nastavitev odklepanja z obrazom</string>
+    <string name="facelock_setup_notification_title">Odklepanje s pogledom</string>
+    <string name="policy_disabled_alert_msg">Odklepanje z obrazom je onemogočil skrbnik.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">S pritiskom tipke za vklop/izklop odprete začetni zaslon ali nazadnje uporabljeno aplikacijo, ko je prepoznan obraz</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Obhod zaklenjenega zaslona</string>
+    <string name="title_activity_face_intro">Uvod v odklepanje z obrazom</string>
+    <string name="unlock_failed_face_blur">Obraz je preveč zamegljen</string>
+    <string name="unlock_failed_face_large">Obraz je preblizu</string>
+    <string name="unlock_failed_face_multi">Zaznanih preveč obrazov</string>
+    <string name="unlock_failed_face_not_complete">Zaznan samo del obraza</string>
+    <string name="unlock_failed_face_small">Obraz je predaleč</string>
+    <string name="upgrade_finish_summary">"Zdaj lahko napravo odklenete z obrazom"</string>
+    <string name="upgrade_finish_title">Vse v redu!</string>
+</resources>

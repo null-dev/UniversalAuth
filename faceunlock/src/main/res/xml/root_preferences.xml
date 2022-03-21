@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="preload_face"
+        android:summary="Keeps the program loaded in the background. Uses slightly more RAM (~20 MB) but speeds up recognition by 30%."
+        android:title="Stay loaded in background" />
+    <ListPreference
+        android:entries="@array/unlock_animation"
+        android:entryValues="@array/unlock_animation_values"
+        android:key="unlock_animation"
+        android:defaultValue="mode_unlock_fading"
+        android:title="Unlock animation" />
+</PreferenceScreen>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gezichtsherkenning</string>
+    <string name="attr_light_dark">Gezicht heeft meer licht nodig</string>
+    <string name="attr_light_high">Gezicht is te licht</string>
+    <string name="attr_light_shadow">Gezicht heeft te veel schaduwen</string>
+    <string name="btn_done">Gereed</string>
+    <string name="btn_try">OPNIEUW</string>
+    <string name="face_intro_conten_first_point">Gezichtsvergelijking is minder veilig dan een patroon, pincode of wachtwoord</string>
+    <string name="face_intro_content_second_point">Iemand die op jou lijkt, kan mogelijk ook je telefoon ontgrendelen</string>
+    <string name="face_intro_content_third_point">De gegevens die worden gebruikt om je gezicht te herkennen, zijn privé en worden op je telefoon bewaard</string>
+    <string name="face_intro_next">VOLGENDE</string>
+    <string name="face_intro_remember">Onthoud:</string>
+    <string name="face_intro_summary">Ontgrendel je telefoon door ernaar te kijken.</string>
+    <string name="face_intro_title">Over Ontgrendelen via gezichtsherkenning</string>
+    <string name="face_value_prop_cancel">Nee, bedankt</string>
+    <string name="face_value_prop_next">Instellen</string>
+    <string name="face_value_prop_summary">"Met Ontgrendelen via gezichtsherkenning kun je gemakkelijk je telefoon ontgrendelen gewoon door ernaar te kijken. Aangezien je telefoon je gezicht kent, toont het vergrendelde scherm alleen meldingen als je naar het scherm kijkt."</string>
+    <string name="facelock_setup_notification_text">Ontgrendelen via gezichtsherkenning instellen</string>
+    <string name="facelock_setup_notification_title">Ontgrendelen met één blik</string>
+    <string name="face_camera_content">Breng je gezicht in beeld</string>
+    <string name="face_camera_content_tip">Zorg dat je gezicht hieronder in het midden zichtbaar is. Zorg dat je gezicht goed belicht is en kijk recht naar de telefoon.</string>
+    <string name="face_next_change_later_tip">Je kunt dit later wijzigen in de instellingen voor Locatie en beveiliging</string>
+    <string name="face_next_content">Alles ingesteld</string>
+    <string name="face_next_content_tip">"Nu je gezicht is gescand, kun je je telefoon ontgrendelen door ernaar te kijken."</string>
+    <string name="face_try_content">Er is een fout opgetreden</string>
+    <string name="face_try_content_tip">"De gezichtsscan is mislukt. Zorg ervoor dat je gezicht goed belicht is en kijk in de camera."</string>
+    <string name="perm_required_alert_button_app_info">App-info</string>
+    <string name="perm_required_alert_msg">Ontgrendelen via gezichtsherkenning heeft toestemming nodig voor toegang tot bepaalde delen op je apparaat. Selecteer \"Toestaan\" in App-info om dit opnieuw in te schakelen.</string>
+    <string name="perm_required_alert_title">Toestemming vereist</string>
+    <string name="policy_disabled_alert_msg">Ontgrendelen via gezichtsherkenning is uitgeschakeld door de beheerder.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Als je op de aan/uit-knop drukt, wordt het startscherm of de app die je het laatst hebt gebruikt, geopend als het gezicht overeenkomt met de scan</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Vergrendeld scherm omzeilen</string>
+    <string name="title_activity_face_intro">Ontgrendelen via gezichtsherkenning - Inleiding</string>
+    <string name="unlock_failed_face_blur">Gezicht te wazig</string>
+    <string name="unlock_failed_face_large">Gezicht is te dichtbij</string>
+    <string name="unlock_failed_face_multi">Te veel gezichten gedetecteerd</string>
+    <string name="unlock_failed_face_not_complete">Gezicht slechts gedeeltelijk herkend</string>
+    <string name="unlock_failed_face_small">Gezicht te ver weg</string>
+    <string name="upgrade_finish_summary">"Je kunt je apparaat nu ontgrendelen via gezichtsherkenning"</string>
+    <string name="upgrade_finish_title">Oké!</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">کردنەوە بە ڕووخسار</string>
+    <string name="attr_light_dark">ڕووخسارت پێویستی بەڕووناکی زیاترە</string>
+    <string name="attr_light_high">ڕووناکی ڕووخسارت زۆرە</string>
+    <string name="attr_light_shadow">ڕووخسارت سێبەری زۆرە</string>
+    <string name="btn_done">ته‌واو</string>
+    <string name="btn_try">هەوڵبدەرەوە</string>
+    <string name="face_intro_conten_first_point">ناسەرەوەی ڕووخسار کەمتر پارێزراوە وەک لە پاتڕۆن ، پینکۆد ، یان تێپەڕەوشە</string>
+    <string name="face_intro_content_second_point">کەسێک کە زۆر لە تۆ بچێت ئەتوانێت مۆبایلەکەت بکاتەوە</string>
+    <string name="face_intro_content_third_point">زانیاری بەکارهێنراو بۆ ناسینەوەی ڕووخسارت بەتایبەتی دەمێنێتەوە لە مۆبایلەکەتدا</string>
+    <string name="face_intro_next">دواتر</string>
+    <string name="face_intro_remember">بیرت بێت: </string>
+    <string name="face_intro_summary">کردنەوەی مۆبایلەکەت بە تەماشاکردنی</string>
+    <string name="face_intro_title">دەربارەی ناسەرەوەی ڕووخسار</string>
+    <string name="facelock_setup_notification_text">دانانی ناسەرەوەی ڕووخسار</string>
+    <string name="facelock_setup_notification_title">کردنەوە لەگەڵ تەماشاکردنێک</string>
+    <string name="policy_disabled_alert_msg">ناسەرەوەی ڕووخسار ناچالاککراوە لەلایەن بەڕێوەبەرییەوە</string>
+    <string name="unlock_failed_face_blur">ڕووخسار زۆر لێڵە</string>
+    <string name="unlock_failed_face_not_complete">تەنها بەشێکی ڕووخسار دۆزرایەوە</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Buka kunci menggunakan pengecaman wajah</string>
+    <string name="attr_light_dark">Wajah perlukan lebih cahaya</string>
+    <string name="attr_light_high">Terlalu banyak cahaya pada wajah</string>
+    <string name="attr_light_shadow">Wajah mempunyai terlalu banyak bayang</string>
+    <string name="btn_done">Selesai</string>
+    <string name="btn_try">CUBA LAGI</string>
+    <string name="face_intro_conten_first_point">Pemadanan wajah kurang selamat berbanding corak, PIN atau kata laluan</string>
+    <string name="face_intro_content_second_point">Seseorang yang menyerupai anda boleh membuka kunci telefon anda</string>
+    <string name="face_intro_content_third_point">Data yang digunakan untuk mengecam wajah anda dikekalkan peribadi pada telefon anda</string>
+    <string name="face_intro_next">SETERUSNYA</string>
+    <string name="face_intro_remember">Ingat:</string>
+    <string name="face_intro_summary">Buka kunci telefon anda dengan melihatnya.</string>
+    <string name="face_intro_title">Perihal buka kunci menggunakan pengecaman wajah</string>
+    <string name="face_value_prop_cancel">Tidak, terima kasih</string>
+    <string name="face_value_prop_next">sediakan</string>
+    <string name="face_value_prop_summary">"Buka kunci menggunakan pengecaman wajah membolehkan anda log masuk ke dalam telefon anda hanya dengan melihat pada telefon. Oleh sebab, telefon anda dapat mengecam wajah anda, skrin kunci menunjukkan pemberitahuan hanya apabila anda melihat pada telefon"</string>
+    <string name="facelock_setup_notification_text">Sediakan buka kunci menggunakan pengecaman wajah</string>
+    <string name="facelock_setup_notification_title">Buka kunci dengan sepintas lalu</string>
+    <string name="face_camera_content">Jajarkan wajah anda</string>
+    <string name="face_camera_content_tip">Pastikan wajah anda berada di kedudukan tengah di bawah. Pastikan wajah anda di bawah pencahayaan yang terang dan lihat secara terus pada telefon anda.</string>
+    <string name="face_next_change_later_tip">Anda boleh mengubah ini kemudian dalam Tetapan Keselamatan dan Lokasi</string>
+    <string name="face_next_content">Semua selesai</string>
+    <string name="face_next_content_tip">"Oleh sebab anda telah mengimbas wajah anda, anda boleh membuka kunci telefon anda dengan sepintas lalu."</string>
+    <string name="face_try_content">Terdapat masalah</string>
+    <string name="face_try_content_tip">"Imbas wajah telah gagal. Pastikan anda berada di tempat yang mempunyai pencahayaan terang dan lihat pada kamera."</string>
+    <string name="perm_required_alert_button_app_info">Maklumat Aplikasi</string>
+    <string name="perm_required_alert_msg">Buka kunci menggunakan pengecaman wajah memerlukan kebenaran untuk mengakses sesetengah item pada peranti anda. Pilih \"Kebenaran\" dalam maklumat Apl untuk mendayakan semula.</string>
+    <string name="perm_required_alert_title">Kebenaran diperlukan</string>
+    <string name="policy_disabled_alert_msg">Buka kunci menggunakan pengecaman wajah telah dilumpuhkan oleh pentadbir.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Menekan kekunci kuasa akan membuka skrin utama atau apl yang terakhir digunakan apabila wajah dipadankan</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Pintas skrin kunci</string>
+    <string name="title_activity_face_intro">Pengenalan Buka Kunci Menggunakan Pengecaman Wajah</string>
+    <string name="unlock_failed_face_blur">Wajah terlalu kabur</string>
+    <string name="unlock_failed_face_large">Wajah terlalu dekat</string>
+    <string name="unlock_failed_face_multi">Terlalu banyak wajah dikesan</string>
+    <string name="unlock_failed_face_not_complete">Hanya separa wajah dikesan</string>
+    <string name="unlock_failed_face_small">Wajah terlalu jauh</string>
+    <string name="upgrade_finish_summary">"Kini anda sedia untuk membuka kunci peranti anda dengan Buka kunci menggunakan pengecaman wajah"</string>
+    <string name="upgrade_finish_title">Baiklah!</string>
+</resources>

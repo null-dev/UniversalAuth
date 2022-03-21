@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Отключване с лице</string>
+    <string name="attr_light_dark">Лицето има нужда от повече светлина</string>
+    <string name="attr_light_high">Лицето има прекалено много светлина</string>
+    <string name="attr_light_shadow">Лицето има прекалено много сенки</string>
+    <string name="btn_done">Готово</string>
+    <string name="btn_try">ОПИТАЙТЕ ОТНОВО</string>
+    <string name="face_intro_conten_first_point">Лицевото разпознаване не е толкова сигурно, колкото модел, PIN (код) или парола</string>
+    <string name="face_intro_content_second_point">Някой, който прилича на Вас, може да отключи телефона Ви</string>
+    <string name="face_intro_content_third_point">Данните, използвани за разпознаване на лицето Ви, са поверителни и се съхраняват на телефона Ви</string>
+    <string name="face_intro_next">НАПРЕД</string>
+    <string name="face_intro_remember">Запомнете:</string>
+    <string name="face_intro_summary">Отключвайте телефона си, като погледнете към него.</string>
+    <string name="face_intro_title">Относно отключването с лице</string>
+    <string name="face_value_prop_cancel">Не, благодаря</string>
+    <string name="face_value_prop_next">Настройване</string>
+    <string name="face_value_prop_summary">"Отключване с лице ви позволява лесно да влизате в телефона си, като просто го погледнете. Тъй като телефонът разпознава лицето ви, заключеният екран показва известия само когато гледате към него"</string>
+    <string name="facelock_setup_notification_text">Настройване на лицево отключване</string>
+    <string name="facelock_setup_notification_title">Отключване с поглед</string>
+    <string name="face_camera_content">Подравнете лицето си</string>
+    <string name="face_camera_content_tip">Уверете се, че лицето ви е центрирано отдолу. Лицето ви трябва да е добре осветено и да е обърнато директно към телефона ви.</string>
+    <string name="face_next_change_later_tip">Можете да промените това по-късно от настройките за \"Сигурност и местоположение\"</string>
+    <string name="face_next_content">Всичко е готово</string>
+    <string name="face_next_content_tip">"След като сканирахте лицето си, можете да отключвате телефона си само с поглед"</string>
+    <string name="face_try_content">Възникна грешка</string>
+    <string name="face_try_content_tip">"Лицевото сканиране е неуспешно. Уверете се, че сте добре осветени и гледате към камерата."</string>
+    <string name="perm_required_alert_button_app_info">Информация за приложението</string>
+    <string name="perm_required_alert_msg">Отключването с лице има нужда от разрешение за достъп до някои елементи от Вашето устройство. Изберете \"Разрешения\" в информация за приложението за разрешаване.</string>
+    <string name="perm_required_alert_title">Необходими са разрешения</string>
+    <string name="policy_disabled_alert_msg">Лицевото отключване е изключено от администратора.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Натискането на бутон вкл./изкл. ще отвори началния екран или последно използваното приложение, когато лицето е разпознато</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Пропускане на заключения екран</string>
+    <string name="title_activity_face_intro">Въведение в отключването с лице</string>
+    <string name="unlock_failed_face_blur">Лицето е твърде неясно</string>
+    <string name="unlock_failed_face_large">Лицето е твърде близо</string>
+    <string name="unlock_failed_face_multi">Разпознати са прекалено много лица</string>
+    <string name="unlock_failed_face_not_complete">Само част от лицето е разпознато</string>
+    <string name="unlock_failed_face_small">Лицето е твърде далеч</string>
+    <string name="upgrade_finish_summary">"Вече сте готови да отключите устройството си с Отключване с лице"</string>
+    <string name="upgrade_finish_title">Добре!</string>
+</resources>

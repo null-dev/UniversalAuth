@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_done">ചെയ്തു</string>
+    <string name="face_intro_next">അടുത്തത്</string>
+    <string name="face_intro_remember">ഓർക്കുക:</string>
+</resources>

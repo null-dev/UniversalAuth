@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/finish_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32.0dip"
+        android:layout_marginTop="24.0dip"
+        android:layout_marginEnd="32.0dip"
+        android:layout_marginBottom="24.0dip"
+        android:text="@string/upgrade_finish_title"
+        android:textColor="@color/theme_color"
+        android:textIsSelectable="false"
+        android:textSize="24.0sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/bottom_bar"
+        android:layout_below="@id/finish_title"
+        android:fillViewport="true"
+        android:scrollbars="horizontal">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/optin_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24.0dip"
+                android:layout_marginBottom="24.0sp"
+                android:scaleType="centerInside"
+                android:src="@drawable/all_done" />
+
+            <TextView
+                style="@style/InfoTextFinished"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/optin_image"
+                android:layout_marginBottom="20.0dip"
+                android:gravity="center"
+                android:text="@string/upgrade_finish_summary"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="?android:textColorPrimary"
+                android:textIsSelectable="false" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:minHeight="@dimen/settings_tutorial_button_layout_height">
+
+        <Button
+            android:id="@+id/singleButton"
+            style="@style/ButtonTextRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_done" />
+    </RelativeLayout>
+</RelativeLayout>

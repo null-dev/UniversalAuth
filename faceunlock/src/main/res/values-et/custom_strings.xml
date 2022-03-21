@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Näotuvastus</string>
+    <string name="attr_light_dark">Nägu vajab rohkem valgust</string>
+    <string name="attr_light_high">Nägu on ülevalgustatud</string>
+    <string name="attr_light_shadow">Näol on liiga palju varje</string>
+    <string name="btn_done">Valmis</string>
+    <string name="btn_try">Proovi uuesti</string>
+    <string name="face_intro_conten_first_point">Näotuvastus on vähem turvaline kui muster, PIN-kood või parool</string>
+    <string name="face_intro_content_second_point">Väliselt sarnased inimesed võivad saada avada Teie telefoni</string>
+    <string name="face_intro_content_third_point">Teie näo tuvastamiseks kasutatavaid andmeid hoitakse Teie telefonis</string>
+    <string name="face_intro_next">Edasi</string>
+    <string name="face_intro_remember">Pidage meeles:</string>
+    <string name="face_intro_summary">Avage oma telefon seda vaadates.</string>
+    <string name="face_intro_title">Näotuvastusest</string>
+    <string name="face_value_prop_cancel">Ei, aitäh</string>
+    <string name="face_value_prop_next">Seadista</string>
+    <string name="face_value_prop_summary">"Näotuvastus võimaldab teil telefoni lihtsalt lukust avada, seda vaadates. Telefon tunneb teie nägu ja lukustuskuva märguanded ilmuvad ainult seda vaadates. "</string>
+    <string name="facelock_setup_notification_text">Seadistage näotuvastus</string>
+    <string name="facelock_setup_notification_title">Pilguga avamine</string>
+    <string name="face_camera_content">Joondage oma nägu</string>
+    <string name="face_camera_content_tip">Veenduge, et Teie nägu oleks keskel. Hoidke oma nägu hästi valgustatud ja vaadake otse kaamerasse.</string>
+    <string name="face_next_change_later_tip">Seda saate hiljem turvaseadetes muuta</string>
+    <string name="face_next_content">Valmis</string>
+    <string name="face_next_content_tip">"Nüüd, kui olete oma näo skanninud, saate telefoni avada vaid seda vaadates."</string>
+    <string name="face_try_content">Midagi läks valesti</string>
+    <string name="face_try_content_tip">"Näo skaneerimine ebaõnnestus. Veenduge, et olete hästi valgustatud ja vaatate otse kaamerasse."</string>
+    <string name="perm_required_alert_button_app_info">Rakenduse teave</string>
+    <string name="perm_required_alert_msg">Näotuvastus funktsioon vajab mõningatele teie seadmes olevatele andmetele juurdepääsu luba. Funktsiooni lubamiseks valige rakenduse seadetes „Load”. </string>
+    <string name="perm_required_alert_title">Load on vajalikud</string>
+    <string name="policy_disabled_alert_msg">Näotuvastus on administraatori poolt keelatud.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Toiteklahvi vajutamisel avatakse avakuva või viimati kasutatud rakendus pärast näo tuvastamist</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Lukustusekraanist möödumine</string>
+    <string name="title_activity_face_intro">Üldine info näotuvastus funktsioonist</string>
+    <string name="unlock_failed_face_blur">Nägu on liiga udune</string>
+    <string name="unlock_failed_face_large">Nägu on liiga lähedal</string>
+    <string name="unlock_failed_face_multi">Liiga palju nägusid</string>
+    <string name="unlock_failed_face_not_complete">Tunnustatud ainult osa näost</string>
+    <string name="unlock_failed_face_small">Nägu on liiga kaugel</string>
+    <string name="upgrade_finish_summary">"Nüüd saate seadme näotuvastus funktsiooni abil lukust lahti võtta"</string>
+    <string name="upgrade_finish_title">Hästi!</string>
+</resources>

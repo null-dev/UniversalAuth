@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="top_icon_margin_top">72.0dip</dimen>
+    <dimen name="setup_body_text_size">16.0sp</dimen>
+    <dimen name="setup_bypass_lock_screen_margin_top">24.0dip</dimen>
+    <dimen name="setup_header_margin_top">8.0dip</dimen>
+    <dimen name="setup_header_text_size">24.0sp</dimen>
+    <dimen name="setup_remember_margin_top">30.0dip</dimen>
+    <dimen name="setup_remember_point_margin_top">18.0dip</dimen>
+    <dimen name="setup_summary_margin_top">7.0dip</dimen>
+    <dimen name="setup_top_icon_size">32.0dip</dimen>
+    <dimen name="page_padding_left">32.0dip</dimen>
+    <dimen name="page_padding_left_20">20.0dip</dimen>
+    <dimen name="page_padding_right">32.0dip</dimen>
+    <dimen name="suw_glif_button_padding">16.0dip</dimen>
+    <dimen name="button_inset_horizontal_material">4.0dip</dimen>
+    <dimen name="button_inset_vertical_material">6.0dip</dimen>
+    <dimen name="button_padding_horizontal_material">8.0dip</dimen>
+    <dimen name="button_padding_vertical_material">4.0dip</dimen>
+    <dimen name="control_corner_material">2.0dip</dimen>
+    <dimen name="help_video_height">330.0dip</dimen>
+    <dimen name="help_video_width">330.0dip</dimen>
+    <dimen name="settings_single_button_max_width">140.0dip</dimen>
+    <dimen name="settings_single_button_min_width">90.0dip</dimen>
+    <dimen name="settings_tutorial_button_height">36.0dip</dimen>
+    <dimen name="settings_tutorial_button_layout_height">84.0dip</dimen>
+    <dimen name="settings_tutorial_button_padding">16.0dip</dimen>
+    <dimen name="settings_tutorial_side_margin">32.0dip</dimen>
+    <dimen name="round_button_corner_radius">60.0dip</dimen>
+    <dimen name="round_button_stroke_width">1.0dip</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

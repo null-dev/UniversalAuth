@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Error message shown when the face hardware can't be accessed. [CHAR LIMIT=69] -->
+    <string name="face_error_hw_not_available">Can\u2019t verify face. Hardware not available.</string>
+    <!-- Error message shown when the face hardware timer has expired and the user needs to restart the operation. [CHAR LIMIT=50] -->
+    <string name="face_error_timeout">No valid face detected.</string>
+    <!-- Error message shown when the face hardware has run out of room for storing faces. [CHAR LIMIT=69] -->
+    <string name="face_error_no_space">Can\u2019t store new face data. Delete an old one first.</string>
+    <!-- Generic error message shown when the face operation (e.g. enrollment or authentication) is canceled. Generally not shown to the user. [CHAR LIMIT=50] -->
+    <string name="face_error_canceled">Face operation canceled.</string>
+    <!-- Generic error message shown when the Face Unlock operation is canceled due to user input. Generally not shown to the user [CHAR LIMIT=68] -->
+    <string name="face_error_user_canceled">Face Unlock canceled by user</string>
+    <!-- Generic error message shown when the face operation fails because too many attempts have been made. [CHAR LIMIT=50] -->
+    <string name="face_error_lockout">Too many attempts. Try again later.</string>
+    <!-- Generic error message shown when the face operation fails because strong authentication is required. [CHAR LIMIT=90] -->
+    <string name="face_error_lockout_permanent">Too many attempts. Face Unlock disabled.</string>
+    <!-- Generic error message shown when the face operation fails because strong authentication is required. [CHAR LIMIT=90] -->
+    <string name="face_error_lockout_screen_lock">Too many attempts. Enter screen lock instead.</string>
+    <!-- Generic error message shown when the face hardware can't recognize the face. [CHAR LIMIT=50] -->
+    <string name="face_error_unable_to_process">Can\u2019t verify face.</string>
+    <!-- Generic error message shown when the user has no enrolled face. [CHAR LIMIT=59] -->
+    <string name="face_error_not_enrolled">You haven\u2019t set up Face Unlock</string>
+    <!-- Generic error message shown when the app requests Face Unlock on a device without a sensor. [CHAR LIMIT=61] -->
+    <string name="face_error_hw_not_present">Face Unlock isn\u2019t supported on this device</string>
+    <!-- Generic error message shown when face unlock is not available due to a security vulnerability. [CHAR LIMIT=50] -->
+    <string name="face_error_security_update_required">Sensor temporarily disabled.</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="face_error_vendor">
+    </string-array>
+    <!-- Default error message to use when face_error_vendor does not contain a message. [CHAR LIMIT=NONE] -->
+    <string name="face_error_vendor_unknown">Something went wrong. Try again.</string>
+</resources>

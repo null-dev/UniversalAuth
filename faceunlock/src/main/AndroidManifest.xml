@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ax.nd.faceunlock">
+
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.MANAGE_BIOMETRIC"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission
+        android:name="android.permission.USE_BIOMETRIC_INTERNAL"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".FaceApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher_face_unlock"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:resizeableActivity="false"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".FaceAuthActivity"
+            android:showOnLockScreen="true"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SetupFaceIntroActivity"
+            android:enabled="true"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/title_activity_face_intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".FaceEnrollActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".FaceFinish"
+            android:excludeFromRecents="true"
+            android:label="@string/facelock_setup_notification_text"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".FaceTryAgain"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".FaceValuePropActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+        <activity
+            android:name=".FaceUpgradeFinish"
+            android:excludeFromRecents="true"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingsTheme" />
+
+        <service
+            android:name=".service.FaceAuthService"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:permission="android.permission.MANAGE_BIOMETRIC">
+<!--            <intent-filter>-->
+<!--                <action android:name="ax.nd.faceunlock.BIND" />-->
+<!--            </intent-filter>-->
+        </service>
+
+        <service android:name=".service.LockscreenFaceAuthService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

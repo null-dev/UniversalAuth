@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme" parent="@style/AppBaseTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="md_color_button_text">?android:textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.AlertDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog.Alert">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SettingsTheme" parent="@android:style/Theme.DeviceDefault.Settings">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorPrimary">@color/theme_color</item>
+        <item name="android:colorPrimaryDark">@color/theme_color</item>
+        <item name="android:colorSecondary">@color/theme_color</item>
+    </style>
+
+    <style name="SuwGlifButton.Primary" parent="@android:style/Widget.Material.Button.Colored">
+        <item name="android:buttonStyle">@style/SuwGlifButton.Primary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/bg_btn_next</item>
+        <item name="android:paddingLeft">@dimen/suw_glif_button_padding</item>
+        <item name="android:paddingRight">@dimen/suw_glif_button_padding</item>
+        <item name="android:minWidth">0.0dip</item>
+    </style>
+
+    <style name="SuwGlifButton.Secondary" parent="@android:style/Widget.Material.Button.Borderless.Colored">
+        <item name="android:theme">@style/SuwGlifButton.Secondary</item>
+        <item name="android:buttonStyle">@style/SuwGlifButton.Secondary</item>
+        <item name="android:textColor">@color/theme_color</item>
+        <item name="android:paddingLeft">@dimen/suw_glif_button_padding</item>
+        <item name="android:paddingRight">@dimen/suw_glif_button_padding</item>
+        <item name="android:minWidth">0.0dip</item>
+        <item name="android:colorControlHighlight">@color/suw_flat_button_highlight</item>
+    </style>
+
+    <style name="ButtonText">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ButtonTextRound" parent="@style/ButtonText">
+        <item name="android:textColor">@color/positive_button_text</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:background">@drawable/button_round_ripple_actions</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/settings_tutorial_button_height</item>
+        <item name="android:maxWidth">@dimen/settings_single_button_max_width</item>
+        <item name="android:minWidth">@dimen/settings_single_button_min_width</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingStart">@dimen/settings_tutorial_button_padding</item>
+        <item name="android:paddingEnd">@dimen/settings_tutorial_button_padding</item>
+    </style>
+
+    <style name="InfoTextFinished">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:alpha">0.8</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_marginStart">@dimen/settings_tutorial_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/settings_tutorial_side_margin</item>
+    </style>
+</resources>

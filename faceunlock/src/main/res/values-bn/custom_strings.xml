@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">মুখের সাহায্যে আনলক করুন</string>
+    <string name="attr_light_dark">মুখের আরো আলো প্রয়োজন</string>
+    <string name="attr_light_high">মুখে অনেক বেশি আলো রয়েছে</string>
+    <string name="attr_light_shadow">মুখে অনেক ছায়া পড়েছে</string>
+    <string name="btn_done">সম্পন্ন হয়েছে</string>
+    <string name="btn_try">আবার চেষ্টা করুন</string>
+    <string name="face_intro_conten_first_point">কোনো প্যাটার্ন, PIN বা পাসওয়ার্ডের চেয়ে মুখ মেলানো কম নিরাপদ</string>
+    <string name="face_intro_content_second_point">আপনার মতো দেখতে কেউ আপনার ফোন আনলক করতে পারে</string>
+    <string name="face_intro_content_third_point">আপনার মুখ শনাক্ত করার ডেটা আপনার ফোনে ব্যক্তিগত করে রাখা হয়েছে</string>
+    <string name="face_intro_next">পরবর্তী</string>
+    <string name="face_intro_remember">মনে রাখুন:</string>
+    <string name="face_intro_summary">আপনার ফোনের দিকে তাকিয়ে এটি আনলক করুন।</string>
+    <string name="face_intro_title">মুখ আনলক সম্বন্ধে</string>
+    <string name="facelock_setup_notification_text">মুখ আনলক সেট আপ করুন</string>
+    <string name="facelock_setup_notification_title">এক ঝলকে আনলক করুন</string>
+    <string name="policy_disabled_alert_msg">মুখ আনলক প্রশাসক দ্বারা অক্ষম করা হয়েছে।</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">পাওয়ার কীটি টেপা হলে একবার কোনও মুখ মিলে গেলে তা হোম স্ক্রীন বা শেষ ব্যবহৃত অ্যাপটি খুলবে</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">লক স্ক্রিন বাইপাস করুন</string>
+    <string name="title_activity_face_intro">মুখ আনলক উপস্থাপনা</string>
+    <string name="unlock_failed_face_blur">মুখটি অত্যন্ত ঝাপসা</string>
+    <string name="unlock_failed_face_large">মুখ খুব কাছে রয়েছে</string>
+    <string name="unlock_failed_face_multi">অনেক বেশি মুখ শনাক্ত হয়েছে</string>
+    <string name="unlock_failed_face_not_complete">শুধুমাত্র আংশিক মুখ শনাক্ত হয়েছে</string>
+    <string name="unlock_failed_face_small">মুখটি অত্যন্ত দূরে</string>
+    <string name="upgrade_finish_summary">"এখন আপনি আপনার ডিভাইস মুখ আনলকের সাহায্যে আনলক করার জন্য প্রস্তুত"</string>
+    <string name="upgrade_finish_title">ঠিক আছে!</string>
+</resources>

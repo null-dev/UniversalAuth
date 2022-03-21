@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Фейсконтроль</string>
+    <string name="attr_light_dark">Обличчя недостатньо освітлене</string>
+    <string name="attr_light_high">Обличчя надто сильно освітлене</string>
+    <string name="attr_light_shadow">Обличчя надто затінене</string>
+    <string name="btn_done">Готово</string>
+    <string name="btn_try">Повторіть спробу</string>
+    <string name="face_intro_conten_first_point">Розпізнавання обличчя є менш надійним, ніж графічний ключ, PIN-код чи пароль</string>
+    <string name="face_intro_content_second_point">Будь-хто, схожий на вас, зможе розблокувати ваш телефон</string>
+    <string name="face_intro_content_third_point">Дані, які використовуються для розпізнавання вашого обличчя, зберігаються у вашому телефоні на умовах конфіденційності</string>
+    <string name="face_intro_next">ДАЛІ</string>
+    <string name="face_intro_remember">Пам\'ятайте:</string>
+    <string name="face_intro_summary">Розблоковуйте телефон одним поглядом.</string>
+    <string name="face_intro_title">Про Фейсконтроль</string>
+    <string name="face_value_prop_cancel">Ні, дякую</string>
+    <string name="face_value_prop_next">Налашт.</string>
+    <string name="face_value_prop_summary">"Завдяки функції \"Фейсконтроль\" ви можете легко розблокувати телефон, просто глянувши на нього. Оскільки телефон пам'ятає ваше обличчя, сповіщення на екрані блокування відображаються лише тоді, коли ви дивитеся на екран"</string>
+    <string name="facelock_setup_notification_text">Налаштувати функцію \"Фейсконтроль\"</string>
+    <string name="facelock_setup_notification_title">Розблокування поглядом</string>
+    <string name="face_camera_content">Вирівняйте положення обличчя</string>
+    <string name="face_camera_content_tip">Обличчя має бути відцентровано нижче. Переконайтеся, що обличчя добре освітлене, і дивіться прямо на телефон.</string>
+    <string name="face_next_change_later_tip">Ви можете змінити це пізніше в налаштуваннях безпеки</string>
+    <string name="face_next_content">Все готово!</string>
+    <string name="face_next_content_tip">"Тепер, коли ви просканували обличчя, ви можете розблоковувати телефон одним поглядом."</string>
+    <string name="face_try_content">Щось пішло не так</string>
+    <string name="face_try_content_tip">"Не вдалося просканувати обличчя. Переконайтеся, що обличчя добре освітлено, і ви дивитеся прямо на камеру."</string>
+    <string name="perm_required_alert_button_app_info">Про додаток</string>
+    <string name="perm_required_alert_msg">Програмі Фейсконтроль потрібен дозвіл на доступ до певних даних на вашому пристрої. Для ввімкнення виберіть \"Дозволи\" в розділі \"Інформація про програму\".</string>
+    <string name="perm_required_alert_title">Необхідні дозволи</string>
+    <string name="policy_disabled_alert_msg">Функцію \"Фейсконтроль\" вимкнено адміністратором.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Якщо обличчя буде розпізнано, після натиснення кнопки живлення відкриється головний екран або програма, що використовувалася останньою</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Обхід екрана блокування</string>
+    <string name="title_activity_face_intro">Коротко про Фейсконтроль</string>
+    <string name="unlock_failed_face_blur">Обличчя надто розмите</string>
+    <string name="unlock_failed_face_large">Обличчя надто близько</string>
+    <string name="unlock_failed_face_multi">Виявлено забагато облич</string>
+    <string name="unlock_failed_face_not_complete">Виявлено лише частину обличчя</string>
+    <string name="unlock_failed_face_small">Обличчя надто далеко</string>
+    <string name="upgrade_finish_summary">"Тепер ви можете розблокувати свій пристрій за допомогою функції \"Фейсконтроль\""</string>
+    <string name="upgrade_finish_title">Добре!</string>
+</resources>

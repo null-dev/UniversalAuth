@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Разблакоўка тварам</string>
+    <string name="attr_light_dark">Твар недастаткова асветлены</string>
+    <string name="attr_light_high">На твары шмат святла</string>
+    <string name="attr_light_shadow">На твары шмат ценяў</string>
+    <string name="btn_done">Гатова</string>
+    <string name="btn_try">Паспрабаваць яшчэ раз</string>
+    <string name="face_intro_conten_first_point">Супастаўленне твараў менш бяспечнае, чым шаблон, PIN-код або пароль</string>
+    <string name="face_intro_content_second_point">Хтосьці, падобны на вас, можа разблакаваць тэлефон</string>
+    <string name="face_intro_content_third_point">Дадзеныя, якія выкарыстоўваюцца для распазнання вашага твару, захоўваюцца ў прыватнасці на вашым тэлефоне</string>
+    <string name="face_intro_next">Наступны</string>
+    <string name="face_intro_remember">Запомніць:</string>
+    <string name="face_intro_summary">Разблакіруйце тэлефон, гледзячы на ​​яго.</string>
+    <string name="face_intro_title">Пра разблакоўку тварам</string>
+    <string name="facelock_setup_notification_text">Наладзьце разблакоўку тварам</string>
+    <string name="facelock_setup_notification_title">Разблакіруйце адным поглядам</string>
+    <string name="policy_disabled_alert_msg">Разблакіроўка тварам была адключана адміністратарам.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Націсканне клавішы моцу адкрые галоўны экран альбо апошняе выкарыстанне прыкладання, калі твар супадае</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Абыход экрана блакавання</string>
+    <string name="title_activity_face_intro">Увядзенне разблакоўкі тварам</string>
+    <string name="unlock_failed_face_blur">Твар занадта размыты</string>
+    <string name="unlock_failed_face_large">Твар занадта блізка</string>
+    <string name="unlock_failed_face_multi">Выяўлена занадта шмат твараў</string>
+    <string name="unlock_failed_face_not_complete">Выяўлена толькі частка твару</string>
+    <string name="unlock_failed_face_small">Твар занадта далёкі</string>
+    <string name="upgrade_finish_summary">"Цяпер вы гатовыя разблакаваць прыладу разблакоўкай тварам"</string>
+    <string name="upgrade_finish_title">Добра!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Откључавање лицем</string>
+    <string name="attr_light_dark">Потребно је да лице буде више осветљено</string>
+    <string name="attr_light_high">Лице је превише осветљено</string>
+    <string name="attr_light_shadow">На лицу има превише сенки</string>
+    <string name="btn_done">Готово</string>
+    <string name="btn_try">ПРОБАЈ ПОНОВО</string>
+    <string name="face_intro_conten_first_point">Препознавање лица је мање безбедно од шаблона, PIN кода или лозинке</string>
+    <string name="face_intro_content_second_point">Неко ко личи на вас би могао да откључа телефон</string>
+    <string name="face_intro_content_third_point">Подаци за препознавање лица се безбедно чувају на вашем телефону</string>
+    <string name="face_intro_next">ДАЉЕ</string>
+    <string name="face_intro_remember">Запамтите:</string>
+    <string name="face_intro_summary">Откључајте телефон тако што ћете га погледати.</string>
+    <string name="face_intro_title">О откључавању лицем</string>
+    <string name="facelock_setup_notification_text">Подесите откључавање лицем</string>
+    <string name="facelock_setup_notification_title">Откључавање погледом</string>
+    <string name="policy_disabled_alert_msg">Администратор је онемогућио откључавање лицем.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Притиском на тастер за укључивање отвара се почетни екран или последња коришћена апликација када се препозна лице</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Заобиђите закључавање екрана</string>
+    <string name="title_activity_face_intro">Увод у откључавање лицем</string>
+    <string name="unlock_failed_face_blur">Лице је превише замагљено</string>
+    <string name="unlock_failed_face_large">Лице је преблизу</string>
+    <string name="unlock_failed_face_multi">Откривено је превише лица</string>
+    <string name="unlock_failed_face_not_complete">Откривен је само део лица</string>
+    <string name="unlock_failed_face_small">Лице је предалеко</string>
+    <string name="upgrade_finish_summary">"Сада сте спремни за откључавање уређаја лицем"</string>
+    <string name="upgrade_finish_title">У реду!</string>
+</resources>

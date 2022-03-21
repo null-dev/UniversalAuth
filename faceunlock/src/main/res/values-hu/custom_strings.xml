@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Arcalapú feloldás</string>
+    <string name="attr_light_dark">Az arcnak több fényre van szüksége</string>
+    <string name="attr_light_high">Az arc túlságosan meg van világítva</string>
+    <string name="attr_light_shadow">Az arc túlságosan árnyékos</string>
+    <string name="btn_done">Kész</string>
+    <string name="btn_try">PRÓBÁLJA ÚJRA</string>
+    <string name="face_intro_conten_first_point">Az arcfelismerés nem annyira biztonságos, mint a feloldási minta, a PIN-kód vagy a jelszó</string>
+    <string name="face_intro_content_second_point">Az Önre hasonlító személyek fel tudják oldani a telefont</string>
+    <string name="face_intro_content_third_point">Az arcfelismeréshez szükséges adatok a telefonon vannak tárolva, és mások nem láthatják őket</string>
+    <string name="face_intro_next">KÖVETKEZŐ</string>
+    <string name="face_intro_remember">Ne feledje:</string>
+    <string name="face_intro_summary">A feloldáshoz csak rá kell néznie a telefonra.</string>
+    <string name="face_intro_title">További információ az arcalapú feloldásról</string>
+    <string name="face_value_prop_cancel">Köszönöm, nem</string>
+    <string name="face_value_prop_next">Beállítás</string>
+    <string name="face_value_prop_summary">"Az arcalapú feloldással a feloldáshoz csak rá kell pillantania telefonjára. Mivel a telefon ismeri az Ön arcát, a lezárási képernyőn csak akkor jelennek meg az értesítések, amikor Ön nézi a telefont"</string>
+    <string name="facelock_setup_notification_text">Az arcalapú feloldás beállítása</string>
+    <string name="facelock_setup_notification_title">Feloldás egyetlen pillantással</string>
+    <string name="face_camera_content">Igazítsa az arc helyzetét</string>
+    <string name="face_camera_content_tip">Ellenőrizze, hogy az arca középen van. Az arca legyen jól megvilágítva és nézzen egyenesen a telefonjára.</string>
+    <string name="face_next_change_later_tip">Ezt később a Biztonság beállításaiban megváltoztathatja</string>
+    <string name="face_next_content">A beállítás kész!</string>
+    <string name="face_next_content_tip">"Most, hogy sikerült az arc beolvasása, a telefon egyetlen pillantással feloldható."</string>
+    <string name="face_try_content">Valami nem stimmel</string>
+    <string name="face_try_content_tip">"Nem sikerült az arcbeolvasás. Figyeljen arra, hogy legyen jól megvilágítva és nézzen a kamerába."</string>
+    <string name="perm_required_alert_button_app_info">Alkalmazásinformáció</string>
+    <string name="perm_required_alert_msg">Engedélyezni kell, hogy az arcalapú feloldás funkció hozzáférhessen az eszköz egyes adataihoz. Az engedélyezéshez válassza ki az \"Engedélyek\" lehetőséget az Alkalmazásinformáció menüben.</string>
+    <string name="perm_required_alert_title">Engedélyek szükségesek</string>
+    <string name="policy_disabled_alert_msg">A rendszergazda letiltotta az arcalapú feloldás funkciót.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Ha a telefon felismeri az arcot, a bekapcsológomb megnyomásával megnyílik a kezdőképernyő vagy a legutoljára használt alkalmazás</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">A lezárási képernyő átlépése</string>
+    <string name="title_activity_face_intro">Az arcalapú feloldás bemutatása</string>
+    <string name="unlock_failed_face_blur">Az arc túlságosan elmosódott</string>
+    <string name="unlock_failed_face_large">Az arc túl közel van</string>
+    <string name="unlock_failed_face_multi">Túl sok arc látszik</string>
+    <string name="unlock_failed_face_not_complete">Csak az arc egy része látszik</string>
+    <string name="unlock_failed_face_small">Az arc túl távol van</string>
+    <string name="upgrade_finish_summary">"Mostantól az arcalapú feloldással fel tudja oldani a készülékét"</string>
+    <string name="upgrade_finish_title">Minden oké!</string>
+</resources>

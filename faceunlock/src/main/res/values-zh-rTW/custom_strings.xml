@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">臉部辨識解鎖</string>
+    <string name="attr_light_dark">臉部燈光過暗</string>
+    <string name="attr_light_high">臉部燈光過亮</string>
+    <string name="attr_light_shadow">臉部陰影過多</string>
+    <string name="btn_done">完成</string>
+    <string name="btn_try">再試一次</string>
+    <string name="face_intro_conten_first_point">相較於圖案、PIN 或密碼，臉部辨識的安全性較低</string>
+    <string name="face_intro_content_second_point">與您相貌相似的人可能可以解鎖您的手機</string>
+    <string name="face_intro_content_third_point">用於辨識您臉部的資料會私密地儲存在您的手機上</string>
+    <string name="face_intro_next">下一步</string>
+    <string name="face_intro_remember">記住：</string>
+    <string name="face_intro_summary">直視手機即可解鎖。</string>
+    <string name="face_intro_title">關於臉部辨識解鎖</string>
+    <string name="face_value_prop_cancel">不用了，謝謝</string>
+    <string name="face_value_prop_next">設定</string>
+    <string name="face_value_prop_summary">"「臉部辨識解鎖」讓您只需要看著手機就能輕鬆解鎖使用。由於手機能認得您的臉，因此鎖定螢幕只有在您看著手機時才會顯示通知"</string>
+    <string name="facelock_setup_notification_text">設定臉部辨識解鎖</string>
+    <string name="facelock_setup_notification_title">看一眼解鎖</string>
+    <string name="face_camera_content">臉部對正</string>
+    <string name="face_camera_content_tip">請確定您的臉部於下方置中。請保持臉部光線充足，並直視您的手機。</string>
+    <string name="face_next_change_later_tip">您稍後可以在 [安全性與位置] 設定中變更此設定</string>
+    <string name="face_next_content">設定完成</string>
+    <string name="face_next_content_tip">"您的臉部掃描現已完成，只要看一眼就能解鎖手機。"</string>
+    <string name="face_try_content">某個地方出錯了</string>
+    <string name="face_try_content_tip">"臉部掃描失敗。請確定臉部的光線充足，並且直視相機。"</string>
+    <string name="perm_required_alert_button_app_info">應用程式資訊</string>
+    <string name="perm_required_alert_msg">臉部辨識解鎖需要權限才能存取您裝置上的某些功能。請在 [應用程式資訊] 中選取 [權限] 以啟用。</string>
+    <string name="perm_required_alert_title">需要權限</string>
+    <string name="policy_disabled_alert_msg">管理員已停用臉部辨識解鎖功能。</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">在辨識到相符的臉部時，按下電源鍵，即會開啟至主畫面或最後使用的應用程式</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">略過鎖定螢幕</string>
+    <string name="title_activity_face_intro">臉部辨識解鎖簡介</string>
+    <string name="unlock_failed_face_blur">臉部過於模糊不清</string>
+    <string name="unlock_failed_face_large">臉部過近</string>
+    <string name="unlock_failed_face_multi">偵測到過多臉孔</string>
+    <string name="unlock_failed_face_not_complete">僅偵測到部分臉孔</string>
+    <string name="unlock_failed_face_small">臉部過遠</string>
+    <string name="upgrade_finish_summary">"現在只需臉部辨識解鎖就能解鎖裝置"</string>
+    <string name="upgrade_finish_title">很好！</string>
+</resources>

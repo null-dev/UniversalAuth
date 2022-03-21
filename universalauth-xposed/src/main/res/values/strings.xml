@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UniversalAuth</string>
+    <string name="unlock_device_permission_label">Unlock the device</string>
+    <string name="unlock_device_permission_desc">unlock and control your lock screen</string>
+</resources>

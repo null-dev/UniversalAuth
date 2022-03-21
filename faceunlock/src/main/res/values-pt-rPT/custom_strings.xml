@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Desbloqueio facial</string>
+    <string name="attr_light_dark">A face precisa de mais luz</string>
+    <string name="attr_light_high">A face tem demasiada luz</string>
+    <string name="attr_light_shadow">Face com demasiadas sombras</string>
+    <string name="btn_done">Concluído</string>
+    <string name="btn_try">Tentar novamente</string>
+    <string name="face_intro_conten_first_point">O desbloqueio facial é menos seguro do que um padrão, PIN ou palavra-passe</string>
+    <string name="face_intro_content_second_point">Alguém parecido consigo pode desbloquear o telemóvel</string>
+    <string name="face_intro_content_third_point">Os dados utilizados para o reconhecimento da face são mantidos privados no telemóvel</string>
+    <string name="face_intro_next">Seguinte</string>
+    <string name="face_intro_remember">Lembre-se:</string>
+    <string name="face_intro_summary">Desbloquear telefone com a sua face.</string>
+    <string name="face_intro_title">Acerca do desbloqueio com a face</string>
+    <string name="face_value_prop_cancel">Não, obrigado</string>
+    <string name="face_value_prop_next">Configurar</string>
+    <string name="face_value_prop_summary">"O desbloqueio facial permite-lhe aceder facilmente ao telemóvel com a sua face. Uma vez que o telemóvel reconhece o seu rosto, o ecrã de bloqueio só mostra as notificações se você estiver a olhar para ele"</string>
+    <string name="facelock_setup_notification_text">Configurar desbloqueio facial</string>
+    <string name="facelock_setup_notification_title">Desbloquear com um olhar</string>
+    <string name="face_camera_content">Alinhe a sua face</string>
+    <string name="face_camera_content_tip">Certifique-se de que a face está centrada abaixo. Mantenha o rosto bem iluminado e olhe diretamente para o telemóvel.</string>
+    <string name="face_next_change_later_tip">Pode alterar isto mais tarde nas definições de segurança</string>
+    <string name="face_next_content">Concluído</string>
+    <string name="face_next_content_tip">"Agora que a face foi analisada, pode desbloquear o telemóvel com apenas um olhar."</string>
+    <string name="face_try_content">Ocorreu um erro</string>
+    <string name="face_try_content_tip">"Ocorreu um erro ao analisar. Certifique-se de que a face está bem iluminada e que está a olhar para a câmara."</string>
+    <string name="perm_required_alert_button_app_info">Informações da aplicação</string>
+    <string name="perm_required_alert_msg">O desbloqueio facial necessita de permissão para aceder a algumas áreas do dispositivo. Selecione \"Permissões\" em Informações da aplicação para permitir.</string>
+    <string name="perm_required_alert_title">Permissões necessárias</string>
+    <string name="policy_disabled_alert_msg">O desbloqueio facial foi desativado pelo administrador.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Após desbloquear, ir para o ecrã inicial ou para a última aplicação usada</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Ignorar ecrã de bloqueio</string>
+    <string name="title_activity_face_intro">Introdução ao desbloqueio facial</string>
+    <string name="unlock_failed_face_blur">A face está desfocada</string>
+    <string name="unlock_failed_face_large">A face está demasiado perto</string>
+    <string name="unlock_failed_face_multi">Demasiadas faces detetadas</string>
+    <string name="unlock_failed_face_not_complete">Apenas foi detetada parte da face</string>
+    <string name="unlock_failed_face_small">A face está muito afastada</string>
+    <string name="upgrade_finish_summary">"Já está pronto para desbloquear o dispositivo com o desbloqueio facial"</string>
+    <string name="upgrade_finish_title">Muito bem!</string>
+</resources>

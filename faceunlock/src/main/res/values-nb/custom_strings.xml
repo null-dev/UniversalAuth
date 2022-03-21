@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ansiktslås</string>
+    <string name="attr_light_dark">For lite lys på ansiktet</string>
+    <string name="attr_light_high">For mye lys på ansiktet</string>
+    <string name="attr_light_shadow">Ansiktet har for mange skygger</string>
+    <string name="btn_done">Ferdig</string>
+    <string name="btn_try">PRØV PÅ NYTT</string>
+    <string name="face_intro_conten_first_point">Ansiktsmatching er mindre sikkert enn et mønster, en PIN-kode eller et passord</string>
+    <string name="face_intro_content_second_point">Noen som likner på deg, kan låse opp telefonen din</string>
+    <string name="face_intro_content_third_point">Dataene som brukes til å gjenkjenne ansiktet ditt, holdes privat på telefonen din</string>
+    <string name="face_intro_next">NESTE</string>
+    <string name="face_intro_remember">Husk:</string>
+    <string name="face_intro_summary">Lås opp telefonen ved å se på den.</string>
+    <string name="face_intro_title">Om ansiktslås</string>
+    <string name="face_value_prop_cancel">Nei takk</string>
+    <string name="face_value_prop_next">Konfigurer</string>
+    <string name="face_value_prop_summary">"Med ansiktslås får du tilgang til telefonen din ved å kun se på den. Fordi telefonen din kjenner igjen ansiktet ditt, vil varsler vises på låseskjermen kun når du ser på den"</string>
+    <string name="facelock_setup_notification_text">Konfigurer ansiktslås</string>
+    <string name="facelock_setup_notification_title">Lås opp med bare et blikk</string>
+    <string name="face_camera_content">Juster ansiktet ditt</string>
+    <string name="face_camera_content_tip">Sørg for at ansiktet ditt er sentrert nedenfor. Hold ansiktet ditt godt opplyst og se direkte på telefonen.</string>
+    <string name="face_next_change_later_tip">Du kan endre dette senere i innstillingene under Sikkerhet og posisjon</string>
+    <string name="face_next_content">Alt er klart</string>
+    <string name="face_next_content_tip">"Nå som du har skannet ansiktet ditt, kan du låse opp telefonen din ved å kun se på den."</string>
+    <string name="face_try_content">Noe gikk galt</string>
+    <string name="face_try_content_tip">"Ansiktsskanningen mislyktes. Sørg for at ansiktet ditt er godt opplyst og at du ser rett mot kamera."</string>
+    <string name="perm_required_alert_button_app_info">App-info</string>
+    <string name="perm_required_alert_msg">Ansiktslås trenger tilgang til noen ting på enheten din. Velg \"Tillatelser\" i \"Appinformasjon\" for å aktivere.</string>
+    <string name="perm_required_alert_title">Tillatelser kreves</string>
+    <string name="policy_disabled_alert_msg">Ansiktslås er deaktivert av administratoren.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Hvis du trykker på av/på-knappen når ansiktet ditt blir gjenkjent, åpnes startsiden eller appen du brukte sist</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Omgå låseskjermen</string>
+    <string name="title_activity_face_intro">Introduksjon til ansiktslås</string>
+    <string name="unlock_failed_face_blur">Ansiktet er for uklart</string>
+    <string name="unlock_failed_face_large">Ansiktet er for nærme</string>
+    <string name="unlock_failed_face_multi">For mange ansikter er oppdaget</string>
+    <string name="unlock_failed_face_not_complete">Bare et delvist ansikt er oppdaget</string>
+    <string name="unlock_failed_face_small">Ansiktet er for langt unna</string>
+    <string name="upgrade_finish_summary">"Nå kan du låse opp enheten med ansiktslås"</string>
+    <string name="upgrade_finish_title">Flott!</string>
+</resources>

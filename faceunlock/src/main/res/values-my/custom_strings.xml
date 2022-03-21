@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">မျက်နှာြဖင့် သော့ဖွင့်မှု</string>
+    <string name="attr_light_dark">မျက်နှာပိုလင်းရန် လိုသည်</string>
+    <string name="attr_light_high">မျက်နှာလင်းလွန်းနေသည်</string>
+    <string name="attr_light_shadow">မျက်နှာတွင် အရိပ်များကျနေသည်</string>
+    <string name="btn_done">ပြီးပါပြီ</string>
+    <string name="btn_try">ထပ်ကြိုးစားပါ</string>
+    <string name="face_intro_conten_first_point">မျက်နှာတိုက်စစ်ခြင်းသည် ပုံစံ၊ ပင်ကုဒ်၊ စကားဝှက်များလောက် စိတ်မချရပါ</string>
+    <string name="face_intro_content_second_point">သင်နှင့် ရုပ်တူသူက သင့်ဖုန်းကို သော့ဖွင့်နိုင်ပါမည်</string>
+    <string name="face_intro_content_third_point">သင့်မျက်နှာကို မှတ်စေရန် သုံးသည့်ဒေတာများကို သင့်ဖုန်းတွင် သီးသန့်ထားရှိပါမည်</string>
+    <string name="face_intro_next">ရှေ့သို့</string>
+    <string name="face_intro_remember">မှတ်ရန် −</string>
+    <string name="face_intro_summary">၎င်းကိုကြည့်ရုံဖြင့် သင့်ဖုန်းကိုသော့ဖွင့်ပါ။</string>
+    <string name="face_intro_title">မျက်နှာဖြင့် သော့ဖြည်မှု အကြောင်း</string>
+    <string name="facelock_setup_notification_text">မျက်နှာဖြင့် သော့ဖွင့်ခြင်းကို သတ်မှတ်ပါ</string>
+    <string name="facelock_setup_notification_title">တစ်ချက်ကြည့်ရုံဖြင့် သော့ဖွင့်ပါ</string>
+    <string name="policy_disabled_alert_msg">မျက်နှာဖြင့် သော့ဖွင့်မှုကို စီမံခန့်ခွဲသူမှ ပိတ်ထားပါသည်။</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">မျက်နှာကိုက်ညီသွားသည့်အခါ ပါဝါကီးကိုနှိပ်ခြင်းသည် ပင်မစခရင် (သို့) နောက်ဆုံးသုံးခဲ့သည့် အက်ပ်ကိုပွင့်သွားစေမည်။</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">သော့ခတ်စခရင်ကို ဖြတ်ကျော်မည်</string>
+    <string name="title_activity_face_intro">မျက်နှာဖြင့် သော့ဖွင့်ခြင်း မိတ်ဆက်</string>
+    <string name="unlock_failed_face_blur">မျက်နှာအလွန်ဝါးနေသည်</string>
+    <string name="unlock_failed_face_large">မျက်နှာကပ်လွန်းနေသည်</string>
+    <string name="unlock_failed_face_multi">မျက်နှာများစွာကို တွေ့ရှိထားသည်</string>
+    <string name="unlock_failed_face_not_complete">မျက်နှာတစ်စိတ်တစ်ဒေသကိုသာ ရှာတွေ့ထားသည်</string>
+    <string name="unlock_failed_face_small">မျက်နှာဝေးလွန်းနေသည်</string>
+    <string name="upgrade_finish_summary">"အခုဆိုရင် Face Unlock နဲ့သင့် Device ကို Unlock လုပ်ဖို့အဆင်သင့်ဖြစ်နေပါပြီ"</string>
+    <string name="upgrade_finish_title">ကောင်းပါပြီ!</string>
+</resources>

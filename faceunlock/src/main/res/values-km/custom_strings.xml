@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ការដោះសោតាមទម្រង់មុខ</string>
+    <string name="attr_light_dark">មុខត្រូវការពន្លឺបន្ថែម</string>
+    <string name="attr_light_high">មុខមានពន្លឺខ្លាំងពេក</string>
+    <string name="attr_light_shadow">មុខមានស្រមោលច្រើនពេក</string>
+    <string name="btn_done">ធ្វើរួច</string>
+    <string name="btn_try">ព្យាយាម​​ម្ដង​ទៀត</string>
+    <string name="face_intro_conten_first_point">ការផ្គូផ្គងទម្រង់មុខគឺមានសុវត្ថិភាពតិចជាងលំនាំ លេខកូដ PIN ឬពាក្យសម្ងាត់</string>
+    <string name="face_intro_content_second_point">នរណាម្នាក់ដែលមើលទៅដូចជាអ្នក អាចដោះសោទូរសព្ទរបស់អ្នកបាន</string>
+    <string name="face_intro_content_third_point">ទិន្នន័យដែលបានប្រើប្រាស់ដើម្បីសម្គាល់មុខរបស់អ្នក ត្រូវបានរក្សាទុកជាលក្ខណៈឯកជននៅលើទូរសព្ទរបស់អ្នក</string>
+    <string name="face_intro_next">បន្ទាប់</string>
+    <string name="face_intro_remember">សូមចងចាំថា៖</string>
+    <string name="face_intro_summary">ដោះសោទូរសព្ទរបស់អ្នកដោយមើលវា។</string>
+    <string name="face_intro_title">អំពីការដោះសោមុខ</string>
+    <string name="facelock_setup_notification_text">រៀបចំការដោះសោមុខ</string>
+    <string name="facelock_setup_notification_title">ដោះសោដោយក្រឡេកមើល</string>
+    <string name="policy_disabled_alert_msg">ការដោះសោមុខត្រូវបានបិទដោយអ្នកគ្រប់គ្រង។</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">ការចុចកុងតាក់ថាមពលនឹងបើកអេក្រង់ដើម ឬកម្មវិធីដែលបានប្រើប្រាស់ចុងក្រោយនៅពេលដែលមុខត្រូវបានផ្គូផ្គង</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">ឆ្លងកាត់ការចាក់សោ​​អេក្រង់</string>
+    <string name="title_activity_face_intro">ការណែនាំក្នុងការដោះសោមុខ</string>
+    <string name="unlock_failed_face_blur">មុខមានលក្ខណៈព្រិលពេក</string>
+    <string name="unlock_failed_face_large">មុខនៅជិតពេក</string>
+    <string name="unlock_failed_face_multi">មុខច្រើនពេកត្រូវបានរកឃើញ</string>
+    <string name="unlock_failed_face_not_complete">មុខច្រើនពេកត្រូវបានរកឃើញ</string>
+    <string name="unlock_failed_face_small">មុខនៅឆ្ងាយពេក</string>
+    <string name="upgrade_finish_summary">"ឥឡូវ អ្នករួចរាល់ដើម្បីដោះសោឧបករណ៍របស់អ្នកដោយប្រើ​ការដោះសោមុខ"</string>
+    <string name="upgrade_finish_title">ត្រឹមត្រូវ!</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Odemknutí obličejem</string>
+    <string name="attr_light_dark">Obličej vyžaduje více světla</string>
+    <string name="attr_light_high">Obličej je přesvícený</string>
+    <string name="attr_light_shadow">Na obličeji je příliš mnoho stínů</string>
+    <string name="btn_done">Hotovo</string>
+    <string name="btn_try">ZKUSIT ZNOVU</string>
+    <string name="face_intro_conten_first_point">Rozpoznávání obličeje je méně bezpečné než gesto, kód PIN či heslo</string>
+    <string name="face_intro_content_second_point">Telefon by mohl odemknout někdo, kdo vypadá jako vy</string>
+    <string name="face_intro_content_third_point">Data použitá k rozpoznávání obličeje jsou důvěrně uchována ve vašem telefonu</string>
+    <string name="face_intro_next">DALŠÍ</string>
+    <string name="face_intro_remember">Zapamatovat:</string>
+    <string name="face_intro_summary">Odemkněte telefon pouhým pohledem.</string>
+    <string name="face_intro_title">O funkci Odemknutí obličejem</string>
+    <string name="face_value_prop_cancel">Ne, děkuji</string>
+    <string name="face_value_prop_next">Nastavit</string>
+    <string name="face_value_prop_summary">"Funkce Odemknutí obličejem vám umožňuje snadno odemykat telefon pouhým pohledem. Jelikož telefon rozpozná vaši tvář, oznámení se zobrazí na zamčené obrazovce, pouze pokud se na telefon díváte"</string>
+    <string name="facelock_setup_notification_text">Nastavit odemknutí obličejem</string>
+    <string name="facelock_setup_notification_title">Odemknout pohledem</string>
+    <string name="face_camera_content">Zarovnejte obličej</string>
+    <string name="face_camera_content_tip">Obličej musíte mít zarovnaný na střed. Buďte na světle a dívejte se přímo do telefonu.</string>
+    <string name="face_next_change_later_tip">Toto můžete později změnit v nastavení Zabezpečení a poloha</string>
+    <string name="face_next_content">Vše nastaveno</string>
+    <string name="face_next_content_tip">"Teď, když jste svůj obličej naskenovali, můžete telefon odemknout pouhým pohledem."</string>
+    <string name="face_try_content">Něco se pokazilo</string>
+    <string name="face_try_content_tip">"Skenování obličeje selhalo. Musíte být na světle a dívat se do fotoaparátu."</string>
+    <string name="perm_required_alert_button_app_info">Informace o aplikaci</string>
+    <string name="perm_required_alert_msg">Funkce Odemknutí obličejem potřebuje oprávnění pro přístup k některým položkám ve vašem zařízení. Povolte je výběrem možnosti \"Oprávnění\" v části Informace o aplikaci.</string>
+    <string name="perm_required_alert_title">Vyžadována oprávnění</string>
+    <string name="policy_disabled_alert_msg">Funkce odemknutí obličejem byla deaktivována správcem.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Stiskem klávesy pro vypnutí a zapnutí se po rozpoznání obličeje zobrazí plocha nebo naposledy použitá aplikace.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Přeskočit obrazovku uzamčení</string>
+    <string name="title_activity_face_intro">Představení funkce Odemknutí obličejem</string>
+    <string name="unlock_failed_face_blur">Obličej je příliš rozmazaný</string>
+    <string name="unlock_failed_face_large">Obličej je příliš blízko</string>
+    <string name="unlock_failed_face_multi">Nalezeno příliš mnoho obličejů</string>
+    <string name="unlock_failed_face_not_complete">Zachycena jen část obličeje</string>
+    <string name="unlock_failed_face_small">Obličej je příliš daleko</string>
+    <string name="upgrade_finish_summary">"Nyní můžete své zařízení odemykat pomocí funkce Odemknutí obličejem"</string>
+    <string name="upgrade_finish_title">Super!</string>
+</resources>

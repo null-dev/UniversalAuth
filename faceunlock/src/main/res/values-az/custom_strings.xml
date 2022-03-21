@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Üz tanıma kilidi</string>
+    <string name="attr_light_dark">Üzün daha çox işığa ehtiyacı var</string>
+    <string name="attr_light_high">Üzdə həddən çox işıq var</string>
+    <string name="attr_light_shadow">Üzdə həddən çox kölgə var</string>
+    <string name="btn_done">Hazırdır</string>
+    <string name="btn_try">YENİDƏN SINAYIN</string>
+    <string name="face_intro_conten_first_point">Üz uyğunluğu naxış, PIN və ya şifrədən daha az təhlükəsizdir</string>
+    <string name="face_intro_content_second_point">Sizə bənzəyən biri telefonunuzun kilidini aça bilər</string>
+    <string name="face_intro_content_third_point">Üz tanıma üçün istifadə edilən verilərlər telefonunuzda gizli olaraq saxlanılır</string>
+    <string name="face_intro_next">NÖVBƏTİ</string>
+    <string name="face_intro_remember">Unutmayın:</string>
+    <string name="face_intro_summary">Telefonunuza baxaraq kilidi açın.</string>
+    <string name="face_intro_title">Üz tanıma kilidi haqqında</string>
+    <string name="face_value_prop_cancel">Xeyr, Təşəkkürlər</string>
+    <string name="face_value_prop_next">Quraşdır</string>
+    <string name="face_value_prop_summary">"Üz tanıma kilidi, sizə sadəcə telefona baxaraq ona rahatca müraciət etmə imkanı verir. Telefon üzünüzü tanıdığı üçün kilid ekranı yalnız siz telefona baxanda bildirişləri göstərir."</string>
+    <string name="facelock_setup_notification_text">Üz tanıma kilidini quraşdır</string>
+    <string name="facelock_setup_notification_title">Bir baxışla kilidi aç</string>
+    <string name="face_camera_content">Üzünüzü yerləşdirin</string>
+    <string name="face_camera_content_tip">Üzünüzü aşağıda mərkəzlədiyinizə əmin olun. Üzünüzü aydınladın və birbaşa telefona baxın.</string>
+    <string name="face_next_change_later_tip">Bunu daha sonra Təhlükəsizlik Tənzimləmələrində dəyişdirə bilərsiniz</string>
+    <string name="face_next_content">Hər şey hazırdır</string>
+    <string name="face_next_content_tip">"Artıq üzünüzü skan etdiyinizə görə, sadəcə bir baxışda telefonunuzun kilidini aça bilərsiniz."</string>
+    <string name="face_try_content">Nəsə səhv getdi</string>
+    <string name="face_try_content_tip">"Üz skan etmə uğursuz oldu. Üzünüzün aydın olduğuna və kameraya baxdığınıza əmin olun."</string>
+    <string name="perm_required_alert_button_app_info">Tətbiq Məlumatı</string>
+    <string name="perm_required_alert_msg">Üz tanıma kilidinin cihazınızda bəzi şeylərə müraciət etməsi üçün icazəyə ehtiyacı var. Tətbiq məlumatında \"İcazələr\"i seçərək fəallaşdırın.</string>
+    <string name="perm_required_alert_title">İcazə tələb olunur</string>
+    <string name="policy_disabled_alert_msg">Üz tanıma kilidi administrator tərəfindən sıradan çıxarıldı.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Kilid açıldıqdan sonra, Əsas ekrana və ya son istifadə edilən tətbiqə get</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Kilid ekranını keç</string>
+    <string name="title_activity_face_intro">Ün tanıma kilidinin təqdimatı</string>
+    <string name="unlock_failed_face_blur">Üzünüz çox bulanıqdır</string>
+    <string name="unlock_failed_face_large">Üz çox yaxındadır</string>
+    <string name="unlock_failed_face_multi">Həddən çox üz aşkar edildi</string>
+    <string name="unlock_failed_face_not_complete">Üzün bir hissəsi aşkar edildi</string>
+    <string name="unlock_failed_face_small">Üz çox uzaqdadır</string>
+    <string name="upgrade_finish_summary">"Artıq Üz tanıma kilidi ilə cihazınızın kilidini aça bilərsiniz"</string>
+    <string name="upgrade_finish_title">Yaxşı!</string>
+</resources>

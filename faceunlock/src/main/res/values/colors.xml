@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="theme_color">@*android:color/accent_device_default_light</color>
+    <color name="suw_flat_button_highlight">#1f000000</color>
+    <color name="positive_button_text">@android:color/white</color>
+    <color name="white_32_overlay">#51ffffff</color>
+    <color name="enroll_progress_bar">#ffcdd4d8</color>
+</resources>

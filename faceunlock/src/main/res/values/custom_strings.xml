@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Face unlock</string>
+    <string name="attr_light_dark">Face needs more light</string>
+    <string name="attr_light_high">Face has too much light</string>
+    <string name="attr_light_shadow">Face has too many shadows</string>
+    <string name="btn_done">Done</string>
+    <string name="btn_try">TRY AGAIN</string>
+    <string name="face_intro_conten_first_point">Face matching is less secure than a pattern, PIN, or password</string>
+    <string name="face_intro_content_second_point">Someone who looks like you could unlock your phone</string>
+    <string name="face_intro_content_third_point">The data used to recognize your face is kept private on your phone</string>
+    <string name="face_intro_next">NEXT</string>
+    <string name="face_intro_remember">Remember:</string>
+    <string name="face_intro_skip" translatable="false">@android:string/cancel</string>
+    <string name="face_intro_summary">Unlock your phone by looking at it.</string>
+    <string name="face_intro_title">About face unlock</string>
+    <string name="face_value_prop_cancel">No, Thanks</string>
+    <string name="face_value_prop_next">Set Up</string>
+    <string name="face_value_prop_summary">"Face unlock lets you easily get into your phone by just looking at it. Since your phone knows your face, the lock screen shows notifications only when you're looking at it"</string>
+    <string name="facelock_setup_notification_text">Set up face unlock</string>
+    <string name="facelock_setup_notification_title">Unlock with a glance</string>
+    <string name="face_camera_content">Align your face</string>
+    <string name="face_camera_content_tip">Make sure your face is centered below. Keep your face well lit and look directly at your phone.</string>
+    <string name="face_next_change_later_tip">You can change this later in Security Settings</string>
+    <string name="face_next_content">All set</string>
+    <string name="face_next_content_tip">"Now that you've scanned your face, you can unlock your phone with just a glance."</string>
+    <string name="face_try_content">Something went wrong</string>
+    <string name="face_try_content_tip">"Face scan has failed. Be sure you're well lit and looking at the camera."</string>
+    <string name="perm_required_alert_button_app_info">App Info</string>
+    <string name="perm_required_alert_msg">Face unlock needs permission to access some things on your device. Select \"Permissions\" in App info to enable.</string>
+    <string name="perm_required_alert_title">Permissions required</string>
+    <string name="policy_disabled_alert_msg">Face unlock has been disabled by the administrator.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">After unlocking, go to the Home screen or last used app</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Skip lock screen</string>
+    <string name="title_activity_face_intro">Face unlock introduction</string>
+    <string name="unlock_failed_face_blur">Face is too blurry</string>
+    <string name="unlock_failed_face_large">Face is too close</string>
+    <string name="unlock_failed_face_multi">Too many faces detected</string>
+    <string name="unlock_failed_face_not_complete">Only partial face detected</string>
+    <string name="unlock_failed_face_small">Face is too far away</string>
+    <string name="upgrade_finish_summary">"Now you're ready to unlock your device with Face unlock"</string>
+    <string name="upgrade_finish_title">All right!</string>
+</resources>

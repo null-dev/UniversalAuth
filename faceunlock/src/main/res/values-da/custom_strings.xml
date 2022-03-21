@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ansigtslås</string>
+    <string name="attr_light_dark">Ansigtet har brug for mere lys</string>
+    <string name="attr_light_high">Ansigtet er for oplyst</string>
+    <string name="attr_light_shadow">Ansigtet har for mange skygger</string>
+    <string name="btn_done">Udført</string>
+    <string name="btn_try">PRØV IGEN</string>
+    <string name="face_intro_conten_first_point">Ansigtsmatching er ikke så sikkert som et mønster, en PIN-kode eller en adgangskode</string>
+    <string name="face_intro_content_second_point">Nogen, som ligner dig, kan låse din telefon op</string>
+    <string name="face_intro_content_third_point">Data, der bruges til at genkende dit ansigt, opbevares som private på din telefon</string>
+    <string name="face_intro_next">NÆSTE</string>
+    <string name="face_intro_remember">Husk:</string>
+    <string name="face_intro_summary">Lås din telefon op ved at kigge på den.</string>
+    <string name="face_intro_title">Om Ansigtslås</string>
+    <string name="facelock_setup_notification_text">Indstil ansigtslås</string>
+    <string name="facelock_setup_notification_title">Lås op med et enkelt blik</string>
+    <string name="policy_disabled_alert_msg">Ansigtslås er blevet deaktiveret af administratoren.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Hvis du trykker på tænd/sluk-knappen, åbnes startskærmen eller senest anvendte app, når et ansigt matches</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Tilsidesæt låseskærm</string>
+    <string name="title_activity_face_intro">Introduktion til Ansigtslås</string>
+    <string name="unlock_failed_face_blur">Ansigtet er alt for utydeligt</string>
+    <string name="unlock_failed_face_large">Ansigtet er for tæt på</string>
+    <string name="unlock_failed_face_multi">For mange ansigter registreret</string>
+    <string name="unlock_failed_face_not_complete">Ansigtet er kun delvist registreret</string>
+    <string name="unlock_failed_face_small">Ansigtet er for langt væk</string>
+    <string name="upgrade_finish_summary">"Nu er du klar til at låse din enhed op med Ansigtslås"</string>
+    <string name="upgrade_finish_title">Helt rigtigt!</string>
+</resources>

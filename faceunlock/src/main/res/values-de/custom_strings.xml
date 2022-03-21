@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gesichtsentsperrung</string>
+    <string name="attr_light_dark">Gesicht ist unterbelichtet</string>
+    <string name="attr_light_high">Gesicht ist überbelichtet</string>
+    <string name="attr_light_shadow">Zu viele Schatten</string>
+    <string name="btn_done">Fertig</string>
+    <string name="btn_try">ERNEUT VERSUCHEN</string>
+    <string name="face_intro_conten_first_point">Die Gesichtserkennung ist unsicherer als ein Muster, eine PIN oder ein Passwort</string>
+    <string name="face_intro_content_second_point">Jemand, der Ihnen ähnlich sieht, kann Ihr Telefon möglicherweise entsperren</string>
+    <string name="face_intro_content_third_point">Die zur Erkennung Ihres Gesichts verwendeten Daten sind auf dem Telefon als vertrauliche Informationen gespeichert</string>
+    <string name="face_intro_next">WEITER</string>
+    <string name="face_intro_remember">Bedenken Sie:</string>
+    <string name="face_intro_summary">Entsperren Sie das Telefon, indem Sie es ansehen.</string>
+    <string name="face_intro_title">Info zur Gesichtsentsperrung</string>
+    <string name="face_value_prop_cancel">Nein, danke</string>
+    <string name="face_value_prop_next">Einrichten</string>
+    <string name="face_value_prop_summary">"Mit der Gesichtsentsperrung können Sie Ihr Telefon ganz einfach entsperren, indem Sie es ansehen. Da das Telefon Ihr Gesicht kennt, werden auf dem Sperrbildschirm nur dann Benachrichtigungen angezeigt, wenn Sie es ansehen."</string>
+    <string name="facelock_setup_notification_text">Gesichtsentsperrung einrichten</string>
+    <string name="facelock_setup_notification_title">Mit einem Blick entsperren</string>
+    <string name="face_camera_content">Bringen Sie Ihr Gesicht in die richtige Position</string>
+    <string name="face_camera_content_tip">Ihr Gesicht muss sich unten in der Mitte befinden. Achten Sie darauf, dass Ihr Gesicht gut beleuchtet ist und Sie das Telefon direkt anschauen.</string>
+    <string name="face_next_change_later_tip">Sie können diese Auswahl später in den Sicherheits- und Standorteinstellungen ändern</string>
+    <string name="face_next_content">Alles eingestellt.</string>
+    <string name="face_next_content_tip">"Nachdem Sie nun Ihr Gesicht gescannt haben, können Sie Ihr Telefon mit nur einem Blick entsperren."</string>
+    <string name="face_try_content">Ein Fehler ist aufgetreten</string>
+    <string name="face_try_content_tip">"Der Gesichtsscan war nicht erfolgreich. Achten Sie darauf, dass Ihr Gesicht gut beleuchtet ist und Sie direkt in die Kamera schauen."</string>
+    <string name="perm_required_alert_button_app_info">App-Info</string>
+    <string name="perm_required_alert_msg">Die Gesichtsentsperrung benötigt eine Erlaubnis für den Zugriff auf einige Funktionen auf Ihrem Gerät. Wählen Sie \"Berechtigungen\" in der App-Info aus, um die Erlaubnis zu erteilen.</string>
+    <string name="perm_required_alert_title">Berechtigungen erforderlich</string>
+    <string name="policy_disabled_alert_msg">Die Gesichtsentsperrung wurde vom Administrator deaktiviert.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Durch Drücken der Ein-/Austaste wird der Startbildschirm oder die zuletzt verwendete App geöffnet, wenn das Gesicht erkannt wird</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Sperrbildschirm umgehen</string>
+    <string name="title_activity_face_intro">Einführung zur Gesichtsentsperrung</string>
+    <string name="unlock_failed_face_blur">Gesicht zu unscharf</string>
+    <string name="unlock_failed_face_large">Gesicht zu nah</string>
+    <string name="unlock_failed_face_multi">Zu viele Gesichter erkannt</string>
+    <string name="unlock_failed_face_not_complete">Nur ein Teil des Gesichts erkannt</string>
+    <string name="unlock_failed_face_small">Gesicht zu weit weg</string>
+    <string name="upgrade_finish_summary">"Jetzt können Sie das Gerät mit der Gesichtsentsperrung entsperren."</string>
+    <string name="upgrade_finish_title">Perfekt!</string>
+</resources>

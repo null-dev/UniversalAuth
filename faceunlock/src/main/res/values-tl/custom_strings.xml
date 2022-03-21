@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="attr_light_dark">Kailangan ng mas maraming ilaw ang mukha</string>
+    <string name="attr_light_high">Napakaliwanag ng mukha</string>
+    <string name="attr_light_shadow">Napakaraming anino ng mukha</string>
+    <string name="btn_done">Tapos na</string>
+    <string name="btn_try">SUBUKANG MULI</string>
+    <string name="face_intro_conten_first_point">Hindi masyadong ligtas ang pagtutugma ng mukha kaysa sa pattern, PIN, o password</string>
+    <string name="face_intro_content_second_point">Maaaring i-unlock ang telepono mo ng taong kahawig mo</string>
+    <string name="face_intro_content_third_point">Ang data na ginamit para makilala ang mukha mo ay pribadong itinago sa iyong telepono</string>
+    <string name="face_intro_next">SUSUNOD</string>
+    <string name="face_intro_remember">Tandaan:</string>
+    <string name="face_intro_summary">I-unlock ang iyong telepono sa pamamagitan ng pagtingin dito.</string>
+    <string name="face_intro_title">Naka-lock ang about face</string>
+    <string name="facelock_setup_notification_text">I-setup ang pag-unlock ng mukha</string>
+    <string name="facelock_setup_notification_title">I-unlock sa isang iglap</string>
+    <string name="policy_disabled_alert_msg">Dinis-able ng tagapangasiwa ang Face unlock.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Ang pagpindot sa power key ay magbubukas ng home screen o huling ginamit na app sa oras na tumugma ang mukha</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">I-bypass ang naka-lock na screen</string>
+    <string name="title_activity_face_intro">Pagpapakilala sa pag-unlock ng mukha</string>
+    <string name="unlock_failed_face_blur">Masyadong malabo ang mukha</string>
+    <string name="unlock_failed_face_large">Masyadong malapit ang mukha</string>
+    <string name="unlock_failed_face_multi">Napakaraming mukha ang nakita</string>
+    <string name="unlock_failed_face_not_complete">Konting mukha lang ang nakita</string>
+    <string name="unlock_failed_face_small">Masyadong malayo ang mukha</string>
+    <string name="upgrade_finish_summary">"Ngayon, maaari mo nang i-unlock ang iyong device gamit ang Pag-unlock gamit ang mukha"</string>
+    <string name="upgrade_finish_title">Ayos!</string>
+</resources>

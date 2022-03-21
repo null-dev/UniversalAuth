@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بازگشایی قفل با صورت</string>
+    <string name="attr_light_dark">صورت نور بیشتری لازم دارد</string>
+    <string name="attr_light_high">نور صورت خیلی زیاد است</string>
+    <string name="attr_light_shadow">روی صورت خیلی سایه است</string>
+    <string name="btn_done">انجام شد</string>
+    <string name="btn_try">دوباره امتحان کنید</string>
+    <string name="face_intro_conten_first_point">بازگشایی قفل با صورت نسبت به الگو، پین یا رمز عبور از امنیت کمتری برخوردار است</string>
+    <string name="face_intro_content_second_point">کسی که شبیه شما باشد می‌تواند قفل تلفنتان را باز کند</string>
+    <string name="face_intro_content_third_point">داده‌های مورد استفاده برای شناسایی صورت شما در تلفن محرمانه باقی می‌مانند</string>
+    <string name="face_intro_next">بعدی</string>
+    <string name="face_intro_remember">به خاطر داشته باشید:</string>
+    <string name="face_intro_summary">با نگاه کردن به تلفن، قفل آن را باز کنید.</string>
+    <string name="face_intro_title">درباره بازگشایی قفل با صورت</string>
+    <string name="facelock_setup_notification_text">تنظیم بازگشایی قفل با صورت</string>
+    <string name="facelock_setup_notification_title">بازگشایی قفل با یک نگاه</string>
+    <string name="policy_disabled_alert_msg">بازگشایی قفل با صورت توسط مدیر سیستم غیرفعال شده است.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">با فشار دادن کلید روشن/خاموش، تلفن روی صفحه اصلی یا آخرین برنامه‌ای که قبلاً با باز شدن قفل با صورت استفاده شده است، باز می‌شود</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">گذشتن از صفحه قفل</string>
+    <string name="title_activity_face_intro">معرفی بازگشایی قفل با صورت</string>
+    <string name="unlock_failed_face_blur">صورت خیلی تار است</string>
+    <string name="unlock_failed_face_large">صورت خیلی نزدیک است</string>
+    <string name="unlock_failed_face_multi">تعداد زیادی صورت شناسایی شد</string>
+    <string name="unlock_failed_face_not_complete">فقط قسمتی از صورت شناسایی شد</string>
+    <string name="unlock_failed_face_small">صورت خیلی دور است</string>
+    <string name="upgrade_finish_summary">"اکنون برای بازگشایی قفل دستگاه خود با صورت آماده‌اید"</string>
+    <string name="upgrade_finish_title">بسیار خوب!</string>
+</resources>

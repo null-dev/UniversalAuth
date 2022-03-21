@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Desbloqueo facial</string>
+    <string name="attr_light_dark">A faciana precisa máis luz</string>
+    <string name="attr_light_high">A faciana ten luz de máis </string>
+    <string name="attr_light_shadow">A faciana ten sombras de máis </string>
+    <string name="btn_done">Feito</string>
+    <string name="btn_try">Téntao de novo</string>
+    <string name="face_intro_conten_first_point">A coincidencia facial é menos segura que un padrón, un PIN ou un contrasinal</string>
+    <string name="face_intro_content_second_point">Alguén que se lle pareza pode desbloquear o seu teléfono </string>
+    <string name="face_intro_content_third_point">Os datos empregados para recoñecer a túa faciana mantéñense privados no teu teléfono</string>
+    <string name="face_intro_next">Seguinte</string>
+    <string name="face_intro_remember">Lembre:</string>
+    <string name="face_intro_summary">Desbloquea o teu teléfono mirándoo.</string>
+    <string name="face_intro_title">Acerca do desbloqueo facial</string>
+    <string name="policy_disabled_alert_msg">O desbloqueo facial foi desactivado polo administrador.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Ao premer a tecla de acendido abrirase a pantalla de inicio ou a última aplicación usada unha vez que a faciana estea emparellada</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Pasar da pantalla de bloqueo</string>
+    <string name="unlock_failed_face_multi">Facianas detectadas de máis</string>
+    <string name="unlock_failed_face_not_complete">Só faciana parcial detectada</string>
+    <string name="unlock_failed_face_small">A faciana está moi lonxe</string>
+</resources>

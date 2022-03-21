@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Déverrouillage par reconnaissance faciale</string>
+    <string name="attr_light_dark">Le visage n\'est pas assez éclairé</string>
+    <string name="attr_light_high">Le visage est trop éclairé</string>
+    <string name="attr_light_shadow">Trop d\'ombres sur le visage</string>
+    <string name="btn_done">Terminé</string>
+    <string name="btn_try">RÉESSAYER</string>
+    <string name="face_intro_conten_first_point">La correspondance faciale est moins sûre qu\'un schéma, qu\'un code PIN ou qu\'un mot de passe</string>
+    <string name="face_intro_content_second_point">Quelqu\'un qui vous ressemble peut déverrouiller votre téléphone</string>
+    <string name="face_intro_content_third_point">Les données utilisées pour reconnaître votre visage sont conservées sur votre téléphone comme données privées</string>
+    <string name="face_intro_next">SUIVANT</string>
+    <string name="face_intro_remember">Rappel :</string>
+    <string name="face_intro_summary">Déverrouillez votre téléphone simplement en le regardant.</string>
+    <string name="face_intro_title">À propos du déverrouillage par reconnaissance faciale</string>
+    <string name="face_value_prop_cancel">Non merci</string>
+    <string name="face_value_prop_next">Configurer</string>
+    <string name="face_value_prop_summary">"Face unlock vous permet de déverrouiller votre téléphone juste en le regardant. Comme votre téléphone reconnait votre visage, l'écran de verrouillage affiche les notifications seulement quand il vous reconnait. "</string>
+    <string name="facelock_setup_notification_text">Configurer la reconnaissance faciale</string>
+    <string name="facelock_setup_notification_title">Déverrouiller d\'un simple coup d\'œil</string>
+    <string name="face_camera_content">Alignez votre visage</string>
+    <string name="face_camera_content_tip">Centrez votre visage ci-dessous. Assurez-vous que votre visage est bien éclairé et regardez votre téléphone.</string>
+    <string name="face_next_change_later_tip">Vous pourrez modifier cette option ultérieurement dans les paramètres de Sécurité</string>
+    <string name="face_next_content">Terminé</string>
+    <string name="face_next_content_tip">"Maintenant que vous avez scanné votre visage, vous pouvez déverrouiller votre téléphone d'un simple coup d'œil."</string>
+    <string name="face_try_content">Une erreur s\'est produite</string>
+    <string name="face_try_content_tip">"Votre visage n'a pas pu être scanné. Assurez-vous d'être bien éclairé et de regarder l'appareil photo."</string>
+    <string name="perm_required_alert_button_app_info">Infos de l\'App</string>
+    <string name="perm_required_alert_msg">Face unlock doit disposer d\'autorisations pour accéder à certaines fonctions de votre appareil. Pour les activer, sélectionnez \"Autorisations\" dans les Infos de l\'application.</string>
+    <string name="perm_required_alert_title">Autorisation requise</string>
+    <string name="policy_disabled_alert_msg">Le déverrouillage par reconnaissance faciale a été désactivé par l\'administrateur.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Une fois qu\'une correspondance faciale est vérifiée, l\'écran d\'accueil ou la dernière application utilisée s\'ouvre lorsque vous appuyez sur le bouton Marche-Arrêt</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Contourner l\'écran de verrouillage</string>
+    <string name="title_activity_face_intro">Présentation du déverrouillage par reconnaissance faciale</string>
+    <string name="unlock_failed_face_blur">Visage trop flou</string>
+    <string name="unlock_failed_face_large">Visage trop proche</string>
+    <string name="unlock_failed_face_multi">Trop de visages détectés</string>
+    <string name="unlock_failed_face_not_complete">Visage seulement partiellement détecté</string>
+    <string name="unlock_failed_face_small">Visage trop éloigné</string>
+    <string name="upgrade_finish_summary">"Vous voilà maintenant prêt à déverrouiller votre appareil par reconnaissance faciale"</string>
+    <string name="upgrade_finish_title">Parfait !</string>
+</resources>

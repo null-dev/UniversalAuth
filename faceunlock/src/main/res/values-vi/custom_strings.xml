@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mở khóa bằng khuôn mặt</string>
+    <string name="attr_light_dark">Khuôn mặt cần nhiều ánh sáng hơn</string>
+    <string name="attr_light_high">Khuôn mặt có quá nhiều ánh sáng</string>
+    <string name="attr_light_shadow">Khuôn mặt có quá nhiều chỗ tối</string>
+    <string name="btn_done">Xong</string>
+    <string name="btn_try">HÃY THỬ LẠI</string>
+    <string name="face_intro_conten_first_point">Khớp khuôn mặt ít bảo mật hơn mẫu hình, mã PIN hoặc mật khẩu</string>
+    <string name="face_intro_content_second_point">Ai đó trông giống bạn có thể mở khóa điện thoại của bạn</string>
+    <string name="face_intro_content_third_point">Dữ liệu được dùng để nhận dạng khuôn mặt của bạn được bảo mật trên điện thoại của bạn</string>
+    <string name="face_intro_next">TIẾP THEO</string>
+    <string name="face_intro_remember">Hãy nhớ:</string>
+    <string name="face_intro_summary">Mở khóa điện thoại của bạn bằng cách nhìn vào điện thoại.</string>
+    <string name="face_intro_title">Giới thiệu về mở khóa bằng khuôn mặt</string>
+    <string name="face_value_prop_cancel">Không, Cảm ơn</string>
+    <string name="face_value_prop_next">Thiết lập</string>
+    <string name="face_value_prop_summary">"Mở khóa bằng khuôn mặt cho phép bạn dễ dàng truy cập vào điện thoại của mình chỉ bằng cách nhìn vào nó. Vì điện thoại biết khuôn mặt của bạn nên màn hình khóa chỉ hiển thị thông báo khi bạn đang nhìn vào đó"</string>
+    <string name="facelock_setup_notification_text">Thiết lập mở khóa bằng khuôn mặt</string>
+    <string name="facelock_setup_notification_title">Liếc nhanh để mở khóa</string>
+    <string name="face_camera_content">Căn chỉnh khuôn mặt của bạn</string>
+    <string name="face_camera_content_tip">Đảm bảo rằng khuôn mặt của bạn nằm ở chính giữa. Giữ khuôn mặt của bạn đủ ánh sáng và nhìn thẳng vào điện thoại.</string>
+    <string name="face_next_change_later_tip">Bạn có thể thay đổi điều này sau trong Cài đặt bảo mật</string>
+    <string name="face_next_content">Mọi thứ đã sẵn sàng</string>
+    <string name="face_next_content_tip">"Bây giờ bạn đã quét khuôn mặt của mình, bạn có thể mở khóa điện thoại của mình chỉ trong nháy mắt."</string>
+    <string name="face_try_content">Đã xảy ra sự cố</string>
+    <string name="face_try_content_tip">"Quét khuôn mặt thất bại. Hãy đảm bảo khuôn mặt bạn sáng rõ và bạn nhìn vào máy ảnh."</string>
+    <string name="perm_required_alert_button_app_info">Thông tin ứng dụng</string>
+    <string name="perm_required_alert_msg">Mở khóa bằng khuôn mặt cần quyền truy cập vào một số nội dung trên thiết bị của bạn. Hãy chọn \"Quyền\" trong thông tin Ứng dụng để bật.</string>
+    <string name="perm_required_alert_title">Yêu cầu cấp quyền</string>
+    <string name="policy_disabled_alert_msg">Quản trị viên đã tắt Mở khóa bằng khuôn mặt.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Nhấn phím nguồn sẽ tự động mở màn hình chính hoặc ứng dụng sử dụng lần cuối khi khuôn mặt trùng khớp</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Bỏ qua màn hình khóa</string>
+    <string name="title_activity_face_intro">Giới thiệu về mở khóa bằng khuôn mặt</string>
+    <string name="unlock_failed_face_blur">Khuôn mặt quá mờ</string>
+    <string name="unlock_failed_face_large">Khuôn mặt quá gần</string>
+    <string name="unlock_failed_face_multi">Phát hiện quá nhiều khuôn mặt</string>
+    <string name="unlock_failed_face_not_complete">Chỉ phát hiện một phần khuôn mặt</string>
+    <string name="unlock_failed_face_small">Khuôn mặt quá xa</string>
+    <string name="upgrade_finish_summary">"Bây giờ, bạn đã sẵn sàng mở khóa thiết bị của mình bằng Mở khóa bằng khuôn mặt"</string>
+    <string name="upgrade_finish_title">Được rồi!</string>
+</resources>

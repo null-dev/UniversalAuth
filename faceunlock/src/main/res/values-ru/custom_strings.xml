@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Разблокировка по лицу</string>
+    <string name="attr_light_dark">Лицо недостаточно освещено</string>
+    <string name="attr_light_high">Лицо переосвещено</string>
+    <string name="attr_light_shadow">На лице слишком много теней</string>
+    <string name="btn_done">Готово</string>
+    <string name="btn_try">ПОВТОРИТЬ</string>
+    <string name="face_intro_conten_first_point">Распознавание по лицу менее безопасно, чем использование графического ключа, PIN-кода или пароля.</string>
+    <string name="face_intro_content_second_point">Внешне похожие на вас люди могут разблокировать телефон.</string>
+    <string name="face_intro_content_third_point">Данные для распознавания вашего лица хранятся на телефоне.</string>
+    <string name="face_intro_next">ДАЛЕЕ</string>
+    <string name="face_intro_remember">Обратите внимание:</string>
+    <string name="face_intro_summary">Разблокируйте ваш телефон, посмотрев на него.</string>
+    <string name="face_intro_title">О функции разблокировки по лицу</string>
+    <string name="face_value_prop_cancel">Нет, спасибо</string>
+    <string name="face_value_prop_next">Настроить</string>
+    <string name="face_value_prop_summary">"Разблокировка по лицу позволяет с лёгкостью разблокировать телефон, просто взглянув на него. Поскольку телефон распознает ваше лицо, на экране блокировки уведомления отображаются только тогда, когда вы смотрите на него"</string>
+    <string name="facelock_setup_notification_text">Настройте разблокировку по лицу</string>
+    <string name="facelock_setup_notification_title">Разблокировка взглядом</string>
+    <string name="face_camera_content">Выровняйте положение лица</string>
+    <string name="face_camera_content_tip">Ваше лицо должно быть хорошо освещено и располагаться по центру. Смотрите прямо в камеру телефона.</string>
+    <string name="face_next_change_later_tip">Это можно изменить в разделе настроек безопасности</string>
+    <string name="face_next_content">Готово</string>
+    <string name="face_next_content_tip">"Вы выполнили сканирование лица и теперь можете разблокировать телефон, просто взглянув на него."</string>
+    <string name="face_try_content">Что-то пошло не так</string>
+    <string name="face_try_content_tip">"Не удалось выполнить сканирование лица. Убедитесь, что лицо хорошо освещено, и вы смотрите в камеру."</string>
+    <string name="perm_required_alert_button_app_info">О приложении</string>
+    <string name="perm_required_alert_msg">Функции разблокировки по лицу необходимо разрешение на доступ к некоторым данным на вашем устройстве. Выберите \"Разрешения\" в разделе информации о приложении, чтобы включить функцию.</string>
+    <string name="perm_required_alert_title">Необходимы разрешения</string>
+    <string name="policy_disabled_alert_msg">Разблокировка по лицу отключена администратором.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">При нажатии кнопки питания после распознавания вашего лица откроется главный экран или последнее использовавшееся приложение</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Обход экрана блокировки</string>
+    <string name="title_activity_face_intro">Общая информация о функции разблокировки по лицу</string>
+    <string name="unlock_failed_face_blur">Лицо слишком размыто</string>
+    <string name="unlock_failed_face_large">Лицо слишком близко</string>
+    <string name="unlock_failed_face_multi">Слишком много лиц</string>
+    <string name="unlock_failed_face_not_complete">Распознана только часть лица</string>
+    <string name="unlock_failed_face_small">Лицо слишком далеко</string>
+    <string name="upgrade_finish_summary">"Теперь вы можете разблокировать устройство при помощи функции разблокировки по лицу"</string>
+    <string name="upgrade_finish_title">Отлично!</string>
+</resources>

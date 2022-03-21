@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">चेहऱ्याद्वारे अनलॉक</string>
+    <string name="attr_light_dark">चेहऱ्याला अधिक प्रकाशाची आवश्यकता आहे</string>
+    <string name="attr_light_high">चेहऱ्यावर खूपच प्रकाश आहे</string>
+    <string name="attr_light_shadow">चेहऱ्यावर खूपच सावली आहे</string>
+    <string name="btn_done">पूर्ण झाले</string>
+    <string name="btn_try">पुन्हा प्रयत्न करा</string>
+    <string name="face_intro_conten_first_point">चेहरा जुळणी ही पॅटर्न, PIN किंवा पासवर्डपेक्षा कमी सुरक्षित आहे</string>
+    <string name="face_intro_content_second_point">आपल्यासारखे दिसणारे कोणीतरी आपला फोन उघडू शकते</string>
+    <string name="face_intro_content_third_point">आपला चेहरा ओळखण्यासाठी वापरण्यात येणारा डेटा आपल्या फोनवर खाजगी ठेवला जातो</string>
+    <string name="face_intro_next">पुढील</string>
+    <string name="face_intro_remember">लक्षात ठेवा:</string>
+    <string name="face_intro_summary">आपल्या फोनकडे पाहून तो अनलॉक करा</string>
+    <string name="face_intro_title">चेहरा अनलॉक विषयी</string>
+    <string name="facelock_setup_notification_text">चेहरा अनलॉक सेटअप करा</string>
+    <string name="facelock_setup_notification_title">एका कटाक्षा सह अनलॉक करा</string>
+    <string name="policy_disabled_alert_msg">कॅमेरा अनलॉक प्रशासकाद्वारे अक्षम केला गेला आहे.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">एकदा चेहरा जुळल्यावर पॉवर की दाबल्याने होम स्क्रीन किंवा शेवटचे वापरलेले ॲप उघडेल</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">लॉक स्क्रीन वगळा</string>
+    <string name="title_activity_face_intro">चेहरा अनलॉक परिचय</string>
+    <string name="unlock_failed_face_blur">चेहरा खूप अस्पष्ट आहे</string>
+    <string name="unlock_failed_face_large">चेहरा खूपच जवळ आहे</string>
+    <string name="unlock_failed_face_multi">खूप जास्त चेहरे आढळले</string>
+    <string name="unlock_failed_face_not_complete">केवळ आंशिक चेहरा आढळला</string>
+    <string name="unlock_failed_face_small">चेहरा खूपच लांब आहे</string>
+    <string name="upgrade_finish_summary">"आता आपण चेहरा अनलॉक सह आपले उपकरण अनलॉक करण्यासाठी तयार आहात"</string>
+    <string name="upgrade_finish_title">ठीक आहे!</string>
+</resources>

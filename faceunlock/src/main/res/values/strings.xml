@@ -1,0 +1,3 @@
+<resources>
+    <string name="accessibility_service_description">Face unlock needs accessibility access to run on the lock screen.</string>
+</resources>

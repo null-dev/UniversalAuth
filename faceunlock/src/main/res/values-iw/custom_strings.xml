@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">זיהוי פרצוף</string>
+    <string name="attr_light_dark">הפנים צריכות להיות מוארות יותר</string>
+    <string name="attr_light_high">הפנים מוארות יותר מדי</string>
+    <string name="attr_light_shadow">הפנים מוצללים מדי</string>
+    <string name="btn_done">בוצע</string>
+    <string name="btn_try">נסה שוב</string>
+    <string name="face_intro_conten_first_point">התאמת פנים היא שיטה פחות בטוחה משימוש בתבנית, PIN או סיסמה</string>
+    <string name="face_intro_content_second_point">אדם שפניו דומים לשלך עלול לבטל את נעילת הטלפון</string>
+    <string name="face_intro_content_third_point">הנתונים המשמשים לזיהוי הפנים נשמרים בפרטיות בטלפון שלך</string>
+    <string name="face_intro_next">הבא</string>
+    <string name="face_intro_remember">זכור:</string>
+    <string name="face_intro_summary">ביטול נעילת טלפון באמצעות מבט בלבד.</string>
+    <string name="face_intro_title">אודות ביטול נעילה באמצעות זיהוי פרצוף</string>
+    <string name="face_value_prop_cancel">לא, תודה</string>
+    <string name="face_value_prop_next">הגדר</string>
+    <string name="face_value_prop_summary">"זיהוי פרצוף מאפשר כניסה קלה לטלפון באמצעות מבט בלבד. מכיוון הטלפון מכיר את פניך, מסך הנעילה מציג הודעות רק כאשר אתה מביט בטלפון "</string>
+    <string name="facelock_setup_notification_text">הגדרת זיהוי פרצוף</string>
+    <string name="facelock_setup_notification_title">בטל נעילה באמצעות מבט</string>
+    <string name="face_camera_content">ישר את פניך</string>
+    <string name="face_camera_content_tip">הקפד למקם את פניך במרכז למטה. ודא שהן מוארות היטב והיישר מבט אל הטלפון.</string>
+    <string name="face_next_change_later_tip">ניתן לשנות זאת יותר מאוחר בהגדרות האבטחה.</string>
+    <string name="face_next_content">הכל מוכן</string>
+    <string name="face_next_content_tip">"כעת, משסיימת לסרוק את פניך, תוכל לבטל את נעילת הטלפון באמצעות הצצה בלבד."</string>
+    <string name="face_try_content">משהו השתבש</string>
+    <string name="face_try_content_tip">"סריקת הפנים נכשלה. ודא שאתה מואר היטב ומישיר מבט אל המצלמה."</string>
+    <string name="perm_required_alert_button_app_info">פרטי אפליקציה</string>
+    <string name="perm_required_alert_msg">ביטול נעילת פנים זקוק להרשאה כדי לגשת לכמה דברים במכשיר שלך. בחר באפשרות \"הרשאות\" בפרטי האפליקציה כדי להפעיל.</string>
+    <string name="perm_required_alert_title">הרשאות נדרשות</string>
+    <string name="policy_disabled_alert_msg">אפשרות ביטול הנעילה באמצעות זיהוי פרצוף הושבתה על ידי מנהל המערכת.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">לחיצה על לחצן ההפעלה תפתח את מסך הבית או את האפליקציה האחרונה שהייתה בשימוש, מרגע שתתבצע התאמת פנים</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">עקיפת מסך נעילה</string>
+    <string name="title_activity_face_intro">ביטול נעילה באמצעות זיהוי פרצוף – הקדמה</string>
+    <string name="unlock_failed_face_blur">הפנים מטושטשות מדי</string>
+    <string name="unlock_failed_face_large">הפנים קרובים מדי</string>
+    <string name="unlock_failed_face_multi">זוהו יותר מדי פנים</string>
+    <string name="unlock_failed_face_not_complete">זוהה מראה חלקי בלבד של הפנים</string>
+    <string name="unlock_failed_face_small">הפנים רחוקות מדי</string>
+    <string name="upgrade_finish_summary">"כעת אתה מוכן לבטל את נעילת המכשיר בעזרת זיהוי פרצוף"</string>
+    <string name="upgrade_finish_title">יפה!</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">මුහුණෙන් අගුළු හැරීම</string>
+    <string name="attr_light_dark">මුහුණට වැඩි ආලෝකයක් අවශ්‍යයි</string>
+    <string name="attr_light_high">මුහුණට බොහෝ ආලෝකය තිබේ</string>
+    <string name="attr_light_shadow">මුහුණට බොහෝ සෙවණැලි ඇත</string>
+    <string name="btn_done">නිමයි</string>
+    <string name="btn_try">නැවත උත්සාහ කරන්න</string>
+    <string name="face_intro_conten_first_point">මුහුණ ගැළපීම රටාවකට, PIN අංකයකට, මුරපදයකට වඩා අඩුවෙන් සුරක්ෂිතයි</string>
+    <string name="face_intro_content_second_point">ඔබ වගේ පෙනෙන කෙනෙකුට ඔබේ දුරකථනය අගුළු හැරීමට හැකිය</string>
+    <string name="face_intro_content_third_point">ඔබේ මුහුණ හඳුනා ගැනීමට භාවිතා කරන දත්ත ඔබේ දුරකථනයේ පෞද්ගලිකව තබයි</string>
+    <string name="face_intro_next">ඊළඟ</string>
+    <string name="face_intro_remember">මතක තබා ගන්න:</string>
+    <string name="face_intro_summary">ඔබේ දුරකථනය දෙස බලමින් එය අගුළු හරින්න.</string>
+    <string name="face_intro_title">මුහුණෙන් අගුළු හැරීම ගැන</string>
+    <string name="face_value_prop_cancel">එපා, ස්තූතියි</string>
+    <string name="face_value_prop_next">පිහිටුවන්න</string>
+    <string name="face_value_prop_summary">"මුහුණෙන් අගුළු හැරීම ඔබට දුරකථනය දෙස බලා සිටීමෙන් එයට පහසුවෙන් ඇතුළු වීමට ඉඩ සලසයි. ඔබේ දුරකථනය ඔබේ මුහුණ දන්නා බැවින්, ඔබ එය දෙස බලන විට පමණක් අගුළු තිරය මත දැනුම්දීම් පෙන්වයි"</string>
+    <string name="facelock_setup_notification_text">මුහුණෙන් අගුළු හැරීම පිහිටුවන්න</string>
+    <string name="facelock_setup_notification_title">එක් බැල්මකින් අගුළු හරින්න</string>
+    <string name="face_camera_content">ඔබේ මුහුණ පෙළගස්වන්න</string>
+    <string name="face_camera_content_tip">ඔබේ මුහුණ පහතින් කේන්ද්‍රගතව ඇති බවට වග බලා ගන්න. ඔබේ මුහුණ හොඳින් ආලෝකවත් කර දුරකථනය දෙස කෙළින්ම බලන්න.</string>
+    <string name="face_next_change_later_tip">ඔබට මෙය ආරක්ෂාව සහ ස්ථාන සැකසුම් තුළින් පසුව වෙනස් කළ හැකිය</string>
+    <string name="face_next_content">සියල්ල සැකසිණි</string>
+    <string name="face_next_content_tip">"ඔබ දැන් ඔබේ මුහුණ ස්කෑන් කර ඇති බැවින්, ඔබට එක් බැලීමකින් දුරකථනය අගුළු හැරිය හැක."</string>
+    <string name="face_try_content">යමක් වැරදී ගියේය</string>
+    <string name="face_try_content_tip">"මුහුණ ස්කෑන් කිරීම අසමත් විය. ඔබේ මුහුණ හොඳින් ආලෝකමත් වී කැමරාව දෙස බලන බවට වග බලා ගන්න."</string>
+    <string name="perm_required_alert_button_app_info">යෙදුම් තතු</string>
+    <string name="perm_required_alert_msg">මුහුණෙන් අගුළු හැරීමට ඔබේ උපාංගය මත යම් යම් දේ පරිශීලනයට අවසරය අවශ්‍යයි. සබල කිරීමට යෙදුම් තතුවල \"අවසර\" තෝරන්න.</string>
+    <string name="perm_required_alert_title">අවසර අවශ්‍යයි</string>
+    <string name="policy_disabled_alert_msg">මුහුණෙන් අගුළු හැරීම පරිපාලක විසින් අබල කර ඇත.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">බලය යතුර එබීමෙන් මුහුණ ගැළපෙන විට මුල් තිරය හෝ අවසානයට භාවිතා කළ යෙදුම විවෘත කරනු ඇත</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">අගුළු තිරය මඟ හැර යන්න</string>
+    <string name="title_activity_face_intro">මුහුණෙන් අගුළු හැරීම හැඳින්වීම</string>
+    <string name="unlock_failed_face_blur">මුහුණ ඉතා අඳුරුයි</string>
+    <string name="unlock_failed_face_large">මුහුණ ඉතා සමීපය</string>
+    <string name="unlock_failed_face_multi">බොහෝ මුහුණු අනාවරණය කර ඇත</string>
+    <string name="unlock_failed_face_not_complete">අර්ධ මුහුණක් පමණක් අනාවරණය කර ඇත</string>
+    <string name="unlock_failed_face_small">මුහුණ ඉතා දුරින් ඇත</string>
+    <string name="upgrade_finish_summary">"දැන් ඔබ මුහුණු අගුලු හැරීම භාවිතයෙන් ඔබගේ උපාංගය අගුලු හැරීමට සූදානම්ය"</string>
+    <string name="upgrade_finish_title">ඔක්කොම හරි!</string>
+</resources>

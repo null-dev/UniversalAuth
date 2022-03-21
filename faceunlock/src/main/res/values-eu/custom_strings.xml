@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aurpegi desblokeoa</string>
+    <string name="attr_light_dark">Aurpegiak argi gehiago behar du</string>
+    <string name="attr_light_high">Aurpegiak argi gehiegi du</string>
+    <string name="attr_light_shadow">Aurpegiak itzal gehiegi ditu</string>
+    <string name="btn_try">Saiatu berriro</string>
+    <string name="face_intro_conten_first_point">Aurpegi kointzidentzia ez da eredu bat, PIN kode bat edo pasahitza bat bezain segurua</string>
+    <string name="face_intro_content_second_point">Zure antzeko ikuskera daukan batek mugikorra desbkokea lezake</string>
+    <string name="face_intro_content_third_point">Zure aurpegia aurkitzeko datuak era pribatuan daude gordeta zure mugikorrean</string>
+    <string name="face_intro_next">Hurrengoa</string>
+    <string name="face_intro_remember">Gogoratu</string>
+    <string name="face_intro_summary">Mugikorra desblokeatu hurari begiratuz</string>
+    <string name="face_intro_title">Aurpegi desblokeoari buruz</string>
+    <string name="facelock_setup_notification_text">Aurpegi desblokeoa konfiguratu</string>
+    <string name="facelock_setup_notification_title">Begirada batekin desblokeatu</string>
+    <string name="policy_disabled_alert_msg">Aurpegi desblokeoa kudeatzaileak desaktibatu du</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Pizteko botoia sakatzean, eta aurpegia ezagun bat aurkitzen bada hasierako pantaila edo erabilitako azken aplikazioa irekiko da.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Blokeo pantaila saltatu</string>
+    <string name="title_activity_face_intro">Aurpegi desblokeoaren sarrera</string>
+    <string name="unlock_failed_face_blur">Aurpegia lausoegia dago</string>
+    <string name="unlock_failed_face_large">Aurpegia hurbilegi dago</string>
+    <string name="unlock_failed_face_multi">Aurpegi gehiegi detektatu dira</string>
+    <string name="unlock_failed_face_not_complete">Aurpegiaren zati bat bakarrik detektatu da</string>
+    <string name="unlock_failed_face_small">Aurpegia urrunegi dago</string>
+    <string name="upgrade_finish_summary">"Orain prest zaude zure mugikorra aurpegi desblokeoaren desblokeatzeko"</string>
+    <string name="upgrade_finish_title">Dena ondo!</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">چہرہ ان لاک</string>
+    <string name="attr_light_dark">چہرہ پر اور روشنی کی ضرورت ہے</string>
+    <string name="attr_light_high">چہرہ پر بہت زیادہ روشنی ہے</string>
+    <string name="attr_light_shadow">چہرہ میں بہت سی پرچھائیاں آرہی ہیں</string>
+    <string name="btn_done">ہوگیا</string>
+    <string name="btn_try">دوبارہ کوشش کریں</string>
+    <string name="face_intro_conten_first_point">چہرہ مشابہ نمونہ، پن، یا پاس ورڈ کے مقابلے کم محفوظ ہے</string>
+    <string name="face_intro_content_second_point">آپ کی طرح دکھنے والا شخص آپ کا فون ان لاک کرسکتا ہے</string>
+    <string name="face_intro_content_third_point">جو ڈیٹا آپ کے چہرہ کی شناخت کے لیے استعمال کیا گیا اسے آپ کے فون میں نجی رکھا جاتا ہے</string>
+    <string name="face_intro_next">اگلا</string>
+    <string name="face_intro_remember">یاد رہے کہ:</string>
+    <string name="face_intro_summary">اس میں دیکھ کر اپنا فون ان لاک کریں۔</string>
+    <string name="face_intro_title">چہرہ ان لاک کے متعلق</string>
+    <string name="facelock_setup_notification_text">چہرہ ان لاک سیٹ اپ کریں</string>
+    <string name="facelock_setup_notification_title">ایک نظر میں ان لاک کریں</string>
+    <string name="policy_disabled_alert_msg">چہرہ ان لاک منتظم کے ذریعے نا اہل بنا دیا گیا ہے۔</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">چہرہ مشابہ ہوجانے پر پاور کلید دبانے سے ابتدائی اسکرین یا آخری استعمال کردہ ایپ کھل جائے گا</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">بائی پاس لاک اسکرین</string>
+    <string name="title_activity_face_intro">چہرہ ان لاک کا تعارف</string>
+    <string name="unlock_failed_face_blur">چہرہ بہت دھندلا ہے</string>
+    <string name="unlock_failed_face_large">چہرہ بہت قریب ہورہا ہے</string>
+    <string name="unlock_failed_face_multi">بہت سارے چہرے پائے گئے</string>
+    <string name="unlock_failed_face_not_complete">صرف جزوی چہرا ملا</string>
+    <string name="unlock_failed_face_small">چہرا بہت دور ہے</string>
+    <string name="upgrade_finish_summary">"اب آپ چہرہ ان لاک سے اپنا آلہ ان لاک کرنے کے لیے تیار ہیں"</string>
+    <string name="upgrade_finish_title">ٹھیک ہے!</string>
+</resources>

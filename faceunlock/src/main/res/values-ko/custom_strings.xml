@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">얼굴 인식 잠금해제</string>
+    <string name="attr_light_dark">얼굴에 조명이 더 필요합니다</string>
+    <string name="attr_light_high">얼굴에 조명이 너무 밝습니다</string>
+    <string name="attr_light_shadow">얼굴에 그림자가 너무 많습니다</string>
+    <string name="btn_done">완료</string>
+    <string name="btn_try">다시 시도</string>
+    <string name="face_intro_conten_first_point">얼굴인식은 패턴, PIN 또는 비밀번호보다 안전하지 않습니다</string>
+    <string name="face_intro_content_second_point">외모가 비슷한 사람이 휴대전화를 잠금 해제할 수도 있습니다</string>
+    <string name="face_intro_content_third_point">얼굴을 인식하는 데 사용되는 데이터는 휴대전화에 비공개로 저장됩니다</string>
+    <string name="face_intro_next">다음</string>
+    <string name="face_intro_remember">중요:</string>
+    <string name="face_intro_summary">휴대전화를 바라보는 것으로 잠금 해제하십시오.</string>
+    <string name="face_intro_title">얼굴 인식 잠금해제 정보</string>
+    <string name="face_value_prop_cancel">괜찮습니다</string>
+    <string name="face_value_prop_next">설정</string>
+    <string name="face_value_prop_summary">"얼굴 인식 잠금해제로 휴대전화를 바라보기만 하면 쉽게 액세스할 수 있습니다. 휴대전화에 얼굴이 등록되어 있으므로 잠금 화면을 볼 때에만 알림이 표시됩니다."</string>
+    <string name="facelock_setup_notification_text">얼굴 인식 잠금해제 설정</string>
+    <string name="facelock_setup_notification_title">흘낏 봐서 잠금해제</string>
+    <string name="face_camera_content">얼굴을 맞추세요</string>
+    <string name="face_camera_content_tip">얼굴이 하단 가운데에 오도록 합니다. 얼굴이 밝게 보이도록 하고 휴대전화를 똑바로 바라봅니다.</string>
+    <string name="face_next_change_later_tip">나중에 보안 설정에서 변경할 수 있습니다</string>
+    <string name="face_next_content">설정 완료</string>
+    <string name="face_next_content_tip">"이제 얼굴을 스캔했습니다. 휴대전화를 흘낏 바라보는 것만으로 잠금 해제할 수 있습니다."</string>
+    <string name="face_try_content">문제가 발생했습니다</string>
+    <string name="face_try_content_tip">"얼굴을 스캔하지 못했습니다. 얼굴이 밝게 보이며 카메라를 똑바로 보고 있는지 확인하십시오."</string>
+    <string name="perm_required_alert_button_app_info">앱 정보</string>
+    <string name="perm_required_alert_msg">얼굴 인식 잠금해제가 기기의 특정 항목에 액세스하려면 권한이 필요합니다. 앱 정보의 \"권한\"을 선택하여 활성화하십시오.</string>
+    <string name="perm_required_alert_title">권한 필요</string>
+    <string name="policy_disabled_alert_msg">관리자가 얼굴 인식 잠금해제를 비활성화했습니다.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">전원 버튼을 누르고 얼굴이 일치하면 홈 화면이나 마지막으로 사용한 앱이 열립니다</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">잠금 화면 우회</string>
+    <string name="title_activity_face_intro">얼굴 인식 잠금해제 소개</string>
+    <string name="unlock_failed_face_blur">얼굴이 너무 흐립니다</string>
+    <string name="unlock_failed_face_large">얼굴이 너무 가까이 있습니다</string>
+    <string name="unlock_failed_face_multi">너무 많은 얼굴이 인식되었습니다</string>
+    <string name="unlock_failed_face_not_complete">얼굴의 일부만 인식되었습니다</string>
+    <string name="unlock_failed_face_small">얼굴이 너무 멀리 있습니다</string>
+    <string name="upgrade_finish_summary">"이제 얼굴 인식 잠금해제로 장치의 잠금을 해제할 수 있습니다."</string>
+    <string name="upgrade_finish_title">잘 하셨습니다!</string>
+</resources>

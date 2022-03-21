@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Desbloqueig facial</string>
+    <string name="attr_light_dark">Es necessita més llum a la cara</string>
+    <string name="attr_light_high">Hi ha massa llum a la cara</string>
+    <string name="attr_light_shadow">Hi ha massa ombres a la cara</string>
+    <string name="btn_done">Fet</string>
+    <string name="btn_try">TORNA-HO A PROVAR</string>
+    <string name="face_intro_conten_first_point">La coincidència facial és menys segura que un patró, un PIN o una contrasenya</string>
+    <string name="face_intro_content_second_point">Una persona que se t\'assembli podria desbloquejar el telèfon</string>
+    <string name="face_intro_content_third_point">Les dades que s\'utilitzen per identificar la cara s\'emmagatzemen com informació privada al telèfon</string>
+    <string name="face_intro_next">SEGÜENT</string>
+    <string name="face_intro_remember">Recorda:</string>
+    <string name="face_intro_summary">Desbloquegeu el telèfon amb la mirada.</string>
+    <string name="face_intro_title">Quant al desbloqueig facial</string>
+    <string name="facelock_setup_notification_text">Configura el desbloqueig facial</string>
+    <string name="facelock_setup_notification_title">Desbloqueja amb una mirada</string>
+    <string name="policy_disabled_alert_msg">L\'administrador ha inhabilitat el desbloqueig facial.</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_summary">Quan es reconegui la cara després de prémer el botó d\'engegada, s\'obrirà la pantalla d\'inici o l\'última aplicació utilitzada</string>
+    <string name="security_settings_face_unlock_bypass_lock_screen_title">Omet pantalla de bloqueig</string>
+    <string name="title_activity_face_intro">Introducció al desbloqueig facial</string>
+    <string name="unlock_failed_face_blur">La cara està massa borrosa</string>
+    <string name="unlock_failed_face_large">La cara està massa a prop</string>
+    <string name="unlock_failed_face_multi">S\'han detectat massa cares</string>
+    <string name="unlock_failed_face_not_complete">Només s\'ha detectat una part de la cara</string>
+    <string name="unlock_failed_face_small">La cara està massa lluny</string>
+    <string name="upgrade_finish_summary">"Ara ja ho tens tot a punt per desbloquejar el dispositiu amb el desbloqueig facial"</string>
+    <string name="upgrade_finish_title">Molt bé!</string>
+</resources>
