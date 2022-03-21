@@ -6,6 +6,8 @@ This project aims to bring a variety of custom authentication options to various
 **This project has only been tested on Android 11. It may work in Android 10 and 12 though.** Support for more Android versions is a goal and I welcome contributions!
 
 **You currently cannot use this project to authenticate in apps. It can only unlock your lockscreen.** Support for using this project to authenticate in apps is under development/investigation.
+
+![Face unlock demo](https://raw.githubusercontent.com/null-dev/UniversalAuth/master/branding/face-unlock.gif)
 ## Authentication modules
 Currently available authentication modules:
 
