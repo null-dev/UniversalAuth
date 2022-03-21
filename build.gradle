@@ -8,3 +8,14 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+configure ([project(':faceunlock'), project(':universalauth-xposed')]) {
+    afterEvaluate {
+        android {
+            defaultConfig {
+                versionCode 2
+                versionName "1.1"
+            }
+        }
+    }
+}

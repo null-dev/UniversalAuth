@@ -10,8 +10,6 @@ android {
         applicationId "ax.nd.faceunlock"
         minSdk 29
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
