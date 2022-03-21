@@ -12,7 +12,6 @@ import android.content.IntentFilter;
 import android.util.Log;
 
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -64,7 +63,6 @@ public class Module implements IXposedHookLoadPackage {
         }
     }
 
-
     private <T extends AccessibleObject> T asAccessible(T a) {
         a.setAccessible(true);
         return a;
@@ -74,20 +72,17 @@ public class Module implements IXposedHookLoadPackage {
         Object statusBar = param.thisObject;
         Class<?> statusBarClass = statusBar.getClass();
         Context context = (Context) asAccessible(statusBarClass.getField("mContext")).get(statusBar);
-        Object biometricUnlockController = asAccessible(statusBarClass.getDeclaredField("mBiometricUnlockController")).get(statusBar);
-        Method startWakeAndUnlock = asAccessible(biometricUnlockController
-                .getClass()
-                .getDeclaredMethod("startWakeAndUnlock", int.class));
+
+        UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
 
         BroadcastReceiver unlockReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d(TAG, "Unlocking device...");
                 try {
-                    int unlockMode = intent.getIntExtra(EXTRA_UNLOCK_MODE, MODE_UNLOCK_FADING);
-                    startWakeAndUnlock.invoke(biometricUnlockController, unlockMode);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    Log.e(TAG, "Failed to unlock device!", e);
+                    method.unlock(intent);
+                } catch (Throwable throwable) {
+                    Log.e(TAG, "Failed to unlock device!", throwable);
                 }
             }
         };
@@ -96,5 +91,21 @@ public class Module implements IXposedHookLoadPackage {
         // TODO Handle multiple users
         IntentFilter intentFilter = new IntentFilter(ACTION_UNLOCK_DEVICE);
         context.registerReceiver(unlockReceiver, intentFilter, PERMISSION_UNLOCK_DEVICE, null);
+    }
+
+    public interface UnlockMethod {
+        void unlock(Intent t) throws Throwable;
+    }
+
+    private UnlockMethod hookStatusBarBiometricUnlock(Object statusBar, Class<?> statusBarClass) throws Throwable {
+        Object biometricUnlockController = asAccessible(statusBarClass.getDeclaredField("mBiometricUnlockController")).get(statusBar);
+        Method startWakeAndUnlock = asAccessible(biometricUnlockController
+                .getClass()
+                .getDeclaredMethod("startWakeAndUnlock", int.class));
+
+        return intent -> {
+            int unlockMode = intent.getIntExtra(EXTRA_UNLOCK_MODE, MODE_UNLOCK_FADING);
+            startWakeAndUnlock.invoke(biometricUnlockController, unlockMode);
+        };
     }
 }
