@@ -130,7 +130,6 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             addAction(Intent.ACTION_SCREEN_OFF)
             addAction(Intent.ACTION_USER_PRESENT)
         }
-        unregisterUnlockReceiver()
         lockStateReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent?) {
                 doubleCheckLockscreenState()
@@ -143,7 +142,6 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         val intentFilter = IntentFilter().apply {
             addAction(XposedConstants.ACTION_EARLY_UNLOCK)
         }
-        unregisterUnlockReceiver()
         lockStateReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent) {
                 val mode = p1.getBooleanExtra(XposedConstants.EXTRA_EARLY_UNLOCK_MODE, false)
