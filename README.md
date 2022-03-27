@@ -3,7 +3,7 @@ This project aims to bring a variety of custom authentication options to various
 
 **Your phone needs to have Xposed (or EdXposed/Lsposed).**
 
-**This project has only been tested on Android 11. It may work in Android 10 and 12 though.** Support for more Android versions is a goal and I welcome contributions!
+**This project has only been tested on Android 11/12. It may work in Android 10 though.** Support for more Android versions is a goal and I welcome contributions!
 
 **You currently cannot use this project to authenticate in apps. It can only unlock your lockscreen.** Support for using this project to authenticate in apps is under development/investigation.
 
