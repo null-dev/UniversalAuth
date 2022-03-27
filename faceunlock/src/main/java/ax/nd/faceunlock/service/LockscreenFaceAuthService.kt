@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.hardware.display.DisplayManager
@@ -24,6 +23,7 @@ import android.widget.TextView
 import androidx.core.content.getSystemService
 import ax.nd.faceunlock.FaceApplication
 import ax.nd.faceunlock.LibManager
+import ax.nd.faceunlock.pref.Prefs
 import ax.nd.faceunlock.util.Util
 import ax.nd.faceunlock.util.dpToPx
 import ax.nd.universalauth.xposed.common.XposedConstants
@@ -50,6 +50,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     private var active: Boolean = false
     private var lockStateReceiver: BroadcastReceiver? = null
+    private var requirePinOnBootReceiver: BroadcastReceiver? = null
     private var controller: FaceAuthServiceController? = null
     private var keyguardManager: KeyguardManager? = null
     private var displayManager: DisplayManager? = null
@@ -59,6 +60,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     private lateinit var serviceJob: Job
     private lateinit var serviceScope: CoroutineScope
+    private lateinit var prefs: Prefs
 
     override fun onCreate() {
         super.onCreate()
@@ -66,6 +68,8 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         // Coroutine env
         serviceJob = Job()
         serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
+
+        prefs = FaceApplication.getApp().prefs
 
         controller = FaceAuthServiceController(this, this)
 
@@ -80,20 +84,43 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         textView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
         textView?.setPadding(0, 16.dpToPx.toInt(), 0, 0)
 
-        val prefs = FaceApplication.getApp().prefs
-        serviceScope.launch {
-            prefs.earlyUnlockHook.asFlow().collect { earlyUnlock ->
-                reconfigureUnlockHook(earlyUnlock)
-            }
+        if(prefs.requirePinOnBoot.get()) {
+            setupRequirePinOnBootReceiver()
+        } else {
+            reconfigureUnlockHook()
         }
     }
 
-    private fun reconfigureUnlockHook(earlyUnlock: Boolean) {
-        unRegisterUnlockReceiver()
-        if(earlyUnlock) {
-            registerEarlyUnlockReceiver()
-        } else {
-            registerNormalReceiver()
+    private fun setupRequirePinOnBootReceiver() {
+        val intentFilter = IntentFilter().apply {
+            addAction(Intent.ACTION_USER_PRESENT)
+        }
+        requirePinOnBootReceiver = object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent?) {
+                unregisterRequirePinOnBootReceiver()
+                reconfigureUnlockHook()
+            }
+        }
+        registerReceiver(requirePinOnBootReceiver, intentFilter)
+    }
+
+    private fun unregisterRequirePinOnBootReceiver() {
+        requirePinOnBootReceiver?.let {
+            unregisterReceiver(it)
+            requirePinOnBootReceiver = null
+        }
+    }
+
+    private fun reconfigureUnlockHook() {
+        serviceScope.launch {
+            prefs.earlyUnlockHook.asFlow().collect { earlyUnlock ->
+                unregisterUnlockReceiver()
+                if(earlyUnlock) {
+                    registerEarlyUnlockReceiver()
+                } else {
+                    registerNormalReceiver()
+                }
+            }
         }
     }
 
@@ -103,7 +130,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             addAction(Intent.ACTION_SCREEN_OFF)
             addAction(Intent.ACTION_USER_PRESENT)
         }
-        unRegisterUnlockReceiver()
+        unregisterUnlockReceiver()
         lockStateReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent?) {
                 doubleCheckLockscreenState()
@@ -116,7 +143,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         val intentFilter = IntentFilter().apply {
             addAction(XposedConstants.ACTION_EARLY_UNLOCK)
         }
-        unRegisterUnlockReceiver()
+        unregisterUnlockReceiver()
         lockStateReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent) {
                 val mode = p1.getBooleanExtra(XposedConstants.EXTRA_EARLY_UNLOCK_MODE, false)
@@ -130,7 +157,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         registerReceiver(lockStateReceiver, intentFilter)
     }
 
-    private fun unRegisterUnlockReceiver() {
+    private fun unregisterUnlockReceiver() {
         lockStateReceiver?.let {
             unregisterReceiver(it)
             lockStateReceiver = null
@@ -151,7 +178,8 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     override fun onDestroy() {
         super.onDestroy()
 
-        unRegisterUnlockReceiver()
+        unregisterUnlockReceiver()
+        unregisterRequirePinOnBootReceiver()
         hide()
         serviceJob.cancel()
     }

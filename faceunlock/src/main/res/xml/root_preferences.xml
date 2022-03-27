@@ -16,4 +16,9 @@
         android:key="early_unlock_hook"
         android:summary="Start the face unlock algorithm at the same time as the lockscreen is shown. May not work on all devices yet."
         android:title="Even faster face unlock" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="require_pin_on_boot"
+        android:summary="Do not allow using face unlock until the phone is unlocked at least once after boot. Only enable this if your device does not already automatically enforce this."
+        android:title="Disable for first unlock" />
 </PreferenceScreen>
