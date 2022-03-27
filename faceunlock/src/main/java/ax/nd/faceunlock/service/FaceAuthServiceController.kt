@@ -33,6 +33,7 @@ class FaceAuthServiceController(private val context: Context, private val cb: Fa
                 onError(BiometricFaceConstants.FACE_ERROR_TIMEOUT, 0)
             } else {
                 Log.d(TAG, "Authentication OK: $faceId, $userId")
+                stopInternal(cancel = false)
                 cb.onAuthed()
             }
         }
@@ -42,7 +43,7 @@ class FaceAuthServiceController(private val context: Context, private val cb: Fa
             val clientErrId = FaceManager.calcClientMsgId(error, vendorCode)
             val message = FaceManager.getErrorString(context, error, vendorCode)
             Log.d(TAG, "FaceAuthActivity callback onError: $clientErrId, $error, $vendorCode, $message")
-            stop()
+            stopInternal(cancel = false)
             cb.onError(clientErrId, message)
         }
 
@@ -58,40 +59,54 @@ class FaceAuthServiceController(private val context: Context, private val cb: Fa
             // Not used, safe to skip
         }
     }
+    private var authBinder: IFaceService? = null
     private val faceAuthConn: ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-            val authBinder = iBinder as IFaceService
+            authBinder = iBinder as IFaceService
             try {
-                authBinder.setCallback(authCallback)
+                (authBinder ?: return).setCallback(authCallback)
             } catch (e: RemoteException) {
                 Log.e(TAG, "Callback setup error!", e)
             }
             try {
-                authBinder.authenticate(0)
+                (authBinder ?: return).authenticate(0)
             } catch (e: RemoteException) {
                 Log.e(TAG, "Auth error!", e)
                 authCallback.onError(BiometricFaceConstants.FACE_ERROR_UNKNOWN, 0)
             }
         }
 
-        override fun onServiceDisconnected(componentName: ComponentName) {}
+        override fun onServiceDisconnected(componentName: ComponentName) {
+            authBinder = null
+        }
     }
 
     fun start() {
         if(!serviceBound) {
+            serviceBound = true
             context.bindService(
                 Intent(context, FaceAuthService::class.java),
                 faceAuthConn,
                 Context.BIND_AUTO_CREATE
             )
-            serviceBound = true
         }
     }
 
     fun stop() {
+        stopInternal(cancel = true)
+    }
+
+    private fun stopInternal(cancel: Boolean) {
         if(serviceBound) {
-            context.unbindService(faceAuthConn)
             serviceBound = false
+            if (cancel) {
+                try {
+                    authBinder?.cancel()
+                } catch (e: RemoteException) {
+                    Log.e(TAG, "Failed to cancel face auth!", e)
+                }
+            }
+            context.unbindService(faceAuthConn)
         }
     }
 
