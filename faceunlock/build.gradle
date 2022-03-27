@@ -37,6 +37,11 @@ dependencies {
     implementation project(':faceunlock-framework_stub')
     implementation project(':libuniversalauth')
 
+    // Used to download Face Unlock libs
+//    implementation "com.aurora:gplayapi:3.0.1" // From "gplayapi" submodule
+
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.3'
+
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     implementation 'com.fredporciuncula:flow-preferences:1.5.0'

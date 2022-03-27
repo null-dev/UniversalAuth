@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
             checkAndAskForPermissions()
         } else {
             // First setup libs
-            ChooseLibsDialog(this, chooseLibsViewModel).open()
+            DownloadLibsDialog(this, chooseLibsViewModel).open()
+//            ChooseLibsDialog(this, chooseLibsViewModel).open()
         }
 
         lifecycleScope.launch {
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
                     curErrorDialog?.cancel()
                     curErrorDialog = MaterialDialog(this@MainActivity).show {
                         title(text = "Fatal error")
-                        message(text = "Failed to load libraries, application will now crash! If you wish to switch the app libraries, please clear the app data.")
+                        message(text = "Failed to load libraries, application will now crash!")
                         positiveButton(text = "Ok :(") {
                             throw error
                         }

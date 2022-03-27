@@ -8,14 +8,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.apache.commons.codec.binary.Hex
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.lang.Exception
+import java.io.*
 import java.security.DigestInputStream
+import java.security.DigestOutputStream
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.zip.ZipInputStream
+import kotlin.Exception
 
 sealed interface CheckResult {
     val library: RequiredLib
@@ -24,9 +27,90 @@ sealed interface CheckResult {
     data class FileError(override val library: RequiredLib, val error: Exception) : CheckResult
 }
 
+sealed interface DownloadStatus {
+    object Downloading : DownloadStatus
+    data class DownloadError(val error: Exception) : DownloadStatus
+}
+
 class ChooseLibsViewModel : ViewModel() {
     val checkingStatus = MutableStateFlow(false)
     val checkResult = MutableStateFlow<CheckResult?>(null)
+    val downloadStatus = MutableStateFlow<DownloadStatus?>(null)
+    private val okhttp = OkHttpClient()
+
+    fun downloadLibs(context: Context) {
+        if(downloadStatus.value != DownloadStatus.Downloading) {
+            downloadStatus.value = DownloadStatus.Downloading
+            viewModelScope.launch {
+                try {
+                    downloadLibsInternal(context)
+                    downloadStatus.value = null
+                } catch (e: Exception) {
+                    downloadStatus.value = DownloadStatus.DownloadError(e)
+                }
+            }
+        }
+    }
+
+    private suspend fun downloadLibsInternal(context: Context) {
+        val url = "$IPFS_GATEWAY/ipfs/$LIBS_CID"
+
+        val req = Request.Builder()
+            .url(url)
+            .build()
+
+        withContext(Dispatchers.IO) {
+            okhttp.newCall(req).execute().use { resp ->
+                val body = resp.body ?: run {
+                    throw IOException("Response body is null!")
+                }
+
+                val zin = ZipInputStream(body.byteStream().buffered())
+                while (true) {
+                    val entry = zin.nextEntry ?: break
+                    val name = entry.name
+                    if (!name.startsWith("lib/arm64-v8a/")) {
+                        continue
+                    }
+                    val fname = name.substringAfterLast('/')
+                    val lib = LibManager.requiredLibraries.find { it.name == fname } ?: continue
+
+                    val digest = try {
+                        MessageDigest.getInstance(LibManager.HASH_TYPE)
+                    } catch (e: NoSuchAlgorithmException) {
+                        throw IOException("Missing hash type: ${LibManager.HASH_TYPE}", e)
+                    }
+
+                    val outFile = LibManager.getLibFile(context, lib, temp = true)
+                    outFile.parentFile?.mkdirs()
+                    DigestOutputStream(outFile.outputStream().buffered(), digest).use { ostream ->
+                        zin.copyTo(ostream)
+                    }
+
+                    val hash = digest.digest()
+                    val hex = Hex.encodeHexString(hash, true)
+
+                    val targetHash = lib.hashForCurrentAbi() ?: run {
+                        throw UnsupportedOperationException("This app cannot run on your device: unsupported ABI!")
+                    }
+
+                    if(hex == targetHash) {
+                        val realFile = LibManager.getLibFile(context, lib)
+                        realFile.parentFile?.mkdirs()
+                        if(!outFile.renameTo(realFile)) {
+                            throw IOException("Failed to rename temp file!")
+                        }
+                        LibManager.updateLibraryData(context)
+                        if(LibManager.libsLoaded.get()) {
+                            break
+                        }
+                    } else {
+                        throw IOException("Hash mismatch, maybe the download got corrupted?")
+                    }
+                }
+            }
+        }
+    }
 
     fun addLib(context: Context, library: RequiredLib, uri: Uri) {
         if (!checkingStatus.value && checkResult.value == null) {
@@ -113,7 +197,6 @@ class ChooseLibsViewModel : ViewModel() {
                     return
                 }
                 // Valid, update library data
-                LibManager.updateLibraryData(context)
             } else {
                 checkResult.value = CheckResult.BadHash(library, tmpFile = targetFile)
             }
@@ -122,5 +205,8 @@ class ChooseLibsViewModel : ViewModel() {
 
     companion object {
         private val TAG = ChooseLibsViewModel::class.simpleName
+
+        private const val IPFS_GATEWAY = "https://cloudflare-ipfs.com"
+        private const val LIBS_CID = "QmQNREjjXTQBDpd69gFqEreNi1dV91eSGQByqi5nXU3rBt"
     }
 }

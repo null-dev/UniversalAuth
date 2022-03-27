@@ -20,9 +20,9 @@ data class RequiredLib(
         if("arm64-v8a" in abis) {
             return arm64_v8a
         }
-        if("armeabi-v7a" in abis) {
-            return armeabi_v7a
-        }
+//        if("armeabi-v7a" in abis) {
+//            return armeabi_v7a
+//        }
         return null
     }
 }
