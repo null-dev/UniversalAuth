@@ -11,4 +11,9 @@
         android:key="unlock_animation"
         android:defaultValue="mode_unlock_fading"
         android:title="Unlock animation" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="early_unlock_hook"
+        android:summary="Start the face unlock algorithm at the same time as the lockscreen is shown. May not work on all devices yet."
+        android:title="Even faster face unlock" />
 </PreferenceScreen>

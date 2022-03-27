@@ -27,6 +27,10 @@ import ax.nd.faceunlock.LibManager
 import ax.nd.faceunlock.util.Util
 import ax.nd.faceunlock.util.dpToPx
 import ax.nd.universalauth.xposed.common.XposedConstants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbacks {
     private var windowManager: WindowManager? = null
@@ -53,8 +57,15 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     private var startTime: Long = 0
     private var textViewAnimator: ViewPropertyAnimator? = null
 
+    private lateinit var serviceJob: Job
+    private lateinit var serviceScope: CoroutineScope
+
     override fun onCreate() {
         super.onCreate()
+
+        // Coroutine env
+        serviceJob = Job()
+        serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
         controller = FaceAuthServiceController(this, this)
 
@@ -69,17 +80,61 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         textView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
         textView?.setPadding(0, 16.dpToPx.toInt(), 0, 0)
 
+        val prefs = FaceApplication.getApp().prefs
+        serviceScope.launch {
+            prefs.earlyUnlockHook.asFlow().collect { earlyUnlock ->
+                reconfigureUnlockHook(earlyUnlock)
+            }
+        }
+    }
+
+    private fun reconfigureUnlockHook(earlyUnlock: Boolean) {
+        unRegisterUnlockReceiver()
+        if(earlyUnlock) {
+            registerEarlyUnlockReceiver()
+        } else {
+            registerNormalReceiver()
+        }
+    }
+
+    private fun registerNormalReceiver() {
         val intentFilter = IntentFilter().apply {
             addAction(Intent.ACTION_SCREEN_ON)
             addAction(Intent.ACTION_SCREEN_OFF)
             addAction(Intent.ACTION_USER_PRESENT)
         }
+        unRegisterUnlockReceiver()
         lockStateReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent?) {
                 doubleCheckLockscreenState()
             }
         }
         registerReceiver(lockStateReceiver, intentFilter)
+    }
+
+    private fun registerEarlyUnlockReceiver() {
+        val intentFilter = IntentFilter().apply {
+            addAction(XposedConstants.ACTION_EARLY_UNLOCK)
+        }
+        unRegisterUnlockReceiver()
+        lockStateReceiver = object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent) {
+                val mode = p1.getBooleanExtra(XposedConstants.EXTRA_EARLY_UNLOCK_MODE, false)
+                if(mode) {
+                    show()
+                } else {
+                    hide()
+                }
+            }
+        }
+        registerReceiver(lockStateReceiver, intentFilter)
+    }
+
+    private fun unRegisterUnlockReceiver() {
+        lockStateReceiver?.let {
+            unregisterReceiver(it)
+            lockStateReceiver = null
+        }
     }
 
     override fun onServiceConnected() {
@@ -96,8 +151,9 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     override fun onDestroy() {
         super.onDestroy()
 
-        lockStateReceiver?.let { unregisterReceiver(it) }
+        unRegisterUnlockReceiver()
         hide()
+        serviceJob.cancel()
     }
 
     // Broadcast receiver isn't 100% accurate

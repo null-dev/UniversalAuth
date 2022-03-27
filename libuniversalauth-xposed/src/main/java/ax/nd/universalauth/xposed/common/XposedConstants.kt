@@ -3,6 +3,8 @@ package ax.nd.universalauth.xposed.common
 object XposedConstants {
     const val ACTION_UNLOCK_DEVICE = "ax.nd.universalauth.unlock-device"
     const val EXTRA_UNLOCK_MODE = "ax.nd.universalauth.unlock-device.unlock-mode"
+    const val ACTION_EARLY_UNLOCK = "ax.nd.universalauth.early-unlock"
+    const val EXTRA_EARLY_UNLOCK_MODE = "ax.nd.universalauth.early-unlock.mode"
 
     const val PERMISSION_UNLOCK_DEVICE = "ax.nd.universalauth.permission.UNLOCK_DEVICE"
 

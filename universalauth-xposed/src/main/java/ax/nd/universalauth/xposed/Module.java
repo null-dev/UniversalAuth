@@ -12,14 +12,17 @@ import android.content.IntentFilter;
 import android.util.Log;
 
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import ax.nd.universalauth.xposed.common.XposedConstants;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
@@ -27,6 +30,12 @@ public class Module implements IXposedHookLoadPackage {
     private static final String TAG = "XposedUniversalAuth";
     private static final String STATUS_BAR_CLASS = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String SYSTEM_UI_CLASS = "com.android.systemui.SystemUI";
+    private static final String KEYGUARD_UPDATE_MONITOR_CLASS = "com.android.keyguard.KeyguardUpdateMonitor";
+    private static final String STATUS_BAR_STATE_CONTROLLER_CLASS = "com.android.systemui.plugins.statusbar.StatusBarStateController";
+    private static final String KEYGUARD_UPDATE_MONITOR_LAST_MODE = "ax.nd.universalauth.last-mode";
+
+    // com.android.systemui.statusbar.StatusBarState.SHADE_LOCKED
+    private static final int SHADE_LOCKED = 2;
 
     /**
      * This method is called when an app is loaded. It's called very early, even before
@@ -65,7 +74,61 @@ public class Module implements IXposedHookLoadPackage {
                         }
                     }
             );
+
+            // Hook com.android.keyguard.KeyguardUpdateMonitor.updateFaceListeningState
+            try {
+                addHookEarlyUnlock(lpparam);
+            } catch (Throwable t) {
+                XposedBridge.log("Failed to hook early unlock, early unlock hook will not work:");
+                XposedBridge.log(t);
+            }
         }
+    }
+
+    private void addHookEarlyUnlock(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+        Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
+        Field mStatusBarStateControllerField = asAccessible(kumClazz.getDeclaredField("mStatusBarStateController"));
+        Field mKeyguardIsVisibleField = asAccessible(kumClazz.getDeclaredField("mKeyguardIsVisible"));
+        Field mDeviceInteractiveField = asAccessible(kumClazz.getDeclaredField("mDeviceInteractive"));
+        Field mGoingToSleepField = asAccessible(kumClazz.getDeclaredField("mGoingToSleep"));
+        Field mContextField = asAccessible(kumClazz.getDeclaredField("mContext"));
+
+        Class<?> sbscClazz = lpparam.classLoader.loadClass(STATUS_BAR_STATE_CONTROLLER_CLASS);
+        Method getStateMethod = asAccessible(sbscClazz.getDeclaredMethod("getState"));
+
+        XposedHelpers.findAndHookMethod(
+                kumClazz,
+                "updateFaceListeningState",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Object kum = param.thisObject;
+                        Object sbsc = mStatusBarStateControllerField.get(kum);
+                        boolean mKeyguardIsVisible = mKeyguardIsVisibleField.getBoolean(kum);
+                        boolean mDeviceInteractive = mDeviceInteractiveField.getBoolean(kum);
+                        boolean mGoingToSleep = mGoingToSleepField.getBoolean(kum);
+                        int sbscState = (int) getStateMethod.invoke(sbsc);
+
+                        // From: com.android.keyguard.KeyguardUpdateMonitor.shouldListenForFace
+                        final boolean statusBarShadeLocked = sbscState == SHADE_LOCKED;
+                        final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
+                                && !statusBarShadeLocked;
+
+                        Object prevAwakeKeyguard = XposedHelpers.setAdditionalInstanceField(kum, KEYGUARD_UPDATE_MONITOR_LAST_MODE, awakeKeyguard);
+
+                        if (!Objects.equals(prevAwakeKeyguard, awakeKeyguard)) {
+                            Log.d("FaceUnlockTimer", "Awake: " + awakeKeyguard);
+                            Context mContext = (Context) mContextField.get(kum);
+                            hookEarlyUnlock(mContext, awakeKeyguard);
+                        }
+                    }
+                }
+        );
+    }
+
+    private void hookEarlyUnlock(Context context, boolean newAwakeKeyguard) throws Throwable {
+        context.sendBroadcast(new Intent(XposedConstants.ACTION_EARLY_UNLOCK)
+                .putExtra(XposedConstants.EXTRA_EARLY_UNLOCK_MODE, newAwakeKeyguard));
     }
 
     private <T extends AccessibleObject> T asAccessible(T a) {
