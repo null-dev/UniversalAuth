@@ -117,7 +117,6 @@ public class Module implements IXposedHookLoadPackage {
                         Object prevAwakeKeyguard = XposedHelpers.setAdditionalInstanceField(kum, KEYGUARD_UPDATE_MONITOR_LAST_MODE, awakeKeyguard);
 
                         if (!Objects.equals(prevAwakeKeyguard, awakeKeyguard)) {
-                            Log.d("FaceUnlockTimer", "Awake: " + awakeKeyguard);
                             Context mContext = (Context) mContextField.get(kum);
                             hookEarlyUnlock(mContext, awakeKeyguard);
                         }
