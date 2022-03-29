@@ -120,21 +120,11 @@ public class SetupFaceIntroActivity extends FaceBaseActivity {
     }
 
     private void showPermissionRequiredDialog() {
-        boolean required = true;
-        try {
-            if (Settings.Secure.getInt(getContentResolver(), "user_setup_complete") != 1) {
-                required = false;
-            }
-        } catch (Settings.SettingNotFoundException e) {
-            e.printStackTrace();
-        }
         AlertDialog.Builder message = new AlertDialog.Builder(this, R.style.AppTheme_AlertDialog)
                 .setTitle(R.string.perm_required_alert_title)
                 .setMessage(R.string.perm_required_alert_msg)
                 .setOnCancelListener(dialogInterface -> SetupFaceIntroActivity.this.finish());
-        if (required) {
-            message.setPositiveButton(R.string.perm_required_alert_button_app_info, (dialogInterface, i) -> Util.jumpToAppInfo(SetupFaceIntroActivity.this, 2));
-        }
+        message.setPositiveButton(R.string.perm_required_alert_button_app_info, (dialogInterface, i) -> Util.jumpToAppInfo(SetupFaceIntroActivity.this, 2));
         message.show();
     }
 

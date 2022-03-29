@@ -3,6 +3,7 @@
     android:description="@string/accessibility_service_description"
     android:accessibilityEventTypes="typeAnnouncement"
     android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault"
     android:notificationTimeout="100"
     android:canControlMagnification="false"
     android:canPerformGestures="false"

@@ -7,7 +7,7 @@ public class Settings {
     private static final String PROPERTY_FACEUNLOCK_AVAILABLE = "property_faceunlock_available";
     private static final String TAG = Settings.class.getSimpleName();
 
-    public static boolean isByPassLockScreenEnabled(Context context) {
+    /*public static boolean isByPassLockScreenEnabled(Context context) {
         // TODO Allow customization on whether or not to skip lock screen
         return true;
 //        int defaultValue = context.getResources().getBoolean(
@@ -22,7 +22,7 @@ public class Settings {
     public static void setByPassLockScreenEnabled(Context context, boolean enabled) {
         android.provider.Settings.Secure.putInt(context.getContentResolver(), "face_unlock_dismisses_keyguard", enabled ? 1 : 0);
         Log.d(TAG, "setByPassLockScreenEnabled: " + enabled);
-    }
+    }*/
 
     public static void setFaceUnlockAvailable(Context context, int i) {
         SharedUtil sharedPrefUtil = new SharedUtil(context);
