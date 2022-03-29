@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.util.Log;
 
 import java.lang.reflect.AccessibleObject;
@@ -30,6 +31,7 @@ public class Module implements IXposedHookLoadPackage {
     private static final String TAG = "XposedUniversalAuth";
     private static final String STATUS_BAR_CLASS = "com.android.systemui.statusbar.phone.StatusBar";
     private static final String SYSTEM_UI_CLASS = "com.android.systemui.SystemUI";
+    private static final String CORE_STARTABLE_CLASS = "com.android.systemui.CoreStartable";
     private static final String KEYGUARD_UPDATE_MONITOR_CLASS = "com.android.keyguard.KeyguardUpdateMonitor";
     private static final String STATUS_BAR_STATE_CONTROLLER_CLASS = "com.android.systemui.plugins.statusbar.StatusBarStateController";
     private static final String KEYGUARD_UPDATE_MONITOR_LAST_MODE = "ax.nd.universalauth.last-mode";
@@ -145,8 +147,25 @@ public class Module implements IXposedHookLoadPackage {
 
     private void hookStatusBar(ClassLoader classLoader, XC_MethodHook.MethodHookParam param) throws Throwable {
         Object statusBar = param.thisObject;
-        Class<?> systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
         Class<?> statusBarClass = classLoader.loadClass(STATUS_BAR_CLASS);
+        Class<?> systemUiClass;
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2) {
+            // >= Android 13
+            systemUiClass = classLoader.loadClass(CORE_STARTABLE_CLASS);
+        } else if(Build.VERSION.SDK_INT == Build.VERSION_CODES.S_V2) {
+            // == Android 12L
+            try {
+                // Try loading SystemUI class for Android 12L
+                systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
+            } catch (ClassNotFoundException ex) {
+                // We are on Android 13 DP (same API level as 12L: https://issuetracker.google.com/issues/36973990#comment2)
+                // Load Android 13 class
+                systemUiClass = classLoader.loadClass(CORE_STARTABLE_CLASS);
+            }
+        } else {
+            // <= Android 12
+            systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
+        }
         Context context = (Context) asAccessible(systemUiClass.getDeclaredField("mContext")).get(statusBar);
 
         UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
