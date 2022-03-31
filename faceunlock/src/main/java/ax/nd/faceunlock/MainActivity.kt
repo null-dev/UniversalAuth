@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
     private fun isAccessServiceEnabled(context: Context, accessibilityServiceClass: Class<*>): Boolean {
         val prefString = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
         val serviceName = accessibilityServiceClass.canonicalName
-        return prefString?.split(":")?.any {
+        return prefString?.split(":")?.filter { it.isNotBlank() }?.any {
             val slashIndex = it.indexOf('/')
             val possibleServiceName = it.substring(slashIndex + 1)
             possibleServiceName == serviceName || (it.substring(0, slashIndex) + possibleServiceName) == serviceName
