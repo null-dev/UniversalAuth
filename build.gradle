@@ -13,8 +13,8 @@ configure ([project(':faceunlock'), project(':universalauth-xposed')]) {
     afterEvaluate {
         android {
             defaultConfig {
-                versionCode 14
-                versionName "1.4"
+                versionCode 15
+                versionName "1.5"
             }
         }
     }
