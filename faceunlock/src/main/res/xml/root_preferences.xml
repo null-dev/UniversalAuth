@@ -27,4 +27,9 @@
         android:entryValues="@array/unlock_animation_values"
         android:key="unlock_animation"
         android:title="Lockscreen dismiss animation" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="show_status_text"
+        android:summary="Show face unlock status on lockscreen"
+        android:title="Show status text" />
 </PreferenceScreen>

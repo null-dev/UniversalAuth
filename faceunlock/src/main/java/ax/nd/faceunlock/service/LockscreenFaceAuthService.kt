@@ -62,6 +62,8 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     private lateinit var serviceScope: CoroutineScope
     private lateinit var prefs: Prefs
 
+    private var showStatusText = true
+
     override fun onCreate() {
         super.onCreate()
 
@@ -88,6 +90,12 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             setupRequirePinOnBootReceiver()
         } else {
             reconfigureUnlockHook()
+        }
+
+        serviceScope.launch {
+            prefs.showStatusText.asFlow().collect { showStatusText ->
+                this@LockscreenFaceAuthService.showStatusText = showStatusText
+            }
         }
     }
 
@@ -198,9 +206,11 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             if(Util.isFaceUnlockEnrolled(this)) {
                 active = true
                 // If animation is currently playing, we need to fire it's end listener
-                textViewAnimator?.cancel()
-                textView?.text = "Looking for face..."
-                windowManager?.addView(textView, params)
+                if(showStatusText) {
+                    textViewAnimator?.cancel()
+                    textView?.text = "Looking for face..."
+                    windowManager?.addView(textView, params)
+                }
                 startTime = System.currentTimeMillis()
                 controller?.start()
             }
@@ -210,27 +220,31 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     private fun hide(delay: Int = 0) {
         if(active) {
             active = false
-            if(delay > 0) {
-                // Delayed hide is animated
-                textViewAnimator = textView?.animate()
-                    ?.alpha(0f)
-                    ?.setListener(object : Animator.AnimatorListener {
-                        override fun onAnimationStart(p0: Animator?) {}
-                        override fun onAnimationEnd(p0: Animator?) = onTextViewAnimationEnd()
-                        override fun onAnimationCancel(p0: Animator?) {}
-                        override fun onAnimationRepeat(p0: Animator?) {}
-                    })
-                    ?.setStartDelay(delay.toLong())
-                    ?.setDuration(300)
-                textViewAnimator?.start()
-            } else {
-                removeTextViewFromWindowManager()
+            if(showStatusText) {
+                if (delay > 0) {
+                    // Delayed hide is animated
+                    textViewAnimator = textView?.animate()
+                        ?.alpha(0f)
+                        ?.setListener(object : Animator.AnimatorListener {
+                            override fun onAnimationStart(p0: Animator?) {}
+                            override fun onAnimationEnd(p0: Animator?) = onTextViewAnimationEnd()
+                            override fun onAnimationCancel(p0: Animator?) {}
+                            override fun onAnimationRepeat(p0: Animator?) {}
+                        })
+                        ?.setStartDelay(delay.toLong())
+                        ?.setDuration(300)
+                    textViewAnimator?.start()
+                } else {
+                    removeTextViewFromWindowManager()
+                }
             }
             controller?.stop()
         } else {
-            if(delay == 0) {
-                // If hide animation is running, skip it
-                textViewAnimator?.cancel()
+            if(showStatusText) {
+                if (delay == 0) {
+                    // If hide animation is running, skip it
+                    textViewAnimator?.cancel()
+                }
             }
         }
     }
