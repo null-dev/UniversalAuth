@@ -98,33 +98,45 @@ public class Module implements IXposedHookLoadPackage {
         Class<?> sbscClazz = lpparam.classLoader.loadClass(STATUS_BAR_STATE_CONTROLLER_CLASS);
         Method getStateMethod = asAccessible(sbscClazz.getDeclaredMethod("getState"));
 
-        XposedHelpers.findAndHookMethod(
-                kumClazz,
-                "updateFaceListeningState",
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Object kum = param.thisObject;
-                        Object sbsc = mStatusBarStateControllerField.get(kum);
-                        boolean mKeyguardIsVisible = mKeyguardIsVisibleField.getBoolean(kum);
-                        boolean mDeviceInteractive = mDeviceInteractiveField.getBoolean(kum);
-                        boolean mGoingToSleep = mGoingToSleepField.getBoolean(kum);
-                        int sbscState = (int) getStateMethod.invoke(sbsc);
+        XC_MethodHook hook = new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                Object kum = param.thisObject;
+                Object sbsc = mStatusBarStateControllerField.get(kum);
+                boolean mKeyguardIsVisible = mKeyguardIsVisibleField.getBoolean(kum);
+                boolean mDeviceInteractive = mDeviceInteractiveField.getBoolean(kum);
+                boolean mGoingToSleep = mGoingToSleepField.getBoolean(kum);
+                int sbscState = (int) getStateMethod.invoke(sbsc);
 
-                        // From: com.android.keyguard.KeyguardUpdateMonitor.shouldListenForFace
-                        final boolean statusBarShadeLocked = sbscState == SHADE_LOCKED;
-                        final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
-                                && !statusBarShadeLocked;
+                // From: com.android.keyguard.KeyguardUpdateMonitor.shouldListenForFace
+                final boolean statusBarShadeLocked = sbscState == SHADE_LOCKED;
+                final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
+                        && !statusBarShadeLocked;
 
-                        Object prevAwakeKeyguard = XposedHelpers.setAdditionalInstanceField(kum, KEYGUARD_UPDATE_MONITOR_LAST_MODE, awakeKeyguard);
+                Object prevAwakeKeyguard = XposedHelpers.setAdditionalInstanceField(kum, KEYGUARD_UPDATE_MONITOR_LAST_MODE, awakeKeyguard);
 
-                        if (!Objects.equals(prevAwakeKeyguard, awakeKeyguard)) {
-                            Context mContext = (Context) mContextField.get(kum);
-                            hookEarlyUnlock(mContext, awakeKeyguard);
-                        }
-                    }
+                if (!Objects.equals(prevAwakeKeyguard, awakeKeyguard)) {
+                    Context mContext = (Context) mContextField.get(kum);
+                    hookEarlyUnlock(mContext, awakeKeyguard);
                 }
-        );
+            }
+        };
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2) {
+            // Android 12L+
+            XposedHelpers.findAndHookMethod(
+                    kumClazz,
+                    "updateFaceListeningState",
+                    int.class,
+                    hook
+            );
+        } else {
+            XposedHelpers.findAndHookMethod(
+                    kumClazz,
+                    "updateFaceListeningState",
+                    hook
+            );
+        }
     }
 
     private void hookEarlyUnlock(Context context, boolean newAwakeKeyguard) throws Throwable {
