@@ -1,16 +1,12 @@
 package ax.nd.universalauth.xposed;
 
-import static ax.nd.universalauth.xposed.common.XposedConstants.ACTION_UNLOCK_DEVICE;
+import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_BYPASS_KEYGUARD;
 import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_UNLOCK_MODE;
 import static ax.nd.universalauth.xposed.common.XposedConstants.MODE_UNLOCK_FADING;
-import static ax.nd.universalauth.xposed.common.XposedConstants.PERMISSION_UNLOCK_DEVICE;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
-import android.util.Log;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
@@ -26,6 +22,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import kotlin.Unit;
 
 public class Module implements IXposedHookLoadPackage {
     private static final String TAG = "XposedUniversalAuth";
@@ -77,18 +74,24 @@ public class Module implements IXposedHookLoadPackage {
                     }
             );
 
+            Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
             // Hook com.android.keyguard.KeyguardUpdateMonitor.updateFaceListeningState
             try {
-                addHookEarlyUnlock(lpparam);
+                addHookEarlyUnlock(kumClazz, lpparam);
             } catch (Throwable t) {
                 XposedBridge.log("Failed to hook early unlock, early unlock hook will not work:");
+                XposedBridge.log(t);
+            }
+            try {
+                TrustHook.INSTANCE.hookKum(kumClazz);
+            } catch (Throwable t) {
+                XposedBridge.log("Failed to hook trust hook, trust hook will not work:");
                 XposedBridge.log(t);
             }
         }
     }
 
-    private void addHookEarlyUnlock(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
+    private void addHookEarlyUnlock(Class<?> kumClazz, XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         Field mStatusBarStateControllerField = asAccessible(kumClazz.getDeclaredField("mStatusBarStateController"));
         Field mKeyguardIsVisibleField = asAccessible(kumClazz.getDeclaredField("mKeyguardIsVisible"));
         Field mDeviceInteractiveField = asAccessible(kumClazz.getDeclaredField("mDeviceInteractive"));
@@ -182,37 +185,35 @@ public class Module implements IXposedHookLoadPackage {
 
         UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
 
-        BroadcastReceiver unlockReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d(TAG, "Unlocking device...");
-                try {
-                    method.unlock(intent);
-                } catch (Throwable throwable) {
-                    Log.e(TAG, "Failed to unlock device!", throwable);
-                }
+        UnlockReceiver.INSTANCE.setup(context, statusBar, intent -> {
+            try {
+                method.unlock(intent);
+            } catch (Throwable throwable) {
+                throw new RuntimeException(throwable);
             }
-        };
-
-        // Register broadcastReceiver for IPC
-        // TODO Handle multiple users
-        IntentFilter intentFilter = new IntentFilter(ACTION_UNLOCK_DEVICE);
-        context.registerReceiver(unlockReceiver, intentFilter, PERMISSION_UNLOCK_DEVICE, null);
+            return Unit.INSTANCE;
+        });
     }
 
     public interface UnlockMethod {
         void unlock(Intent t) throws Throwable;
     }
 
+    private Object getBiometricUnlockControllerFromStatusBar(Object statusBar, Class<?> statusBarClass) throws NoSuchFieldException, IllegalAccessException {
+        return asAccessible(statusBarClass.getDeclaredField("mBiometricUnlockController")).get(statusBar);
+    }
+
     private UnlockMethod hookStatusBarBiometricUnlock(Object statusBar, Class<?> statusBarClass) throws Throwable {
-        Object biometricUnlockController = asAccessible(statusBarClass.getDeclaredField("mBiometricUnlockController")).get(statusBar);
+        Object biometricUnlockController = getBiometricUnlockControllerFromStatusBar(statusBar, statusBarClass);
         Method startWakeAndUnlock = asAccessible(biometricUnlockController
                 .getClass()
                 .getDeclaredMethod("startWakeAndUnlock", int.class));
 
         return intent -> {
-            int unlockMode = intent.getIntExtra(EXTRA_UNLOCK_MODE, MODE_UNLOCK_FADING);
-            startWakeAndUnlock.invoke(biometricUnlockController, unlockMode);
+            if (intent.getBooleanExtra(EXTRA_BYPASS_KEYGUARD, true)) {
+                int unlockMode = intent.getIntExtra(EXTRA_UNLOCK_MODE, MODE_UNLOCK_FADING);
+                startWakeAndUnlock.invoke(biometricUnlockController, unlockMode);
+            }
         };
     }
 }

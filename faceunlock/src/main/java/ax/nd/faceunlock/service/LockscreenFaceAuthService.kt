@@ -207,10 +207,10 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         }
     }
 
-    private fun hide(delay: Boolean = false) {
+    private fun hide(delay: Int = 0) {
         if(active) {
             active = false
-            if(delay) {
+            if(delay > 0) {
                 // Delayed hide is animated
                 textViewAnimator = textView?.animate()
                     ?.alpha(0f)
@@ -220,7 +220,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
                         override fun onAnimationCancel(p0: Animator?) {}
                         override fun onAnimationRepeat(p0: Animator?) {}
                     })
-                    ?.setStartDelay(2000)
+                    ?.setStartDelay(delay.toLong())
                     ?.setDuration(300)
                 textViewAnimator?.start()
             } else {
@@ -228,7 +228,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             }
             controller?.stop()
         } else {
-            if(!delay) {
+            if(delay == 0) {
                 // If hide animation is running, skip it
                 textViewAnimator?.cancel()
             }
@@ -237,8 +237,9 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     // Should reset textview to the state it was in before animation started playing
     private fun onTextViewAnimationEnd() {
-        textViewAnimator = null
         removeTextViewFromWindowManager()
+        textViewAnimator?.cancel()
+        textViewAnimator = null
         textView?.alpha = 1f
     }
 
@@ -264,13 +265,18 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         }
         sendBroadcast(Intent(XposedConstants.ACTION_UNLOCK_DEVICE).apply {
             putExtra(XposedConstants.EXTRA_UNLOCK_MODE, unlockAnimation)
+            putExtra(XposedConstants.EXTRA_BYPASS_KEYGUARD, prefs.bypassKeyguard.get())
         })
+        handler?.post {
+            textView?.text = "Welcome!"
+            hide(delay = 1000)
+        }
     }
 
     override fun onError(errId: Int, message: String) {
         handler?.post {
             textView?.text = message
-            hide(delay = true)
+            hide(delay = 2000)
         }
     }
 

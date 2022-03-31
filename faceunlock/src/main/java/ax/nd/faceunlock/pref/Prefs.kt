@@ -12,4 +12,5 @@ class Prefs(context: Context) {
     val unlockAnimation = flowPrefs.getString(PrefKeys.UNLOCK_ANIMATION, "mode_unlock_fading")
     val earlyUnlockHook = flowPrefs.getBoolean(PrefKeys.EARLY_UNLOCK_HOOK, false)
     val requirePinOnBoot = flowPrefs.getBoolean(PrefKeys.REQUIRE_PIN_ON_BOOT, false)
+    val bypassKeyguard = flowPrefs.getBoolean(PrefKeys.BYPASS_KEYGUARD, true)
 }

@@ -5,12 +5,6 @@
         android:key="preload_face"
         android:summary="Keeps the program loaded in the background. Uses slightly more RAM (~20 MB) but speeds up recognition by 30%."
         android:title="Stay loaded in background" />
-    <ListPreference
-        android:entries="@array/unlock_animation"
-        android:entryValues="@array/unlock_animation_values"
-        android:key="unlock_animation"
-        android:defaultValue="mode_unlock_fading"
-        android:title="Unlock animation" />
     <SwitchPreference
         android:defaultValue="false"
         android:key="early_unlock_hook"
@@ -21,4 +15,16 @@
         android:key="require_pin_on_boot"
         android:summary="Do not allow using face unlock until the phone is unlocked at least once after boot. Only enable this if your device does not already automatically enforce this."
         android:title="Disable for first unlock" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="bypass_keyguard"
+        android:summary="Automatically dismiss lockscreen once authenticated with face"
+        android:title="Auto dismiss lockscreen" />
+    <ListPreference
+        android:defaultValue="mode_unlock_fading"
+        android:dependency="bypass_keyguard"
+        android:entries="@array/unlock_animation"
+        android:entryValues="@array/unlock_animation_values"
+        android:key="unlock_animation"
+        android:title="Lockscreen dismiss animation" />
 </PreferenceScreen>
