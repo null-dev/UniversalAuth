@@ -11,6 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        // https://git.svc.vepta.org/nulldev/xposedutil
+        maven { url 'https://git.svc.vepta.org/api/v4/projects/4/packages/maven' }
     }
 }
 rootProject.name = "Universal Auth"
