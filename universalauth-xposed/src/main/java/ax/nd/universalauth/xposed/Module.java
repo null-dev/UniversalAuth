@@ -4,12 +4,14 @@ import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_BYPASS_KEY
 import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_UNLOCK_MODE;
 import static ax.nd.universalauth.xposed.common.XposedConstants.MODE_UNLOCK_FADING;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
@@ -36,6 +38,8 @@ public class Module implements IXposedHookLoadPackage {
     // com.android.systemui.statusbar.StatusBarState.SHADE_LOCKED
     private static final int SHADE_LOCKED = 2;
 
+    private Method isUserInLockdownMethod;
+
     /**
      * This method is called when an app is loaded. It's called very early, even before
      * {@link Application#onCreate} is called.
@@ -48,6 +52,9 @@ public class Module implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         // Hook SystemUi
         if (Objects.equals(lpparam.packageName, "com.android.systemui")) {
+            Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
+            isUserInLockdownMethod = getIsUserInLockdownMethod(kumClazz);
+
             try {
                 // Hook com.android.systemui.statusbar.phone.StatusBar.start
                 Class<?> statusBarClass = lpparam.classLoader.loadClass(STATUS_BAR_CLASS);
@@ -66,7 +73,6 @@ public class Module implements IXposedHookLoadPackage {
                 }
             }
 
-            Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
             // Hook com.android.keyguard.KeyguardUpdateMonitor.updateFaceListeningState
             try {
                 addHookEarlyUnlock(kumClazz, lpparam);
@@ -98,6 +104,19 @@ public class Module implements IXposedHookLoadPackage {
         );
     }
 
+    private Method getIsUserInLockdownMethod(Class<?> kumClazz) {
+        try {
+            return asAccessible(kumClazz.getDeclaredMethod("isUserInLockdown", int.class));
+        } catch (NoSuchMethodException ignored) {
+            return null;
+        }
+    }
+
+    private boolean isUserInLockdown(Object kum) throws InvocationTargetException, IllegalAccessException {
+        return isUserInLockdownMethod != null
+                && (boolean) isUserInLockdownMethod.invoke(kum, Util.INSTANCE.getCurrentUser());
+    }
+
     private void addHookEarlyUnlock(Class<?> kumClazz, XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         Field mStatusBarStateControllerField = asAccessible(kumClazz.getDeclaredField("mStatusBarStateController"));
         Field mKeyguardIsVisibleField = asAccessible(kumClazz.getDeclaredField("mKeyguardIsVisible"));
@@ -112,6 +131,10 @@ public class Module implements IXposedHookLoadPackage {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 Object kum = param.thisObject;
+                if(isUserInLockdown(kum)) {
+                    return;
+                }
+
                 Object sbsc = mStatusBarStateControllerField.get(kum);
                 boolean mKeyguardIsVisible = mKeyguardIsVisibleField.getBoolean(kum);
                 boolean mDeviceInteractive = mDeviceInteractiveField.getBoolean(kum);
@@ -188,12 +211,15 @@ public class Module implements IXposedHookLoadPackage {
             systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
         }
         Context context = (Context) asAccessible(systemUiClass.getDeclaredField("mContext")).get(statusBar);
+        Object kum = asAccessible(statusBarClass.getDeclaredField("mKeyguardUpdateMonitor")).get(statusBar);
 
         UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
 
         UnlockReceiver.INSTANCE.setup(context, statusBar, intent -> {
             try {
-                method.unlock(intent);
+                if(!isUserInLockdown(kum)) {
+                    method.unlock(intent);
+                }
             } catch (Throwable throwable) {
                 throw new RuntimeException(throwable);
             }

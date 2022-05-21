@@ -14,13 +14,11 @@ object TrustHook {
             Int::class.javaPrimitiveType!!,
             Boolean::class.javaPrimitiveType!!
         ).asAccessible()
-        val activityManagerGetCurrentUser =
-            ActivityManager::class.java.getDeclaredMethod("getCurrentUser").asAccessible()
         XposedHelpersExt.runAfterClassConstructed(kumClazz) { param ->
             val context = contextField.get(param.thisObject) as Context
             UnlockReceiver.setup(context, param.thisObject) { intent ->
                 if (!intent.getBooleanExtra(EXTRA_BYPASS_KEYGUARD, true)) {
-                    val currentUser = activityManagerGetCurrentUser.invoke(null)
+                    val currentUser = Util.getCurrentUser()
                     onFaceAuthenticated.invoke(param.thisObject, currentUser, true)
                 }
             }
