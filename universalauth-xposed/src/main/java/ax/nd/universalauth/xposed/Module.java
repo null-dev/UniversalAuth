@@ -48,31 +48,23 @@ public class Module implements IXposedHookLoadPackage {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         // Hook SystemUi
         if (Objects.equals(lpparam.packageName, "com.android.systemui")) {
-            // Hook com.android.systemui.statusbar.phone.StatusBar.start
-            XposedHelpers.findAndHookMethod(
-                    STATUS_BAR_CLASS,
-                    lpparam.classLoader,
-                    "start",
-                    new XC_MethodHook() {
-                        /**
-                         * Called after the invocation of the method.
-                         *
-                         * <p>You can use {@link MethodHookParam#setResult} and {@link MethodHookParam#setThrowable}
-                         * to modify the return value of the original method.
-                         *
-                         * <p>Note that implementations shouldn't call {@code super(param)}, it's not necessary.
-                         *
-                         * @param param Information about the method call.
-                         * @throws Throwable Everything the callback throws is caught and logged.
-                         */
-                        @Override
-                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                            XposedBridge.log("FaceUnlock hook pre-install!");
-                            hookStatusBar(lpparam.classLoader, param);
-//                            XposedBridge.log("FaceUnlock hook installed!");
-                        }
-                    }
-            );
+            try {
+                // Hook com.android.systemui.statusbar.phone.StatusBar.start
+                Class<?> statusBarClass = lpparam.classLoader.loadClass(STATUS_BAR_CLASS);
+                hookStatusBar(lpparam, statusBarClass);
+            } catch(Throwable e) {
+                // Failed to hook status bar class, we are on Android 13 DP Beta 1+
+                // Try using another class
+                try {
+                    Class<?> statusBarClass = lpparam.classLoader.loadClass("com.android.systemui.statusbar.phone.CentralSurfaces");
+                    hookStatusBar(lpparam, statusBarClass);
+                } catch(Throwable e2) {
+                    XposedBridge.log("Failed to hook status bar! Initial attempt failed with:");
+                    XposedBridge.log(e);
+                    XposedBridge.log("We tried an alternative class but that failed too:");
+                    XposedBridge.log(e2);
+                }
+            }
 
             Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
             // Hook com.android.keyguard.KeyguardUpdateMonitor.updateFaceListeningState
@@ -89,6 +81,21 @@ public class Module implements IXposedHookLoadPackage {
                 XposedBridge.log(t);
             }
         }
+    }
+
+    private void hookStatusBar(XC_LoadPackage.LoadPackageParam lpparam, Class<?> statusBarClass) {
+        XposedHelpers.findAndHookMethod(
+                statusBarClass,
+                "start",
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                            XposedBridge.log("FaceUnlock hook pre-install!");
+                        hookStatusBar(statusBarClass, lpparam.classLoader, param);
+//                            XposedBridge.log("FaceUnlock hook installed!");
+                    }
+                }
+        );
     }
 
     private void addHookEarlyUnlock(Class<?> kumClazz, XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
@@ -160,9 +167,8 @@ public class Module implements IXposedHookLoadPackage {
         return stream.map(Object::toString).collect(Collectors.joining(",\n"));
     }
 
-    private void hookStatusBar(ClassLoader classLoader, XC_MethodHook.MethodHookParam param) throws Throwable {
+    private void hookStatusBar(Class<?> statusBarClass, ClassLoader classLoader, XC_MethodHook.MethodHookParam param) throws Throwable {
         Object statusBar = param.thisObject;
-        Class<?> statusBarClass = classLoader.loadClass(STATUS_BAR_CLASS);
         Class<?> systemUiClass;
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2) {
             // >= Android 13
