@@ -28,8 +28,9 @@ sealed interface CheckResult {
 }
 
 sealed interface DownloadStatus {
-    object Downloading : DownloadStatus
-    data class DownloadError(val error: Exception) : DownloadStatus
+    data class Downloading(val importing: Boolean) : DownloadStatus
+    object AskImport : DownloadStatus
+    data class DownloadError(val importing: Boolean, val error: Exception?) : DownloadStatus
 }
 
 class ChooseLibsViewModel : ViewModel() {
@@ -38,34 +39,54 @@ class ChooseLibsViewModel : ViewModel() {
     val downloadStatus = MutableStateFlow<DownloadStatus?>(null)
     private val okhttp = OkHttpClient()
 
-    fun downloadLibs(context: Context) {
-        if(downloadStatus.value != DownloadStatus.Downloading) {
-            downloadStatus.value = DownloadStatus.Downloading
+    fun downloadLibs(context: Context, uri: Uri?) {
+        if(downloadStatus.value !is DownloadStatus.Downloading) {
+            downloadStatus.value = DownloadStatus.Downloading(uri != null)
             viewModelScope.launch {
                 try {
-                    downloadLibsInternal(context)
-                    downloadStatus.value = null
+                    downloadLibsInternal(context, uri)
+                    downloadStatus.value = DownloadStatus.DownloadError(uri != null, null)
                 } catch (e: Exception) {
-                    downloadStatus.value = DownloadStatus.DownloadError(e)
+                    downloadStatus.value = DownloadStatus.DownloadError(uri != null, e)
                 }
             }
         }
     }
 
-    private suspend fun downloadLibsInternal(context: Context) {
+    private fun downloadApk(): InputStream {
         val url = "$IPFS_GATEWAY/ipfs/$LIBS_CID"
 
         val req = Request.Builder()
             .url(url)
             .build()
 
-        withContext(Dispatchers.IO) {
-            okhttp.newCall(req).execute().use { resp ->
-                val body = resp.body ?: run {
-                    throw IOException("Response body is null!")
-                }
+        val body = okhttp.newCall(req).execute().body ?: run {
+            throw IOException("Response body is null!")
+        }
 
-                val zin = ZipInputStream(body.byteStream().buffered())
+        try {
+            return body.byteStream()
+        } catch (e: Exception) {
+            body.close()
+            throw e
+        }
+    }
+
+    private fun openImportUri(context: Context, uri: Uri): InputStream {
+        return context.contentResolver.openInputStream(uri) ?: run {
+            throw NullPointerException("ContentProvider crashed!")
+        }
+    }
+
+    private suspend fun downloadLibsInternal(context: Context, uri: Uri?) {
+        withContext(Dispatchers.IO) {
+            val inputStream = if(uri != null) {
+                openImportUri(context, uri)
+            } else {
+                downloadApk()
+            }
+            inputStream.buffered().use { resp ->
+                val zin = ZipInputStream(resp)
                 while (true) {
                     val entry = zin.nextEntry ?: break
                     val name = entry.name
@@ -139,6 +160,18 @@ class ChooseLibsViewModel : ViewModel() {
                 LibManager.updateLibraryData(context)
             }
             clearCheckResult()
+        }
+    }
+
+    fun setAskImport() {
+        if(downloadStatus.value !is DownloadStatus.Downloading) {
+            downloadStatus.value = DownloadStatus.AskImport
+        }
+    }
+
+    fun clearDownloadResult() {
+        if(downloadStatus.value !is DownloadStatus.Downloading) {
+            downloadStatus.value = null
         }
     }
 

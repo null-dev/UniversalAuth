@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
     private lateinit var binding: ActivityMain2Binding
     private var removeFaceController: RemoveFaceController? = null
     private val chooseLibsViewModel: ChooseLibsViewModel by viewModels()
-    private var pickLibsLauncher: Map<String, ActivityResultLauncher<String>>? = null
+//    private var pickLibsLauncher: Map<String, ActivityResultLauncher<String>>? = null
+    private var pickApkLauncher: ActivityResultLauncher<String>? = null
     private var requestUnlockPermsLauncher: ActivityResultLauncher<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +42,16 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
             startActivity(Intent(this, FaceAuthActivity::class.java))
         }
 
-        pickLibsLauncher = LibManager.requiredLibraries.associate {
+        /*pickLibsLauncher = LibManager.requiredLibraries.associate {
             it.name to registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
                 if(uri != null)
                     chooseLibsViewModel.addLib(this, it, uri)
             }
+        }*/
+
+        pickApkLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if(uri != null)
+                chooseLibsViewModel.downloadLibs(this, uri)
         }
 
         requestUnlockPermsLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
@@ -165,7 +171,11 @@ class MainActivity : AppCompatActivity(), RemoveFaceControllerCallbacks {
         }
     }
 
-    fun browseForFiles(lib: RequiredLib) {
-        pickLibsLauncher?.get(lib.name)?.launch("*/*")
+//    fun browseForFiles(lib: RequiredLib) {
+//        pickLibsLauncher?.get(lib.name)?.launch("*/*")
+//    }
+
+    fun browseForFiles() {
+        pickApkLauncher?.launch("*/*")
     }
 }

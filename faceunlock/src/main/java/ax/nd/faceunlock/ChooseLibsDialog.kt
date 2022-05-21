@@ -133,7 +133,7 @@ class ChooseLibsDialog(private val activity: MainActivity, private val viewModel
         button.isEnabled = enabled
         button.text = "Browse"
         button.setOnClickListener {
-            activity.browseForFiles(lib)
+//            activity.browseForFiles(lib)
         }
         row.addView(button)
 
