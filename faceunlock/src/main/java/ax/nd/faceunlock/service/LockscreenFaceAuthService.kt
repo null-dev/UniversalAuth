@@ -50,7 +50,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     private var active: Boolean = false
     private var lockStateReceiver: BroadcastReceiver? = null
-    private var requirePinOnBootReceiver: BroadcastReceiver? = null
+    private var unlockReceiver: BroadcastReceiver? = null
     private var controller: FaceAuthServiceController? = null
     private var keyguardManager: KeyguardManager? = null
     private var displayManager: DisplayManager? = null
@@ -63,6 +63,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     private lateinit var prefs: Prefs
 
     private var showStatusText = true
+    private var booted = false
 
     override fun onCreate() {
         super.onCreate()
@@ -73,7 +74,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
         prefs = FaceApplication.getApp().prefs
 
-        controller = FaceAuthServiceController(this, this)
+        controller = FaceAuthServiceController(this, prefs, this)
 
         windowManager = getSystemService()
         keyguardManager = getSystemService()
@@ -85,12 +86,13 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         textView?.setShadowLayer(10f, 0f, 0f, Color.BLACK)
         textView?.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
         textView?.setPadding(0, 16.dpToPx.toInt(), 0, 0)
+        textView?.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
 
-        if(prefs.requirePinOnBoot.get()) {
-            setupRequirePinOnBootReceiver()
-        } else {
+        booted = !prefs.requirePinOnBoot.get()
+        if(booted) {
             reconfigureUnlockHook()
         }
+        setupUnlockReceiver()
 
         serviceScope.launch {
             prefs.showStatusText.asFlow().collect { showStatusText ->
@@ -99,30 +101,33 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         }
     }
 
-    private fun setupRequirePinOnBootReceiver() {
+    private fun setupUnlockReceiver() {
         val intentFilter = IntentFilter().apply {
             addAction(Intent.ACTION_USER_PRESENT)
         }
-        requirePinOnBootReceiver = object : BroadcastReceiver() {
+        unlockReceiver = object : BroadcastReceiver() {
             override fun onReceive(p0: Context?, p1: Intent?) {
-                unregisterRequirePinOnBootReceiver()
-                reconfigureUnlockHook()
+                if(!booted) {
+                    booted = true
+                    reconfigureUnlockHook()
+                }
+                prefs.failedUnlockAttempts.set(0)
             }
         }
-        registerReceiver(requirePinOnBootReceiver, intentFilter)
+        registerReceiver(unlockReceiver, intentFilter)
     }
 
-    private fun unregisterRequirePinOnBootReceiver() {
-        requirePinOnBootReceiver?.let {
+    private fun unregisterUnlockReceiver() {
+        unlockReceiver?.let {
             unregisterReceiver(it)
-            requirePinOnBootReceiver = null
+            unlockReceiver = null
         }
     }
 
     private fun reconfigureUnlockHook() {
         serviceScope.launch {
             prefs.earlyUnlockHook.asFlow().collect { earlyUnlock ->
-                unregisterUnlockReceiver()
+                unregisterLockStateReceiver()
                 if(earlyUnlock) {
                     registerEarlyUnlockReceiver()
                 } else {
@@ -163,7 +168,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         registerReceiver(lockStateReceiver, intentFilter)
     }
 
-    private fun unregisterUnlockReceiver() {
+    private fun unregisterLockStateReceiver() {
         lockStateReceiver?.let {
             unregisterReceiver(it)
             lockStateReceiver = null
@@ -184,8 +189,8 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     override fun onDestroy() {
         super.onDestroy()
 
+        unregisterLockStateReceiver()
         unregisterUnlockReceiver()
-        unregisterRequirePinOnBootReceiver()
         hide()
         serviceJob.cancel()
     }

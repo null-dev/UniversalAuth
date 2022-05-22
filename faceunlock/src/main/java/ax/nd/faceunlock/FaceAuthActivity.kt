@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ax.nd.faceunlock.pref.Prefs
 import ax.nd.faceunlock.service.FaceAuthServiceCallbacks
 import ax.nd.faceunlock.service.FaceAuthServiceController
 
 class FaceAuthActivity : AppCompatActivity(), FaceAuthServiceCallbacks {
     private var controller: FaceAuthServiceController? = null
+    private lateinit var prefs: Prefs
     private var startTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_face_auth)
-        controller = FaceAuthServiceController(this, this)
+        prefs = FaceApplication.getApp().prefs
+        controller = FaceAuthServiceController(this, prefs, this)
     }
 
 

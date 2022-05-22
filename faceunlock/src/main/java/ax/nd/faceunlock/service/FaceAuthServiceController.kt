@@ -7,17 +7,19 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
+import ax.nd.faceunlock.pref.Prefs
 import ax.nd.faceunlock.stub.biometrics.BiometricFaceConstants
 import ax.nd.faceunlock.stub.face.FaceManager
 import com.android.internal.util.custom.faceunlock.IFaceService
 import com.android.internal.util.custom.faceunlock.IFaceServiceReceiver
+import kotlinx.coroutines.runBlocking
 
 interface FaceAuthServiceCallbacks {
     fun onAuthed()
     fun onError(errId: Int, message: String)
 }
 
-class FaceAuthServiceController(private val context: Context, private val cb: FaceAuthServiceCallbacks) {
+class FaceAuthServiceController(private val context: Context, private val prefs: Prefs, private val cb: FaceAuthServiceCallbacks) {
     private var serviceBound = false
     private val authCallback = object : IFaceServiceReceiver.Stub() {
         @Throws(RemoteException::class)
@@ -30,9 +32,14 @@ class FaceAuthServiceController(private val context: Context, private val cb: Fa
         override fun onAuthenticated(faceId: Int, userId: Int, token: ByteArray?) {
             if(userId == -1) {
                 // onAuthenticated can still be called if the request times out
+                // Commit this synchronously for security
+                runBlocking {
+                    prefs.failedUnlockAttempts.setAndCommit(prefs.failedUnlockAttempts.get() + 1)
+                }
                 onError(BiometricFaceConstants.FACE_ERROR_TIMEOUT, 0)
             } else {
                 Log.d(TAG, "Authentication OK: $faceId, $userId")
+                prefs.failedUnlockAttempts.set(0)
                 stopInternal(cancel = false)
                 cb.onAuthed()
             }
@@ -82,6 +89,10 @@ class FaceAuthServiceController(private val context: Context, private val cb: Fa
     }
 
     fun start() {
+        if(prefs.failedUnlockAttempts.get() >= 5) {
+            authCallback.onError(BiometricFaceConstants.FACE_ERROR_LOCKOUT_PERMANENT, 0)
+            return
+        }
         if(!serviceBound) {
             serviceBound = true
             context.bindService(

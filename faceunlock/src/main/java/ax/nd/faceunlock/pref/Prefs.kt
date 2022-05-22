@@ -14,4 +14,5 @@ class Prefs(context: Context) {
     val requirePinOnBoot = flowPrefs.getBoolean(PrefKeys.REQUIRE_PIN_ON_BOOT, false)
     val bypassKeyguard = flowPrefs.getBoolean(PrefKeys.BYPASS_KEYGUARD, true)
     val showStatusText = flowPrefs.getBoolean(PrefKeys.SHOW_STATUS_TEXT, true)
+    val failedUnlockAttempts = flowPrefs.getInt(PrefKeys.FAILED_UNLOCK_ATTEMPTS, 0)
 }
