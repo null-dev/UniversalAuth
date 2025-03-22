@@ -2,6 +2,7 @@ package ax.nd.universalauth.xposed
 
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.RECEIVER_EXPORTED
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
@@ -28,7 +29,7 @@ object UnlockReceiver {
         // Register broadcastReceiver for IPC
         // TODO Handle multiple users
         val intentFilter = IntentFilter(ACTION_UNLOCK_DEVICE)
-        context.registerReceiver(unlockReceiver, intentFilter, PERMISSION_UNLOCK_DEVICE, null)
+        context.registerReceiver(unlockReceiver, intentFilter, PERMISSION_UNLOCK_DEVICE, null, RECEIVER_EXPORTED)
 
         XposedHelpers.setAdditionalInstanceField(attachTo, ATTACH_KEY, unlockReceiver)
 

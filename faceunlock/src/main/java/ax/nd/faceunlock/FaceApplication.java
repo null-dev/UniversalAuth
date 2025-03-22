@@ -59,7 +59,7 @@ public class FaceApplication extends Application {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
         intentFilter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
-        registerReceiver(mReceiver, intentFilter, null, null);
+        registerReceiver(mReceiver, intentFilter, null, null, RECEIVER_EXPORTED);
         getPackageManager().setComponentEnabledSetting(new ComponentName(this, SetupFaceIntroActivity.class),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);

@@ -239,7 +239,7 @@ class ChooseLibsViewModel : ViewModel() {
     companion object {
         private val TAG = ChooseLibsViewModel::class.simpleName
 
-        private const val IPFS_GATEWAY = "https://cloudflare-ipfs.com"
+        private const val IPFS_GATEWAY = "https://ipfs.io/ipfs/"
         private const val LIBS_CID = "QmQNREjjXTQBDpd69gFqEreNi1dV91eSGQByqi5nXU3rBt"
     }
 }

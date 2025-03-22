@@ -276,7 +276,7 @@ public class FaceAuthService extends Service {
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
         intentFilter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
-        registerReceiver(mReceiver, intentFilter);
+        registerReceiver(mReceiver, intentFilter, RECEIVER_EXPORTED);
         if (Util.DEBUG) {
             Log.d(TAG, "OnCreate end");
         }
