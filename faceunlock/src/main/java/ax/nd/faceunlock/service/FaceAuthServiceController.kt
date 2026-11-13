@@ -32,9 +32,12 @@ class FaceAuthServiceController(private val context: Context, private val prefs:
         override fun onAuthenticated(faceId: Int, userId: Int, token: ByteArray?) {
             if(userId == -1) {
                 // onAuthenticated can still be called if the request times out
-                // Commit this synchronously for security
-                runBlocking {
-                    prefs.failedUnlockAttempts.setAndCommit(prefs.failedUnlockAttempts.get() + 1)
+                // Commit this synchronously for security.
+                // Only a seen-but-unmatched face counts: glancing at the clock must not burn attempts.
+                if (faceId == 1) {
+                    runBlocking {
+                        prefs.failedUnlockAttempts.setAndCommit(prefs.failedUnlockAttempts.get() + 1)
+                    }
                 }
                 onError(BiometricFaceConstants.FACE_ERROR_TIMEOUT, 0)
             } else {
