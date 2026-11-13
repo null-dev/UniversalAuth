@@ -1,251 +1,311 @@
 package ax.nd.universalauth.xposed;
 
+import static ax.nd.universalauth.xposed.common.XposedConstants.ACTION_UNLOCK_DEVICE;
 import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_BYPASS_KEYGUARD;
-import static ax.nd.universalauth.xposed.common.XposedConstants.EXTRA_UNLOCK_MODE;
-import static ax.nd.universalauth.xposed.common.XposedConstants.MODE_UNLOCK_FADING;
+import static ax.nd.universalauth.xposed.common.XposedConstants.PERMISSION_UNLOCK_DEVICE;
 
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
+import android.util.Log;
+import android.util.SparseLongArray;
 
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import ax.nd.universalauth.xposed.common.XposedConstants;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
-import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import kotlin.Unit;
 
+/**
+ * Android 14+ SystemUI: face unlock state lives in DeviceEntryFaceAuthInteractor, which never
+ * sees our software sensor. So we report the auth through KeyguardUpdateMonitor.onFaceAuthenticated
+ * (drives BiometricUnlockController and TrustManager like a real face HAL would) and answer the
+ * "is the user unlocked with biometric" queries ourselves until the screen turns off or the
+ * keyguard goes away.
+ */
 public class Module implements IXposedHookLoadPackage {
-    private static final String TAG = "XposedUniversalAuth";
-    private static final String STATUS_BAR_CLASS = "com.android.systemui.statusbar.phone.StatusBar";
-    private static final String SYSTEM_UI_CLASS = "com.android.systemui.SystemUI";
-    private static final String CORE_STARTABLE_CLASS = "com.android.systemui.CoreStartable";
-    private static final String KEYGUARD_UPDATE_MONITOR_CLASS = "com.android.keyguard.KeyguardUpdateMonitor";
-    private static final String STATUS_BAR_STATE_CONTROLLER_CLASS = "com.android.systemui.plugins.statusbar.StatusBarStateController";
-    private static final String KEYGUARD_UPDATE_MONITOR_LAST_MODE = "ax.nd.universalauth.last-mode";
+    private static final String TAG = "UniversalAuth: ";
+    private static final String LOG_TAG = "UniversalAuth";
+    private static final String KUM_CLASS = "com.android.keyguard.KeyguardUpdateMonitor";
+    private static final String BYPASS_CONTROLLER_CLASS =
+            "com.android.systemui.statusbar.phone.KeyguardBypassController";
+    private static final String KEYGUARD_STATE_CONTROLLER_CLASS =
+            "com.android.systemui.statusbar.policy.KeyguardStateControllerImpl";
 
-    // com.android.systemui.statusbar.StatusBarState.SHADE_LOCKED
-    private static final int SHADE_LOCKED = 2;
+    // Upper bound for swipe-to-open after a face match; normally cleared much earlier on sleep
+    private static final long FACE_UNLOCK_VALID_MS = 60_000;
 
-    private Method isUserInLockdownMethod;
+    // Context.RECEIVER_EXPORTED / RECEIVER_NOT_EXPORTED, inlined: compileSdk predates them
+    private static final int RECEIVER_EXPORTED = 0x2;
+    private static final int RECEIVER_NOT_EXPORTED = 0x4;
 
-    /**
-     * This method is called when an app is loaded. It's called very early, even before
-     * {@link Application#onCreate} is called.
-     * Modules can set up their app-specific hooks here.
-     *
-     * @param lpparam Information about the app.
-     * @throws Throwable Everything the callback throws is caught and logged.
-     */
+    // user -> elapsedRealtime deadline. Touched only on the SystemUI main thread.
+    private final SparseLongArray faceUnlockedUntil = new SparseLongArray();
+    // Created lazily: the module is instantiated before the process has a main Looper
+    private Handler mainHandler;
+    private final Runnable expire = () -> clearFaceUnlock("expired");
+    private boolean forceBypass;
+    private Object kum;
+    // KeyguardStateController caches canDismissLockScreen; it must be recomputed after we revoke
+    private Object keyguardStateController;
+    private Method keyguardStateUpdate;
+
+    private Method onFaceAuthenticated;
+    private Method isUserInLockdown;
+    private Method isUnlockingWithBiometricAllowed;
+    private Method getCurrentUser;
+
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        // Hook SystemUi
-        if (Objects.equals(lpparam.packageName, "com.android.systemui")) {
-            Class<?> kumClazz = lpparam.classLoader.loadClass(KEYGUARD_UPDATE_MONITOR_CLASS);
-            isUserInLockdownMethod = getIsUserInLockdownMethod(kumClazz);
+        if (!"com.android.systemui".equals(lpparam.packageName)) {
+            return;
+        }
+        ClassLoader cl = lpparam.classLoader;
+        Class<?> kumClass = cl.loadClass(KUM_CLASS);
 
-            try {
-                // Hook com.android.systemui.statusbar.phone.StatusBar.start
-                Class<?> statusBarClass = lpparam.classLoader.loadClass(STATUS_BAR_CLASS);
-                hookStatusBar(lpparam, statusBarClass);
-            } catch(Throwable e) {
-                // Failed to hook status bar class, we are on Android 13 DP Beta 1+
-                // Try using another class
-                try {
-                    Class<?> statusBarClass = lpparam.classLoader.loadClass("com.android.systemui.statusbar.phone.CentralSurfaces");
-                    hookStatusBar(lpparam, statusBarClass);
-                } catch(Throwable e2) {
-                    XposedBridge.log("Failed to hook status bar! Initial attempt failed with:");
-                    XposedBridge.log(e);
-                    XposedBridge.log("We tried an alternative class but that failed too:");
-                    XposedBridge.log(e2);
+        getCurrentUser = accessible(ActivityManager.class.getDeclaredMethod("getCurrentUser"));
+        onFaceAuthenticated = accessible(
+                kumClass.getDeclaredMethod("onFaceAuthenticated", int.class, boolean.class));
+        isUserInLockdown = optionalMethod(kumClass, "isUserInLockdown", int.class);
+        isUnlockingWithBiometricAllowed =
+                optionalMethod(kumClass, "isUnlockingWithBiometricAllowed", boolean.class);
+
+        XposedBridge.hookAllConstructors(kumClass, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                onKumCreated(param.thisObject);
+            }
+        });
+
+        try {
+            Class<?> kscClass = cl.loadClass(KEYGUARD_STATE_CONTROLLER_CLASS);
+            keyguardStateUpdate = optionalMethod(kscClass, "update", boolean.class);
+            XposedBridge.hookAllConstructors(kscClass, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    keyguardStateController = param.thisObject;
+                }
+            });
+        } catch (Throwable t) {
+            log("KeyguardStateController not found", t);
+        }
+
+        // SCREEN_OFF arrives after keyguard already re-evaluated dismissibility, so revoke synchronously
+        XC_MethodHook revokeOnSleep = new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) {
+                clearFaceUnlock("going to sleep");
+            }
+        };
+        hookOptional(kumClass, "dispatchStartedGoingToSleep", revokeOnSleep, int.class);
+        hookOptional(kumClass, "handleStartedGoingToSleep", revokeOnSleep, int.class);
+
+        // R8 may inline some of these into their callers, so hook every level we can find
+        XC_MethodHook unlockedForUser = new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                if (!Boolean.TRUE.equals(param.getResult()) && isFaceUnlocked((int) param.args[0])) {
+                    param.setResult(true);
                 }
             }
+        };
+        hookOptional(kumClass, "getUserCanSkipBouncer", unlockedForUser, int.class);
+        hookOptional(kumClass, "getUserUnlockedWithBiometric", unlockedForUser, int.class);
+        hookOptional(kumClass, "isCurrentUserUnlockedWithFace", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) {
+                if (!Boolean.TRUE.equals(param.getResult()) && isFaceUnlocked(currentUser())) {
+                    param.setResult(true);
+                }
+            }
+        });
 
-            // Hook com.android.keyguard.KeyguardUpdateMonitor.updateFaceListeningState
-            try {
-                addHookEarlyUnlock(kumClazz, lpparam);
-            } catch (Throwable t) {
-                XposedBridge.log("Failed to hook early unlock, early unlock hook will not work:");
-                XposedBridge.log(t);
-            }
-            try {
-                TrustHook.INSTANCE.hookKum(kumClazz);
-            } catch (Throwable t) {
-                XposedBridge.log("Failed to hook trust hook, trust hook will not work:");
-                XposedBridge.log(t);
-            }
+        try {
+            Class<?> bypassClass = cl.loadClass(BYPASS_CONTROLLER_CLASS);
+            hookOptional(bypassClass, "getBypassEnabled", new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) {
+                    if (forceBypass) {
+                        param.setResult(true);
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            log("bypass controller not found, \"bypass keyguard\" will behave like swipe-to-open", t);
         }
     }
 
-    private void hookStatusBar(XC_LoadPackage.LoadPackageParam lpparam, Class<?> statusBarClass) {
-        XposedHelpers.findAndHookMethod(
-                statusBarClass,
-                "start",
-                new XC_MethodHook() {
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                            XposedBridge.log("FaceUnlock hook pre-install!");
-                        hookStatusBar(statusBarClass, lpparam.classLoader, param);
-//                            XposedBridge.log("FaceUnlock hook installed!");
-                    }
+    private void onKumCreated(Object kum) throws Throwable {
+        if (this.kum != null) {
+            return;
+        }
+        this.kum = kum;
+        mainHandler = new Handler(Looper.getMainLooper());
+        Context context = (Context) findField(kum.getClass(), "mContext").get(kum);
+
+        BroadcastReceiver unlockReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context c, Intent intent) {
+                try {
+                    unlock(intent.getBooleanExtra(EXTRA_BYPASS_KEYGUARD, true));
+                } catch (Throwable t) {
+                    log("unlock failed", t);
                 }
-        );
+            }
+        };
+        // Exported: the sender is the face unlock app; guarded by the signature permission
+        context.registerReceiver(unlockReceiver, new IntentFilter(ACTION_UNLOCK_DEVICE),
+                PERMISSION_UNLOCK_DEVICE, null, receiverFlags(RECEIVER_EXPORTED));
+
+        BroadcastReceiver resetReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context c, Intent intent) {
+                clearFaceUnlock(intent.getAction());
+            }
+        };
+        IntentFilter resetFilter = new IntentFilter();
+        resetFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        resetFilter.addAction(Intent.ACTION_USER_PRESENT);
+        resetFilter.addAction("android.intent.action.USER_SWITCHED"); // @hide in the SDK
+        context.registerReceiver(resetReceiver, resetFilter, null, null,
+                receiverFlags(RECEIVER_NOT_EXPORTED));
+
+        XposedBridge.log(TAG + "hooked KeyguardUpdateMonitor");
     }
 
-    private Method getIsUserInLockdownMethod(Class<?> kumClazz) {
+    private void unlock(boolean bypassKeyguard) throws Throwable {
+        int user = currentUser();
+        boolean lockedDown = isLockedDown(user);
+        boolean allowed = biometricAllowed();
+        Log.i(LOG_TAG, "unlock request: user=" + user + " bypass=" + bypassKeyguard
+                + " lockdown=" + lockedDown + " biometricAllowed=" + allowed);
+        if (lockedDown || !allowed) {
+            // Lockdown, fresh boot or strong-auth timeout: the bouncer must win
+            return;
+        }
+        if (keyguardStateController == null || keyguardStateUpdate == null) {
+            // Fail closed: without a way to revoke, a granted unlock would outlive the screen
+            Log.w(LOG_TAG, "cannot refresh KeyguardStateController, refusing to unlock");
+            return;
+        }
+        faceUnlockedUntil.put(user, SystemClock.elapsedRealtime() + FACE_UNLOCK_VALID_MS);
+        mainHandler.removeCallbacks(expire);
+        mainHandler.postDelayed(expire, FACE_UNLOCK_VALID_MS);
+        forceBypass = bypassKeyguard;
         try {
-            return asAccessible(kumClazz.getDeclaredMethod("isUserInLockdown", int.class));
-        } catch (NoSuchMethodException ignored) {
+            onFaceAuthenticated.invoke(kum, user, false);
+        } finally {
+            forceBypass = false;
+        }
+        Log.i(LOG_TAG, "face auth reported, canSkipBouncer=" + isFaceUnlocked(user));
+    }
+
+    private boolean isFaceUnlocked(int user) {
+        try {
+            return faceUnlockedUntil.get(user, 0) > SystemClock.elapsedRealtime()
+                    && !isLockedDown(user) && biometricAllowed();
+        } catch (Throwable t) {
+            log("state check failed", t);
+            return false;
+        }
+    }
+
+    private void clearFaceUnlock(String reason) {
+        if (mainHandler == null) {
+            return;
+        }
+        mainHandler.removeCallbacks(expire);
+        if (faceUnlockedUntil.size() == 0) {
+            return;
+        }
+        faceUnlockedUntil.clear();
+        Log.i(LOG_TAG, "face unlock revoked: " + reason);
+        try {
+            keyguardStateUpdate.invoke(keyguardStateController, true);
+        } catch (Throwable t) {
+            log("KeyguardStateController refresh failed", t);
+        }
+        try {
+            // onFaceAuthenticated also marked the user in TrustManagerService (isDeviceLocked, keystore)
+            Object trustManager = findField(kum.getClass(), "mTrustManager").get(kum);
+            // BiometricSourceType is @hide in the SDK
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            Class<Enum> sourceType = (Class<Enum>) Class.forName(
+                    "android.hardware.biometrics.BiometricSourceType");
+            trustManager.getClass()
+                    .getMethod("clearAllBiometricRecognized", sourceType, int.class)
+                    .invoke(trustManager, Enum.valueOf(sourceType, "FACE"), -1);
+        } catch (Throwable t) {
+            log("TrustManager biometric reset failed", t);
+        }
+    }
+
+    private boolean isLockedDown(int user) throws Throwable {
+        return isUserInLockdown != null && (boolean) isUserInLockdown.invoke(kum, user);
+    }
+
+    private boolean biometricAllowed() throws Throwable {
+        return isUnlockingWithBiometricAllowed == null
+                || (boolean) isUnlockingWithBiometricAllowed.invoke(kum, false);
+    }
+
+    private int currentUser() {
+        try {
+            return (int) getCurrentUser.invoke(null);
+        } catch (Throwable t) {
+            return 0;
+        }
+    }
+
+    private static int receiverFlags(int flag) {
+        return Build.VERSION.SDK_INT >= 33 ? flag : 0;
+    }
+
+    private static void hookOptional(Class<?> clazz, String name, XC_MethodHook hook,
+                                     Class<?>... params) {
+        Method m = optionalMethod(clazz, name, params);
+        if (m == null) {
+            XposedBridge.log(TAG + clazz.getSimpleName() + "." + name + " not found, skipped");
+            return;
+        }
+        XposedBridge.hookMethod(m, hook);
+    }
+
+    private static Method optionalMethod(Class<?> clazz, String name, Class<?>... params) {
+        try {
+            return accessible(clazz.getDeclaredMethod(name, params));
+        } catch (NoSuchMethodException e) {
             return null;
         }
     }
 
-    private boolean isUserInLockdown(Object kum) throws InvocationTargetException, IllegalAccessException {
-        return isUserInLockdownMethod != null
-                && (boolean) isUserInLockdownMethod.invoke(kum, Util.INSTANCE.getCurrentUser());
-    }
-
-    private void addHookEarlyUnlock(Class<?> kumClazz, XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        Field mStatusBarStateControllerField = asAccessible(kumClazz.getDeclaredField("mStatusBarStateController"));
-        Field mKeyguardIsVisibleField = asAccessible(kumClazz.getDeclaredField("mKeyguardIsVisible"));
-        Field mDeviceInteractiveField = asAccessible(kumClazz.getDeclaredField("mDeviceInteractive"));
-        Field mGoingToSleepField = asAccessible(kumClazz.getDeclaredField("mGoingToSleep"));
-        Field mContextField = asAccessible(kumClazz.getDeclaredField("mContext"));
-
-        Class<?> sbscClazz = lpparam.classLoader.loadClass(STATUS_BAR_STATE_CONTROLLER_CLASS);
-        Method getStateMethod = asAccessible(sbscClazz.getDeclaredMethod("getState"));
-
-        XC_MethodHook hook = new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                Object kum = param.thisObject;
-                if(isUserInLockdown(kum)) {
-                    return;
-                }
-
-                Object sbsc = mStatusBarStateControllerField.get(kum);
-                boolean mKeyguardIsVisible = mKeyguardIsVisibleField.getBoolean(kum);
-                boolean mDeviceInteractive = mDeviceInteractiveField.getBoolean(kum);
-                boolean mGoingToSleep = mGoingToSleepField.getBoolean(kum);
-                int sbscState = (int) getStateMethod.invoke(sbsc);
-
-                // From: com.android.keyguard.KeyguardUpdateMonitor.shouldListenForFace
-                final boolean statusBarShadeLocked = sbscState == SHADE_LOCKED;
-                final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep
-                        && !statusBarShadeLocked;
-
-                Object prevAwakeKeyguard = XposedHelpers.setAdditionalInstanceField(kum, KEYGUARD_UPDATE_MONITOR_LAST_MODE, awakeKeyguard);
-
-                if (!Objects.equals(prevAwakeKeyguard, awakeKeyguard)) {
-                    Context mContext = (Context) mContextField.get(kum);
-                    hookEarlyUnlock(mContext, awakeKeyguard);
-                }
+    private static Field findField(Class<?> clazz, String name) throws NoSuchFieldException {
+        for (Class<?> c = clazz; c != null; c = c.getSuperclass()) {
+            try {
+                Field f = c.getDeclaredField(name);
+                f.setAccessible(true);
+                return f;
+            } catch (NoSuchFieldException ignored) {
             }
-        };
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2) {
-            // Android 12L+
-            XposedHelpers.findAndHookMethod(
-                    kumClazz,
-                    "updateFaceListeningState",
-                    int.class,
-                    hook
-            );
-        } else {
-            XposedHelpers.findAndHookMethod(
-                    kumClazz,
-                    "updateFaceListeningState",
-                    hook
-            );
         }
+        throw new NoSuchFieldException(name);
     }
 
-    private void hookEarlyUnlock(Context context, boolean newAwakeKeyguard) throws Throwable {
-        context.sendBroadcast(new Intent(XposedConstants.ACTION_EARLY_UNLOCK)
-                .putExtra(XposedConstants.EXTRA_EARLY_UNLOCK_MODE, newAwakeKeyguard));
-    }
-
-    private <T extends AccessibleObject> T asAccessible(T a) {
+    private static <T extends java.lang.reflect.AccessibleObject> T accessible(T a) {
         a.setAccessible(true);
         return a;
     }
 
-    private String dumpArray(Object[] obj) {
-        return dumpStream(Arrays.stream(obj));
-    }
-
-    private String dumpStream(Stream<Object> stream) {
-        return stream.map(Object::toString).collect(Collectors.joining(",\n"));
-    }
-
-    private void hookStatusBar(Class<?> statusBarClass, ClassLoader classLoader, XC_MethodHook.MethodHookParam param) throws Throwable {
-        Object statusBar = param.thisObject;
-        Class<?> systemUiClass;
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2) {
-            // >= Android 13
-            systemUiClass = classLoader.loadClass(CORE_STARTABLE_CLASS);
-        } else if(Build.VERSION.SDK_INT == Build.VERSION_CODES.S_V2) {
-            // == Android 12L
-            try {
-                // Try loading SystemUI class for Android 12L
-                systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
-            } catch (ClassNotFoundException ex) {
-                // We are on Android 13 DP (same API level as 12L: https://issuetracker.google.com/issues/36973990#comment2)
-                // Load Android 13 class
-                systemUiClass = classLoader.loadClass(CORE_STARTABLE_CLASS);
-            }
-        } else {
-            // <= Android 12
-            systemUiClass = classLoader.loadClass(SYSTEM_UI_CLASS);
-        }
-        Context context = (Context) asAccessible(systemUiClass.getDeclaredField("mContext")).get(statusBar);
-        Object kum = asAccessible(statusBarClass.getDeclaredField("mKeyguardUpdateMonitor")).get(statusBar);
-
-        UnlockMethod method = hookStatusBarBiometricUnlock(statusBar, statusBarClass);
-
-        UnlockReceiver.INSTANCE.setup(context, statusBar, intent -> {
-            try {
-                if(!isUserInLockdown(kum)) {
-                    method.unlock(intent);
-                }
-            } catch (Throwable throwable) {
-                throw new RuntimeException(throwable);
-            }
-            return Unit.INSTANCE;
-        });
-    }
-
-    public interface UnlockMethod {
-        void unlock(Intent t) throws Throwable;
-    }
-
-    private Object getBiometricUnlockControllerFromStatusBar(Object statusBar, Class<?> statusBarClass) throws NoSuchFieldException, IllegalAccessException {
-        return asAccessible(statusBarClass.getDeclaredField("mBiometricUnlockController")).get(statusBar);
-    }
-
-    private UnlockMethod hookStatusBarBiometricUnlock(Object statusBar, Class<?> statusBarClass) throws Throwable {
-        Object biometricUnlockController = getBiometricUnlockControllerFromStatusBar(statusBar, statusBarClass);
-        Method startWakeAndUnlock = asAccessible(biometricUnlockController
-                .getClass()
-                .getDeclaredMethod("startWakeAndUnlock", int.class));
-
-        return intent -> {
-            if (intent.getBooleanExtra(EXTRA_BYPASS_KEYGUARD, true)) {
-                int unlockMode = intent.getIntExtra(EXTRA_UNLOCK_MODE, MODE_UNLOCK_FADING);
-                startWakeAndUnlock.invoke(biometricUnlockController, unlockMode);
-            }
-        };
+    private static void log(String msg, Throwable t) {
+        XposedBridge.log(TAG + msg);
+        XposedBridge.log(t);
     }
 }

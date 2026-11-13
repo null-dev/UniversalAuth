@@ -24,6 +24,7 @@ import androidx.core.content.getSystemService
 import ax.nd.faceunlock.FaceApplication
 import ax.nd.faceunlock.LibManager
 import ax.nd.faceunlock.pref.Prefs
+import ax.nd.faceunlock.stub.biometrics.BiometricFaceConstants
 import ax.nd.faceunlock.util.Util
 import ax.nd.faceunlock.util.dpToPx
 import ax.nd.universalauth.xposed.common.XposedConstants
@@ -64,6 +65,21 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     private var showStatusText = true
     private var booted = false
+
+    // One "session" per screen-on on the lockscreen: retry until the deadline, stop after success
+    private var sessionDeadline = 0L
+    private var sessionDone = false
+
+    // SCREEN_ON can arrive before the panel reports STATE_ON; the listener catches the real transition
+    private val displayListener = object : DisplayManager.DisplayListener {
+        override fun onDisplayAdded(displayId: Int) {}
+        override fun onDisplayRemoved(displayId: Int) {}
+        override fun onDisplayChanged(displayId: Int) {
+            if (displayId == Display.DEFAULT_DISPLAY) {
+                doubleCheckLockscreenState()
+            }
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -149,6 +165,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             }
         }
         registerReceiver(lockStateReceiver, intentFilter)
+        displayManager?.registerDisplayListener(displayListener, handler)
     }
 
     private fun registerEarlyUnlockReceiver() {
@@ -169,6 +186,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
     }
 
     private fun unregisterLockStateReceiver() {
+        displayManager?.unregisterDisplayListener(displayListener)
         lockStateReceiver?.let {
             unregisterReceiver(it)
             lockStateReceiver = null
@@ -200,8 +218,12 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
         val mainDisplayOn = displayManager?.getDisplay(Display.DEFAULT_DISPLAY)?.state == Display.STATE_ON
 
         if(mainDisplayOn && keyguardManager?.isKeyguardLocked == true) {
-            show()
+            if (!sessionDone) {
+                show()
+            }
         } else {
+            sessionDone = false
+            sessionDeadline = 0L
             hide()
         }
     }
@@ -217,6 +239,9 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
                     windowManager?.addView(textView, params)
                 }
                 startTime = System.currentTimeMillis()
+                if (sessionDeadline == 0L) {
+                    sessionDeadline = startTime + RETRY_WINDOW_MS
+                }
                 controller?.start()
             }
         }
@@ -287,6 +312,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
             putExtra(XposedConstants.EXTRA_BYPASS_KEYGUARD, prefs.bypassKeyguard.get())
         })
         handler?.post {
+            sessionDone = true
             textView?.text = "Welcome!"
             hide(delay = 1000)
         }
@@ -294,6 +320,18 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     override fun onError(errId: Int, message: String) {
         handler?.post {
+            val lockedOut = errId == BiometricFaceConstants.FACE_ERROR_LOCKOUT
+                    || errId == BiometricFaceConstants.FACE_ERROR_LOCKOUT_PERMANENT
+            if (!lockedOut && active && System.currentTimeMillis() < sessionDeadline) {
+                // Still on the lockscreen: a 3 s window per screen-on is too short for a late glance
+                handler?.postDelayed({
+                    if (active) {
+                        controller?.start()
+                    }
+                }, RETRY_DELAY_MS)
+                return@post
+            }
+            sessionDone = true
             textView?.text = message
             hide(delay = 2000)
         }
@@ -301,5 +339,7 @@ class LockscreenFaceAuthService : AccessibilityService(), FaceAuthServiceCallbac
 
     companion object {
         private val TAG = LockscreenFaceAuthService::class.simpleName
+        private const val RETRY_WINDOW_MS = 15_000L
+        private const val RETRY_DELAY_MS = 300L
     }
 }

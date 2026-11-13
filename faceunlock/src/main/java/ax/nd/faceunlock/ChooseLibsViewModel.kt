@@ -53,14 +53,18 @@ class ChooseLibsViewModel : ViewModel() {
         }
     }
 
-    private fun downloadApk(): InputStream {
-        val url = "$IPFS_GATEWAY/ipfs/$LIBS_CID"
-
+    private fun openUrl(url: String): InputStream {
         val req = Request.Builder()
             .url(url)
             .build()
 
-        val body = okhttp.newCall(req).execute().body ?: run {
+        val resp = okhttp.newCall(req).execute()
+        if (!resp.isSuccessful) {
+            resp.close()
+            throw IOException("HTTP ${resp.code} for $url")
+        }
+        val body = resp.body ?: run {
+            resp.close()
             throw IOException("Response body is null!")
         }
 
@@ -80,12 +84,13 @@ class ChooseLibsViewModel : ViewModel() {
 
     private suspend fun downloadLibsInternal(context: Context, uri: Uri?) {
         withContext(Dispatchers.IO) {
-            val inputStream = if(uri != null) {
-                openImportUri(context, uri)
-            } else {
-                downloadApk()
+            if (uri == null) {
+                for (lib in LibManager.requiredLibraries) {
+                    openUrl("$LIBS_BASE_URL/${lib.name}").buffered().use { saveLib(context, lib, it) }
+                }
+                return@withContext
             }
-            inputStream.buffered().use { resp ->
+            openImportUri(context, uri).buffered().use { resp ->
                 val zin = ZipInputStream(resp)
                 while (true) {
                     val entry = zin.nextEntry ?: break
@@ -95,42 +100,45 @@ class ChooseLibsViewModel : ViewModel() {
                     }
                     val fname = name.substringAfterLast('/')
                     val lib = LibManager.requiredLibraries.find { it.name == fname } ?: continue
-
-                    val digest = try {
-                        MessageDigest.getInstance(LibManager.HASH_TYPE)
-                    } catch (e: NoSuchAlgorithmException) {
-                        throw IOException("Missing hash type: ${LibManager.HASH_TYPE}", e)
-                    }
-
-                    val outFile = LibManager.getLibFile(context, lib, temp = true)
-                    outFile.parentFile?.mkdirs()
-                    DigestOutputStream(outFile.outputStream().buffered(), digest).use { ostream ->
-                        zin.copyTo(ostream)
-                    }
-
-                    val hash = digest.digest()
-                    val hex = Hex.encodeHexString(hash, true)
-
-                    val targetHash = lib.hashForCurrentAbi() ?: run {
-                        throw UnsupportedOperationException("This app cannot run on your device: unsupported ABI!")
-                    }
-
-                    if(hex == targetHash) {
-                        val realFile = LibManager.getLibFile(context, lib)
-                        realFile.parentFile?.mkdirs()
-                        if(!outFile.renameTo(realFile)) {
-                            throw IOException("Failed to rename temp file!")
-                        }
-                        LibManager.updateLibraryData(context)
-                        if(LibManager.libsLoaded.get()) {
-                            break
-                        }
-                    } else {
-                        throw IOException("Hash mismatch, maybe the download got corrupted?")
+                    if (saveLib(context, lib, zin)) {
+                        break
                     }
                 }
             }
         }
+    }
+
+    /** @return true when all required libraries are in place */
+    private fun saveLib(context: Context, lib: RequiredLib, input: InputStream): Boolean {
+        val digest = try {
+            MessageDigest.getInstance(LibManager.HASH_TYPE)
+        } catch (e: NoSuchAlgorithmException) {
+            throw IOException("Missing hash type: ${LibManager.HASH_TYPE}", e)
+        }
+
+        val outFile = LibManager.getLibFile(context, lib, temp = true)
+        outFile.parentFile?.mkdirs()
+        DigestOutputStream(outFile.outputStream().buffered(), digest).use { ostream ->
+            input.copyTo(ostream)
+        }
+
+        val hex = Hex.encodeHexString(digest.digest(), true)
+
+        val targetHash = lib.hashForCurrentAbi() ?: run {
+            throw UnsupportedOperationException("This app cannot run on your device: unsupported ABI!")
+        }
+
+        if (hex != targetHash) {
+            outFile.delete()
+            throw IOException("Hash mismatch for ${lib.name}, maybe the download got corrupted?")
+        }
+        val realFile = LibManager.getLibFile(context, lib)
+        realFile.parentFile?.mkdirs()
+        if (!outFile.renameTo(realFile)) {
+            throw IOException("Failed to rename temp file!")
+        }
+        LibManager.updateLibraryData(context)
+        return LibManager.libsLoaded.get()
     }
 
     fun addLib(context: Context, library: RequiredLib, uri: Uri) {
@@ -239,7 +247,8 @@ class ChooseLibsViewModel : ViewModel() {
     companion object {
         private val TAG = ChooseLibsViewModel::class.simpleName
 
-        private const val IPFS_GATEWAY = "https://cloudflare-ipfs.com"
-        private const val LIBS_CID = "QmQNREjjXTQBDpd69gFqEreNi1dV91eSGQByqi5nXU3rBt"
+        // Same Megvii arm64 blobs (hashes match LibManager), pinned to a commit so they can't drift
+        private const val LIBS_BASE_URL =
+            "https://gitlab.com/crdroidandroid/android_packages_apps_FaceUnlock/-/raw/0a35109e0b84f9e8e1e60db070341a7acf7faa21/lib"
     }
 }

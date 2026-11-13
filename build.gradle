@@ -13,8 +13,23 @@ configure ([project(':faceunlock'), project(':universalauth-xposed')]) {
     afterEvaluate {
         android {
             defaultConfig {
-                versionCode 18
-                versionName "1.8"
+                versionCode 19
+                versionName "1.9-a16"
+            }
+            // Both APKs must share a key: the unlock permission is signature-level
+            def ksFile = rootProject.file('keystore.properties')
+            if (ksFile.exists()) {
+                def ks = new Properties()
+                ksFile.withInputStream { ks.load(it) }
+                signingConfigs {
+                    release {
+                        storeFile rootProject.file(ks['storeFile'])
+                        storePassword ks['storePassword']
+                        keyAlias ks['keyAlias']
+                        keyPassword ks['keyPassword']
+                    }
+                }
+                buildTypes.release.signingConfig signingConfigs.release
             }
         }
     }

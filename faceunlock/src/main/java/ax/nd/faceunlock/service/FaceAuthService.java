@@ -143,7 +143,8 @@ public class FaceAuthService extends Service {
                 if (mLockoutType != LOCKOUT_TYPE_DISABLED) {
                     sendLockoutError();
                 }else{
-                    mFaceReceiver.onAuthenticated(0, -1, mShareUtil.getByteArrayValueByKey(AppConstants.SHARED_KEY_ENROLL_TOKEN));
+                    // faceId carries withFace: only a seen-but-unmatched face counts towards lockout
+                    mFaceReceiver.onAuthenticated(withFace ? 1 : 0, -1, mShareUtil.getByteArrayValueByKey(AppConstants.SHARED_KEY_ENROLL_TOKEN));
                 }
                 stopAuthrate();
             } catch (RemoteException e) {

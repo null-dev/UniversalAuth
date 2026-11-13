@@ -11,3 +11,7 @@ local.properties
 
 # Do not upload libs to Github
 /private-libs
+# Signing material stays local
+/keystore.properties
+/release.jks
+/dist

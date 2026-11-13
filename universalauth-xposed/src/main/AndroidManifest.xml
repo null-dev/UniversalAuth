@@ -5,7 +5,7 @@
         android:name="ax.nd.universalauth.permission.UNLOCK_DEVICE"
         android:label="@string/unlock_device_permission_label"
         android:description="@string/unlock_device_permission_desc"
-        android:protectionLevel="dangerous" />
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
